@@ -1,0 +1,44 @@
+<div *ngIf="showresults&&searchJson">
+   <!--error div-->
+  <div *ngIf="error">
+
+    {{ errorMessage }}
+
+  </div>
+
+  <!--result table div-->
+  <div *ngIf="!error">
+
+    <table class="table table-dark">
+      <tr>
+        <th>#</th>
+        <th>Image</th>
+        <th>Title</th>
+        <th>Price</th>
+        <th>Shipping</th>
+        <th>Zip</th>
+        <th>Seller</th>
+        <th>Wishlist</th>
+      </tr>
+
+      <tr *ngFor="let row of searchJson.findItemsAdvancedResponse[0].searchResult[0].item;index as i">
+        <td>{{i+1}}</td>
+        <td><img src="{{row.galleryURL[0]}}"></td>
+        <td>{{ row.title.toString().length>35 ? row.title.toString().substring(0,35):row.title.toString() }}</td>
+        <!--<td>{{ row.title.toString().length>35 ? row.title.toString().substring(0,35):row.title.toString() }}</td>-->
+        <!--<td>{{ row.title.length>35?row.title.splice(0,35):row.title }}</td>-->
+        <td>${{row.sellingStatus[0].currentPrice[0].__value__}}</td>
+        <td>{{row.shippingInfo[0].shippingServiceCost[0].__value__}}</td>
+        <td>{{row.postalCode}}</td>
+        <td>{{row.sellerInfo[0].sellerUserName[0]}}</td>
+        <td><i class="material-icons">
+          add_shopping_cart
+        </i></td>
+
+      </tr>
+
+    </table>
+  </div>
+
+
+</div>

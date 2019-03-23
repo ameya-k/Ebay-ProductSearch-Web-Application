@@ -1,0 +1,155 @@
+<div id="formDiv" name="formDiv" class="container" style="color: white;background-color: black">
+
+  <p style="text-align: center; font-size: 30px;margin-bottom: 10px;margin-top: 2px;">Product Search</p>
+
+  <form id="mainForm" #prodForm="ngForm" (ngSubmit)="onFormSubmit(prodForm)" autocomplete="off">
+    <div class="form-group row">
+      <label for="kword" class="col-sm-2 col-form-label">Keyword</label>
+      <div class="col-sm-7">
+        <input type="text" name="kword" id="kword" placeholder="Enter product Name(eg.Iphone 8)"
+                class="form-control" [(ngModel)]="formdetails.kword">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="category" class="col-sm-2 col-form-label">
+        Category&nbsp;
+      </label>
+      <div class="col-sm-3">
+        <select name="category" id="category" class="form-control"
+                [(ngModel)]="formdetails.category">
+          <option value="-1" name="allcat">All categories</option>
+          <option disabled>-----------------------------------</option>
+          <option value="550" name="Art">Art</option>
+          <option value="2984" name="Baby">Baby</option>
+          <option value="267" name="Books">Books</option>
+          <option value="11450" name="clothes">Clothing, Shoes & Accesories</option>
+          <option value="58058" name="comp">Computers/Tablets & Networking</option>
+          <option value="26395" name="health">Health & Beauty</option>
+          <option value="11233" name="music">Music</option>
+          <option value="1249" name="games">Video Games & Consoles</option>
+        </select>
+      </div>
+    </div>
+    <!--starts here-->
+    <div class="form-group row">
+      <label for="conditionChkBx" class="col-sm-2 col-form-label">
+        Condition
+      </label>
+      <div class="col-sm-7">
+        <div class="form-check form-check-inline" id="conditionChkBx">
+          <input type="checkbox" name="conditionNew" id="conditionNew" class="form-check-input form-control"
+                 [(ngModel)]="formdetails.conditionNew">
+          <label for="conditionNew" class="form-check-label">New</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="checkbox" name="conditionUsed" id="conditionUsed" class="form-check-input form-control"
+                 [(ngModel)]="formdetails.conditionUsed">
+          <label for="conditionUsed" class="form-check-label">Used</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="checkbox" name="conditionUnspecified" id="conditionUnspecified"
+                 class="form-check-input form-control" [(ngModel)]="formdetails.conditionUnspecified">
+          <label for="conditionUnspecified" class="form-check-label">Unspecified</label>
+        </div>
+      </div>
+    </div>
+    <!--ends here-->
+
+
+    <div class="form-group row">
+      <label for="shipbox" class="col-sm-2 col-form-label">
+        Shipping Options
+      </label>
+      <div class="col-sm-7">
+        <div class="form-check form-check-inline" id="shipbox">
+          <input type="checkbox" name="shippingLocal" id="ship1" class="form-check-input form-control"
+                 [(ngModel)]="formdetails.shippingLocal">
+          <label for="ship1">Local Pickup</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="checkbox" name="shippingFree" id="ship2" class="form-check-input form-control"
+                 [(ngModel)]="formdetails.shippingFree">
+          <label for="ship2">Free Shipping</label>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="form-group row">
+      <label for="distance" class="col-sm-2 col-form-label">
+        Distance(Miles)
+      </label>
+      <div class="col-sm-3">
+        <input type="text" name="distance" id="distance" placeholder="10"
+               class="form-control" [(ngModel)]="formdetails.distance">
+      </div>
+    </div>
+
+
+
+    <label for="current">
+      From
+    </label>
+    <div class="form-check">
+      <input type="radio" name="location" value="current" id="current"
+             checked="checked" class="form-control form-check-input" [(ngModel)]="formdetails.location">
+      <label for="current" class="form-check-label">Current location</label>
+    </div>
+
+    <div class="form-check">
+    <input type="radio" name="location" id="zip" value="zip" class="form-control form-check-input"
+           [(ngModel)]="formdetails.location">
+    <label for="zip" class="form-check-label">Other.Please specify zip code</label>
+    </div>
+
+    <br>
+
+    <input type="text" name="zipcodebox" placeholder="zip code" id="zipcodebox" class="form-control col-sm-7"
+           [(ngModel)]="formdetails.zipcode" [formControl]="zipcode" [matAutocomplete]="auto" autocomplete="off">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let option of ziparray " [value]="option">
+        {{ option }}
+      </mat-option>
+    </mat-autocomplete>
+
+
+    <input type="text" hidden="hidden" name="currentlocation" id="iploc" class="form-control"
+           [ngModel]="formdetails.currentlocation">
+
+
+    <p style="text-align: left;margin-left: 20px">
+
+
+      <button type="submit" name="search" value="search" id="search">Search</button>
+      &nbsp;
+      <button name="clear" value="clear" id="clear" type="reset" ng-click="reset()">Clear</button>
+    </p>
+
+
+  </form>
+</div>
+<div>
+  <ul class="nav nav-pills mb-3 justify-content-center" id="pills-tab" role="tablist" >
+    <li class="nav-item">
+      <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#results" role="tab" aria-controls="pills-home"
+         (click)="showChildResult()" aria-selected="true" >Results</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#wishlist" role="tab"
+         (click)="showChildWishList()" aria-controls="pills-profile" aria-selected="false">Wishlist</a>
+    </li>
+
+  </ul>
+</div>
+<div class="tab-pane fade show active" id="results" role="tabpanel" aria-labelledby="pills-home-tab">
+  <app-results></app-results>
+</div>
+
+<div class="tab-pane fade show active" id="wishlist" role="tabpanel" aria-labelledby="pills-home-tab">
+  <app-wishlist></app-wishlist>
+</div>
+
+
+
+
