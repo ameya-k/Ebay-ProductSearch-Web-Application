@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WishlistComponent implements OnInit {
   showWishList:boolean=false;
+
   constructor() { }
 
   ngOnInit() {

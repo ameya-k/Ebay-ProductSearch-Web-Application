@@ -11,6 +11,8 @@ import {CallEbayService} from '../call-ebay.service';
 export class ResultsComponent implements OnInit {
 
   searchJson;
+  pageSize=10;
+  page=1;
 
   showresults:boolean=true;
   error:boolean=false;
@@ -21,16 +23,17 @@ export class ResultsComponent implements OnInit {
     //     // )
 
 
+
   }
 
   checkValidJson(searchJson){
     if(searchJson['findItemsAdvancedResponse'][0]['searchResult']==undefined||
       searchJson['findItemsAdvancedResponse'][0]['searchResult'][0]['item']==undefined||
-      searchJson['findItemsAdvancedResponse'][0]['searchResult'][0]['item'].length==0
-     ){
-        this.error=true;
-      this.errorMessage="No records found";
-      return false;
+      searchJson['findItemsAdvancedResponse'][0]['searchResult'][0]['item'].length==0 )
+    {
+          this.error=true;
+          this.errorMessage="No records found";
+          return false;
     }
 //handle case error 36
     if(searchJson['findItemsAdvancedResponse']['0']['errorMessage']!==undefined &&

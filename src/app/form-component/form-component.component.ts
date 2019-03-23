@@ -146,10 +146,12 @@ export class FormComponentComponent implements OnInit {
 
   showChildResult(){
      this.child.showresults=true;
+     this.wish_child.showWishList=false;
   }
 
   showChildWishList(){
     this.wish_child.showWishList=true;
+    this.child.showresults=false;
   }
 
 
