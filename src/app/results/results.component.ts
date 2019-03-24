@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {CallEbayService} from '../call-ebay.service';
+import {ProdDetailsComponent} from '../prod-details/prod-details.component';
 
 
 
@@ -14,6 +15,9 @@ export class ResultsComponent implements OnInit {
   pageSize=10;
   page=1;
 
+  @ViewChild(ProdDetailsComponent) prod:ProdDetailsComponent;
+
+
   showresults:boolean=true;
   error:boolean=false;
   errorMessage:string;
@@ -24,6 +28,10 @@ export class ResultsComponent implements OnInit {
 
 
 
+  }
+
+  callChild(itemId,title,row){
+      this.prod.callDetailServices(itemId,title,row);
   }
 
   checkValidJson(searchJson){
@@ -68,6 +76,7 @@ export class ResultsComponent implements OnInit {
     // })
    this.ebaysearch.callEbay(formdata).subscribe(data=>{
      this.searchJson=data;
+     console.log(this.searchJson);
      //console.log(this.searchJson);
      this.buildSearchTable(this.searchJson);
    });

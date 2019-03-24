@@ -1,3 +1,250 @@
-<p>
-  prod-details works!
-</p>
+<div *ngIf="itemDetailsJson&&photosJson&&similarItemsJson">
+
+  <div>
+    <ul class="nav nav-pills mb-3 justify-content-center pull-right"  id="pills-tab" role="tablist" >
+      <li class="nav-item">
+        <a class="nav-link active" id="pills-prod-tab" data-toggle="pill" href="#prodtab" role="tab" aria-controls="pills-home"
+            aria-selected="true" (click)="prod_clicked()">Product</a>
+      </li>
+      <li class="nav-item">
+      <a class="nav-link" id="pills-photos-tab" data-toggle="pill" href="#photostab" role="tab"
+         aria-controls="pills-profile" aria-selected="false" (click)="phot_clicked()">Photos</a>
+    </li>
+      <li class="nav-item">
+        <a class="nav-link" id="pills-shipping-tab" data-toggle="pill" href="#shippingTab" role="tab"
+           aria-controls="pills-profile" aria-selected="false" (click)="ship_clicked()">Shipping</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="pills-seller-tab" data-toggle="pill" href="#sellerTab" role="tab"
+           aria-controls="pills-profile" aria-selected="false" (click)="sell_clicked()">Seller</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="pills-similar-tab" data-toggle="pill" href="#simTab" role="tab"
+           aria-controls="pills-profile" aria-selected="false" (click)="sim_clicked()">Similar Products</a>
+      </li>
+
+
+    </ul>
+  </div>
+
+  <div *ngIf="prodclicked" id="prodtab" class="tab-pane fade show active" aria-labelledby="pills-prod-tab">
+    <table class="table table-dark table-striped ">
+      <tr *ngIf="itemDetailsJson['Item']!=undefined && itemDetailsJson['Item']['PictureURL']!=undefined &&
+      itemDetailsJson['Item']['PictureURL'].length!=0">
+        <td>
+          Product Images
+        </td>
+        <td>
+          Click for product images
+        </td>
+      </tr>
+
+      <tr *ngIf="itemDetailsJson['Item']['Subtitle']!=undefined">
+
+        <td>SubTitle</td>
+        <td>{{itemDetailsJson['Item']['Subtitle']}}</td>
+
+      </tr>
+      <tr *ngIf="itemDetailsJson['Item']['CurrentPrice']!=undefined &&
+      itemDetailsJson['Item']['CurrentPrice']['Value']!=undefined">
+        <td>Price</td>
+        <td>{{itemDetailsJson['Item']['CurrentPrice']['Value']}}</td>
+      </tr>
+
+      <tr *ngIf="itemDetailsJson['Item']['Location']!=undefined">
+        <td>Location</td>
+        <td>{{itemDetailsJson['Item']['Location']}}</td>
+      </tr>
+
+      <tr *ngIf="itemDetailsJson['Item']['ReturnPolicy']!=undefined">
+        <td>Return Policy(US)</td>
+        <td *ngIf="itemDetailsJson['Item']['ReturnPolicy']['ReturnsAccepted']!=undefined
+        &&itemDetailsJson['Item']['ReturnPolicy']['ReturnsWithin']!=undefined">
+          {{itemDetailsJson['Item']['ReturnPolicy']['ReturnsAccepted']}} within {{itemDetailsJson['Item']['ReturnPolicy']['ReturnsWithin']}}
+        </td>
+        <td *ngIf="itemDetailsJson['Item']['ReturnPolicy']['ReturnsAccepted']!=undefined
+        &&itemDetailsJson['Item']['ReturnPolicy']['ReturnsWithin']==undefined">
+          {{itemDetailsJson['Item']['ReturnPolicy']['ReturnsAccepted']}}
+        </td>
+        <td *ngIf="itemDetailsJson['Item']['ReturnPolicy']['ReturnsAccepted']==undefined
+        &&itemDetailsJson['Item']['ReturnPolicy']['ReturnsWithin']!=undefined">
+            {{itemDetailsJson['Item']['ReturnPolicy']['ReturnsWithin']}}
+        </td>
+
+
+      </tr>
+      <ng-container *ngIf="itemDetailsJson['Item']['ItemSpecifics']!=undefined">
+        <tr  *ngFor="let row of itemDetailsJson['Item']['ItemSpecifics']['NameValueList'] ">
+          <td>
+            {{row.Name}}
+          </td>
+          <td>{{row.Value[0]}}</td>
+
+        </tr>
+      </ng-container>
+
+
+    </table>
+  </div>
+
+  <div *ngIf="photclicked" id="photostab" class="tab-pane fade show active" aria-labelledby="pills-photos-tab">
+    Inside photos
+  </div>
+
+  <div *ngIf="shipclicked" id="shippingTab" class="tab-pane fade show active" aria-labelledby="pills-shipping-tab">
+    <table class="table table-dark table-striped ">
+
+      <tr *ngIf="sjson.shippingInfo!=undefined && sjson.shippingInfo[0].shippingServiceCost[0].__value__!=undefined">
+          <td>
+              Shipping Cost
+          </td>
+          <td *ngIf="sjson.shippingInfo[0].shippingServiceCost[0].__value__==0">
+            Free Shipping
+          </td>
+          <td *ngIf="sjson.shippingInfo[0].shippingServiceCost[0].__value__!=0">
+            {{sjson.shippingInfo[0].shippingServiceCost[0].__value__}}
+          </td>
+      </tr>
+
+      <tr *ngIf="sjson.shippingInfo!=undefined && sjson.shippingInfo[0].shipToLocations!=undefined">
+      <td>Shipping Locations</td>
+        <td>
+          {{sjson.shippingInfo[0].shipToLocations[0]}}
+        </td>
+
+      </tr>
+      <tr *ngIf="sjson.shippingInfo!=undefined && sjson.shippingInfo[0].handlingTime!=undefined">
+        <td>
+          Handling time
+        </td>
+        <td *ngIf="sjson.shippingInfo[0].handlingTime[0]==0 || sjson.shippingInfo[0].handlingTime[0]==1">
+          {{sjson.shippingInfo[0].handlingTime[0]}} day
+        </td>
+        <td *ngIf="sjson.shippingInfo[0].handlingTime[0]!=0 && sjson.shippingInfo[0].handlingTime[0]!=1">
+          {{sjson.shippingInfo[0].handlingTime[0]}} days
+        </td>
+      </tr>
+
+      <tr *ngIf="sjson.shippingInfo!=undefined && sjson.shippingInfo[0].expeditedShipping!=undefined">
+        <td>Expedited Shipping</td>
+        <td *ngIf="sjson.shippingInfo[0].expeditedShipping[0]=='true'">
+          <i class="material-icons" style="color: green">
+            check
+          </i>
+        </td>
+        <td *ngIf="sjson.shippingInfo[0].expeditedShipping[0]=='false'">
+          <i class="material-icons" style="color: red">
+            close
+          </i>
+        </td>
+      </tr>
+      <tr  *ngIf="sjson.shippingInfo!=undefined && sjson.shippingInfo[0].oneDayShippingAvailable!=undefined">
+        <td>One Day Shipping</td>
+        <td *ngIf=" sjson.shippingInfo[0].oneDayShippingAvailable[0]=='true'">
+          <i class="material-icons" style="color: green">
+            check
+          </i>
+        </td>
+        <td *ngIf=" sjson.shippingInfo[0].oneDayShippingAvailable[0]=='false'">
+          <i class="material-icons" style="color: red">
+            close
+          </i>
+        </td>
+      </tr>
+
+      <tr  *ngIf="sjson.shippingInfo!=undefined && sjson.shippingInfo[0].returnsAccepted!=undefined">
+        <td>Return Accepted</td>
+        <td *ngIf=" sjson.shippingInfo[0].returnsAccepted[0]=='true'">
+          <i class="material-icons" style="color: green">
+            check
+          </i>
+        </td>
+        <td *ngIf=" sjson.shippingInfo[0].returnsAccepted[0]=='false'">
+          <i class="material-icons" style="color: red">
+            close
+          </i>
+        </td>
+      </tr>
+
+    </table>
+  </div>
+
+  <div *ngIf="sellclicked" id="sellerTab" class="tab-pane fade show active" aria-labelledby="pills-seller-tab">
+    <table class="table table-dark table-striped ">
+      <caption *ngIf="sjson.sellerInfo!=undefined && sjson.sellerInfo[0].sellerUserName!=undefined">
+        {{sjson.sellerInfo[0].sellerUserName[0]}}
+      </caption>
+
+      <tr *ngIf="sjson.sellerInfo!=undefined && sjson.sellerInfo[0].feedbackScore!=undefined">
+          <td>Feedback Score</td>
+          <td>{{sjson.sellerInfo[0].feedbackScore}}</td>
+      </tr>
+
+      <tr *ngIf="sjson.sellerInfo!=undefined&&sjson.sellerInfo[0].positiveFeedbackPercent!=undefined">
+        <td>
+          Popularity
+        </td>
+        <td>
+          <round-progress [current]="sjson.sellerInfo[0].positiveFeedbackPercent[0]" [stroke]="5" [max]="100" [radius]="15">
+            {{sjson.sellerInfo[0].positiveFeedbackPercent[0]}}
+          </round-progress>
+        </td>
+      </tr>
+
+      <tr *ngIf="sjson.sellerInfo!=undefined &&sjson.sellerInfo[0].feedbackRatingStar!=undefined ">
+      <td>Feedback Rating Star</td>
+        <td  *ngIf="sjson.sellerInfo[0].feedbackScore>10000">
+          <i class="material-icons" [style.color]="sjson.sellerInfo[0].feedbackRatingStar[0]">
+            stars
+          </i>
+        </td>
+        <td *ngIf="sjson.sellerInfo[0].feedbackScore<=10000">
+          <i class="material-icons" [style.color]="sjson.sellerInfo[0].feedbackRatingStar[0]">
+            star_border
+          </i>
+        </td>
+        <!--<td *ngIf=" sjson.sellerInfo[0].feedbackScore<=10000">-->
+          <!--<i class="material-icons" [style.background]="sjson.sellerInfo[0].feedbackRatingStar[0]">-->
+            <!--stars_border-->
+          <!--</i>-->
+        <!--</td>-->
+
+
+
+
+      </tr>
+      <tr *ngIf="sjson.sellerInfo!=undefined && sjson.sellerInfo[0].topRatedSeller!=undefined">
+        <td>
+          Top Rated
+        </td>
+        <td *ngIf="sjson.sellerInfo[0].topRatedSeller[0]=='true'">
+          <i class="material-icons" style="color: green">
+            check
+          </i>
+        </td>
+        <td *ngIf="sjson.sellerInfo[0].topRatedSeller[0]=='false'">
+          <i class="material-icons" style="color: red">
+            close
+          </i>
+        </td>
+
+      </tr>
+
+      <tr *ngIf="sjson.storeInfo!=undefined&&sjson.storeInfo[0].storeName!=undefined">
+        <td>Store Name</td>
+        <td>{{sjson.storeInfo[0].storeName[0]}}</td>
+      </tr>
+
+      <tr *ngIf="sjson.storeInfo!=undefined&&sjson.storeInfo[0].storeURL!=undefined">
+        <td>Buy Product At</td>
+        <td><a [attr.href]="sjson.storeInfo[0].storeURL[0]" target="_blank">{{sjson.storeInfo[0].storeURL[0]}}</a></td>
+      </tr>
+
+    </table>
+  </div>
+
+  <div *ngIf="simclicked" id="simTab" class="tab-pane fade show active" aria-labelledby="pills-similar-tab">
+    Inside similar
+  </div>
+
+</div>
