@@ -17,6 +17,10 @@ export class ResultsComponent implements OnInit {
 
   @ViewChild(ProdDetailsComponent) prod:ProdDetailsComponent;
 
+  setParentValue(){
+    this.showresults=true;
+  }
+
 
   showresults:boolean=true;
   error:boolean=false;
@@ -30,8 +34,12 @@ export class ResultsComponent implements OnInit {
 
   }
 
+
+
   callChild(itemId,title,row){
-      this.prod.callDetailServices(itemId,title,row);
+       this.showresults=false;
+       this.prod.callDetailServices(itemId,title,row);
+
   }
 
   checkValidJson(searchJson){
@@ -74,6 +82,8 @@ export class ResultsComponent implements OnInit {
     //   this.searchJson=data;
     //   console.log(this.searchJson);
     // })
+   this.showresults=true;
+   this.prod.showResults=false;
    this.ebaysearch.callEbay(formdata).subscribe(data=>{
      this.searchJson=data;
      console.log(this.searchJson);
