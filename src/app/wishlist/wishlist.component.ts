@@ -8,9 +8,8 @@ import {WishlistService} from '../wishlist.service';
 })
 export class WishlistComponent implements OnInit {
   showWishList:boolean=false;
+  wishset:Set<any>=new Set();
   wishArray;
-
-
 
   constructor(private ws: WishlistService) {
 
@@ -24,7 +23,11 @@ export class WishlistComponent implements OnInit {
 
   removeFromTable(row) {
     //service that removes from local storage
+
     this.ws.removeItem(row);
+
+    //getting the local storage array upon element removal
+
 
   }
 }

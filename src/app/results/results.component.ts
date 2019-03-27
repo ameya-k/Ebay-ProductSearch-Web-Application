@@ -50,10 +50,17 @@ export class ResultsComponent implements OnInit {
   error:boolean=false;
   errorMessage:string;
   constructor(private ebaysearch: CallEbayService,private wish:WishlistService) {
-    //  // ebaysearch.ebayResponse.subscribe(
-    //     //  //  data=>{console.log(data);}
-    //     // )
 
+    this.wish.observer.subscribe(data=>{
+
+      let x=this.wish.getStorage();
+      console.warn(x);
+      this.itSet.clear();
+      for(var i=0;i<x.length;i++){
+        this.itSet.add(x[i].itemId[0]);
+      }
+      console.error(this.itSet);
+    });
 
 
   }
@@ -122,19 +129,24 @@ export class ResultsComponent implements OnInit {
 
   addToWish(row){
     this.itSet.add(row.itemId[0]);
+    console.log('adding to hash');
+    console.log(this.itSet);
     this.wish.storeItem(row);
 
   }
 
   removeFromWish(row){
 
+    console.log('removing from hash');
     this.itSet.delete(row.itemId[0]);
     this.wish.removeItem(row);
+    console.log(this.itSet);
   }
 
   refreshHash($event: any) {
     this.itSet=$event;
   }
+
 
 
 }
