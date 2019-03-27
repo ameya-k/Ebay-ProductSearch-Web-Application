@@ -28,13 +28,14 @@ export class ProdDetailsComponent implements OnInit {
   prodVisible=false;
   butLabel="Show More";
   order:string='ascending';
+  storageArray:any;
   prodSet:Set<string>=new Set<string>();
 
   currentRow:any;
  showResults=true;
   deepCopy:any[];
   @Output() sendValueToResult= new EventEmitter<boolean>();
-
+  @Output() sendHashSetToResult=new EventEmitter();
   constructor(private detailService:ItemDetailsService,private simService: SimilarItemsService,private picService:GooglePhotosService,
               private wish:WishlistService) {}
   togbtn(){
@@ -55,6 +56,7 @@ export class ProdDetailsComponent implements OnInit {
     this.sellclicked=false;
     this.simclicked=false;
     this.sendValueToResult.emit(true);
+    this.sendHashSetToResult.emit(this.prodSet);
   }
   ngOnInit() {
 
@@ -66,6 +68,12 @@ export class ProdDetailsComponent implements OnInit {
 
 
   callDetailServices(item_id,title,searchJson){
+    this.storageArray=this.wish.getStorage();
+    //this.itArray=this.stArray.map(x=>x.itemId);
+
+    for(var i=0;i<this.storageArray.length;i++){
+      this.prodSet.add(this.storageArray[i].itemId[0]);
+    }
     this.detailService.getItemDetails(item_id).subscribe(data=>{
       this.itemDetailsJson=data;
       this.currentRow=searchJson;
@@ -106,11 +114,13 @@ export class ProdDetailsComponent implements OnInit {
   }
 
     callWish(){
+      this.prodSet.add(this.currentRow.itemId[0]);
       this.wish.storeItem(this.currentRow);
 
     }
 
     removeWish(){
+      this.prodSet.delete(this.currentRow.itemId[0]);
       this.wish.removeItem(this.currentRow);
     }
 

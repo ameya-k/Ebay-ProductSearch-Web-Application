@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {WishlistService} from '../wishlist.service';
 
 @Component({
   selector: 'app-wishlist',
@@ -7,10 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WishlistComponent implements OnInit {
   showWishList:boolean=false;
+  wishArray;
 
-  constructor() { }
 
-  ngOnInit() {
+
+  constructor(private ws: WishlistService) {
+
+
   }
 
+  ngOnInit() {
+
+  }
+
+
+  removeFromTable(row) {
+    //service that removes from local storage
+    this.ws.removeItem(row);
+
+  }
 }

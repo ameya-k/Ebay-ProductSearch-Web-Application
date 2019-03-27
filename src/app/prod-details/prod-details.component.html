@@ -32,10 +32,10 @@
 
     </ul>
   </div>
-  <i class="material-icons" *ngIf="true" (click)="callWish()">
+  <i class="material-icons" *ngIf="!prodSet.has(currentRow.itemId[0])" (click)="callWish()">
     add_shopping_cart
   </i>
-  <i class="material-icons" *ngIf="true" (click)="removeWish()">
+  <i class="material-icons" *ngIf="prodSet.has(currentRow.itemId[0])" (click)="removeWish()">
     remove_shopping_cart
   </i>
 

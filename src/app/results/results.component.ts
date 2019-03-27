@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {CallEbayService} from '../call-ebay.service';
 import {ProdDetailsComponent} from '../prod-details/prod-details.component';
 import {WishlistService} from '../wishlist.service';
@@ -18,7 +18,7 @@ export class ResultsComponent implements OnInit {
   addWishClicked:boolean=false;
   cart;
   stArray:any;
-  itSet:Set<String>=new Set<String>();
+  @Input() itSet:Set<String>=new Set<String>();
   inWishList:boolean=true;
   @ViewChild(ProdDetailsComponent) prod:ProdDetailsComponent;
 
@@ -34,8 +34,16 @@ export class ResultsComponent implements OnInit {
   }
 
   setParentValue(){
+
+    this.stArray=this.wish.getStorage();
+    //this.itArray=this.stArray.map(x=>x.itemId);
+
+    for(var i=0;i<this.stArray.length;i++){
+      this.itSet.add(this.stArray[i].itemId[0]);
+    }
     this.showresults=true;
   }
+
 
 
   showresults:boolean=true;
@@ -123,5 +131,10 @@ export class ResultsComponent implements OnInit {
     this.itSet.delete(row.itemId[0]);
     this.wish.removeItem(row);
   }
+
+  refreshHash($event: any) {
+    this.itSet=$event;
+  }
+
 
 }

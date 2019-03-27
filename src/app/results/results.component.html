@@ -24,8 +24,8 @@
       <tr *ngFor="let row of searchJson.findItemsAdvancedResponse[0].searchResult[0].item|
       slice: (page-1) * pageSize : (page-1) * pageSize + pageSize;index as i">
         <td>{{(page - 1) * 10 + i + 1}}</td>
-        <td><img src="{{row.galleryURL[0]}}"></td>
-
+        <td *ngIf="row.galleryURL[0]!=undefined"><img src="{{row.galleryURL[0]}}"></td>
+        <td *ngIf="row.galleryURL[0]==undefined">N/A</td>
         <td><a data-toggle="tooltip" placement="bottom" ngbTooltip="{{row.title}}"
                (click)="callChild(row['itemId']['0'],row.title,row)">{{  row.title == null ? 'N/A' : (row.title.toString().length > 50 ? (row.title.toString().substring(0, 50).slice(-1) == ' ' ? (row.title.toString().substring(0, 50) + '...') : (row.title.toString().substring(0, (row.title.toString().substring(0, 50).lastIndexOf(' '))) + '...')) : row.title.toString())
           }}</a></td>
@@ -59,4 +59,5 @@
 
 
 </div>
-<app-prod-details (sendValueToResult)="setParentValue($event)"></app-prod-details>
+<app-prod-details (sendValueToResult)="setParentValue($event)" (sendHashSetToResult)="refreshHash($event)"></app-prod-details>
+
