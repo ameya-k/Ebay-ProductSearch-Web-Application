@@ -32,6 +32,12 @@
 
     </ul>
   </div>
+  <i class="material-icons" *ngIf="true" (click)="callWish()">
+    add_shopping_cart
+  </i>
+  <i class="material-icons" *ngIf="true" (click)="removeWish()">
+    remove_shopping_cart
+  </i>
 
   <div *ngIf="prodclicked" id="prodtab" class="tab-pane fade show active" aria-labelledby="pills-prod-tab">
     <table class="table table-dark table-striped ">

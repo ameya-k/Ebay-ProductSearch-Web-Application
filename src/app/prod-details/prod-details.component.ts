@@ -5,6 +5,7 @@ import {GooglePhotosService} from '../google-photos.service';
 import {forEach} from '@angular/router/src/utils/collection';
 import {RoundProgressModule} from 'angular-svg-round-progressbar'
 import {ResultsComponent} from '../results/results.component';
+import {WishlistService} from '../wishlist.service';
 
 @Component({
   selector: 'app-prod-details',
@@ -27,11 +28,15 @@ export class ProdDetailsComponent implements OnInit {
   prodVisible=false;
   butLabel="Show More";
   order:string='ascending';
+  prodSet:Set<string>=new Set<string>();
+
+  currentRow:any;
  showResults=true;
   deepCopy:any[];
   @Output() sendValueToResult= new EventEmitter<boolean>();
 
-  constructor(private detailService:ItemDetailsService,private simService: SimilarItemsService,private picService:GooglePhotosService) {}
+  constructor(private detailService:ItemDetailsService,private simService: SimilarItemsService,private picService:GooglePhotosService,
+              private wish:WishlistService) {}
   togbtn(){
     if(this.butLabel=="Show More"){
       this.butLabel="Show Less";
@@ -63,6 +68,8 @@ export class ProdDetailsComponent implements OnInit {
   callDetailServices(item_id,title,searchJson){
     this.detailService.getItemDetails(item_id).subscribe(data=>{
       this.itemDetailsJson=data;
+      this.currentRow=searchJson;
+      console.log(this.currentRow);
       // this.buildItemDetailsTable(this.itemDetailsJson);
       console.log(this.itemDetailsJson);
 
@@ -98,7 +105,14 @@ export class ProdDetailsComponent implements OnInit {
 
   }
 
+    callWish(){
+      this.wish.storeItem(this.currentRow);
 
+    }
+
+    removeWish(){
+      this.wish.removeItem(this.currentRow);
+    }
 
    sort(value){
       console.log(value);

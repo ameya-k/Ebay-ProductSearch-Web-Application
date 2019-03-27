@@ -1,5 +1,5 @@
 <div *ngIf="showresults&&searchJson">
-   <!--error div-->
+  <!--error div-->
   <div *ngIf="error">
 
     {{ errorMessage }}
@@ -23,19 +23,25 @@
 
       <tr *ngFor="let row of searchJson.findItemsAdvancedResponse[0].searchResult[0].item|
       slice: (page-1) * pageSize : (page-1) * pageSize + pageSize;index as i">
-        <td>{{(page-1)*10+i+1}}</td>
+        <td>{{(page - 1) * 10 + i + 1}}</td>
         <td><img src="{{row.galleryURL[0]}}"></td>
 
         <td><a data-toggle="tooltip" placement="bottom" ngbTooltip="{{row.title}}"
-               (click)="callChild(row['itemId']['0'],row.title,row)">{{  row.title==null ? 'N/A':  (row.title.toString().length>50 ?(row.title.toString().substring(0,50).slice(-1)==' '?(row.title.toString().substring(0,50)+'...'):(row.title.toString().substring(0,(row.title.toString().substring(0,50).lastIndexOf(' ')))+'...')) : row.title.toString())
+               (click)="callChild(row['itemId']['0'],row.title,row)">{{  row.title == null ? 'N/A' : (row.title.toString().length > 50 ? (row.title.toString().substring(0, 50).slice(-1) == ' ' ? (row.title.toString().substring(0, 50) + '...') : (row.title.toString().substring(0, (row.title.toString().substring(0, 50).lastIndexOf(' '))) + '...')) : row.title.toString())
           }}</a></td>
-        <td>${{row.sellingStatus[0].currentPrice[0].__value__ ==null ? 'N/A':row.sellingStatus[0].currentPrice[0].__value__}}</td>
-        <td>{{row.shippingInfo[0].shippingServiceCost[0].__value__==null ? 'N/A':row.shippingInfo[0].shippingServiceCost[0].__value__}}</td>
-        <td>{{row.postalCode==null ? 'N/A':row.postalCode}}</td>
-        <td>{{row.sellerInfo[0].sellerUserName[0]==null ? 'N/A': row.sellerInfo[0].sellerUserName[0]}}</td>
-        <td><i class="material-icons">
+        <td>
+          ${{row.sellingStatus[0].currentPrice[0].__value__ == null ? 'N/A' : row.sellingStatus[0].currentPrice[0].__value__}}</td>
+        <td>{{row.shippingInfo[0].shippingServiceCost[0].__value__ == null ? 'N/A' : row.shippingInfo[0].shippingServiceCost[0].__value__}}</td>
+        <td>{{row.postalCode == null ? 'N/A' : row.postalCode}}</td>
+        <td>{{row.sellerInfo[0].sellerUserName[0] == null ? 'N/A' : row.sellerInfo[0].sellerUserName[0]}}</td>
+
+        <td *ngIf="!this.itSet.has(row.itemId[0])"> <i class="material-icons" (click)="addToWish(row)">
           add_shopping_cart
         </i></td>
+        <td *ngIf="this.itSet.has(row.itemId[0])"><i class="material-icons" (click)="removeFromWish(row)">
+          remove_shopping_cart
+        </i></td>
+
 
       </tr>
 
@@ -44,7 +50,7 @@
       [(page)]="page"
       [pageSize]="pageSize"
       [collectionSize]="searchJson.findItemsAdvancedResponse[0].searchResult[0].item.length"
-    class="d-flex justify-content-center">
+      class="d-flex justify-content-center">
       <ng-template ngbPaginationPrevious>&#8249;&#8249;Prev</ng-template>
       <ng-template ngbPaginationNext>Next &#8250;&#8250;</ng-template>
       <ng-template ngbPaginationNumber let-page>{{ page }}</ng-template>
@@ -53,4 +59,4 @@
 
 
 </div>
-<app-prod-details (sendValueToResult)="setParentValue($event)" ></app-prod-details>
+<app-prod-details (sendValueToResult)="setParentValue($event)"></app-prod-details>

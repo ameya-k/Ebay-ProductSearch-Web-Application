@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {CallEbayService} from '../call-ebay.service';
 import {ProdDetailsComponent} from '../prod-details/prod-details.component';
+import {WishlistService} from '../wishlist.service';
 
 
 
@@ -14,8 +15,23 @@ export class ResultsComponent implements OnInit {
   searchJson;
   pageSize=10;
   page=1;
-
+  addWishClicked:boolean=false;
+  cart;
+  stArray:any;
+  itSet:Set<String>=new Set<String>();
+  inWishList:boolean=true;
   @ViewChild(ProdDetailsComponent) prod:ProdDetailsComponent;
+
+  ngOnInit() {
+    this.stArray=this.wish.getStorage();
+    //this.itArray=this.stArray.map(x=>x.itemId);
+
+    for(var i=0;i<this.stArray.length;i++){
+      this.itSet.add(this.stArray[i].itemId[0]);
+    }
+
+    console.log(this.itSet);
+  }
 
   setParentValue(){
     this.showresults=true;
@@ -25,7 +41,7 @@ export class ResultsComponent implements OnInit {
   showresults:boolean=true;
   error:boolean=false;
   errorMessage:string;
-  constructor(private ebaysearch: CallEbayService) {
+  constructor(private ebaysearch: CallEbayService,private wish:WishlistService) {
     //  // ebaysearch.ebayResponse.subscribe(
     //     //  //  data=>{console.log(data);}
     //     // )
@@ -74,6 +90,7 @@ export class ResultsComponent implements OnInit {
           this.error=false;
 
       }
+
   }
 
  callEbayservice(formdata){
@@ -92,7 +109,19 @@ export class ResultsComponent implements OnInit {
    });
  }
 
-  ngOnInit() {
+
+
+
+  addToWish(row){
+    this.itSet.add(row.itemId[0]);
+    this.wish.storeItem(row);
+
+  }
+
+  removeFromWish(row){
+
+    this.itSet.delete(row.itemId[0]);
+    this.wish.removeItem(row);
   }
 
 }
