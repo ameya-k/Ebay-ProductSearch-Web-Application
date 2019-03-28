@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import { Formdetails } from '../formdetails';
-import {FormControl, NgForm} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, NgForm} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import {ZipAutoCompleteService} from '../zip-auto-complete.service';
 
@@ -9,6 +9,7 @@ import {debounce, debounceTime, distinctUntilChanged, map, startWith} from 'rxjs
 import {Observable} from 'rxjs';
 import {ResultsComponent} from '../results/results.component';
 import {WishlistComponent} from '../wishlist/wishlist.component';
+import {group} from '@angular/animations';
 
 
 
@@ -20,9 +21,12 @@ import {WishlistComponent} from '../wishlist/wishlist.component';
 export class FormComponentComponent implements OnInit {
 
 
+  isValidForm:boolean=true;
+  zipDisable:boolean=true;
 
+  form:FormGroup;
 
-  constructor( private ip: HttpClient,private zip_service: ZipAutoCompleteService,private ebaysearch: CallEbayService ) {
+  constructor( private ip: HttpClient,private zip_service: ZipAutoCompleteService,private ebaysearch: CallEbayService) {
 
     //this.zipcode.valueChanges.pi
 
@@ -31,11 +35,15 @@ export class FormComponentComponent implements OnInit {
       .subscribe(data => {
         this.zip_service.getZip(data).subscribe(response => {
           if (response[0] != null && response[0] != "undefined" && response[0] != "Undefined")
-            this.ziparray = response
+            this.ziparray = response;
+
         })
       })
 
+
   }
+
+
 
   zipcode: FormControl=new FormControl();
 
@@ -57,49 +65,18 @@ export class FormComponentComponent implements OnInit {
   submitted=false;
   formdetails=new Formdetails();
 
+
+
   onFormSubmit(form: NgForm) {
 
-    // this.formdetails.kword=form.controls['kword'].value;
-    // this.formdetails.category=form.controls['category'].value;
-    // this.formdetails.conditionNew=form.controls['conditionNew'].value;
-    // this.formdetails.conditionUsed=form.controls['conditionUsed'].value;
-    // this.formdetails.conditionUnspecified=form.controls['conditionUnspecified'].value;
-    // this.formdetails.shippingLocal=form.controls['shippingLocal'].value;
-    // this.formdetails.shippingFree=form.controls['shippingFree'].value;
-    // this.formdetails.distance=form.controls['distance'].value;
-    // this.formdetails.location=form.controls['location'].value;
-    // console.log(this.formdetails.location);
-    // if(this.formdetails.location=='current'){
-    //   this.formdetails.zipcode=form.controls['currentlocation'].value;
-    // }
-    // if(this.formdetails.location=='zip'){
-    //   this.formdetails.zipcode=form.controls['zipcodebox'].value;
-    // }
-
-    //console.log(this.formdetails.kword);
-    // console.log(this.formdetails.category);
-    // console.log(this.formdetails.conditionNew);
-    // console.log(this.formdetails.conditionUsed);
-    // console.log( this.formdetails.conditionUnspecified);
-    // console.log(this.formdetails.shippingLocal);
-    // console.log( this.formdetails.shippingFree);
-    // console.log(this.formdetails.distance);
-    // console.log(this.formdetails.location);
-    // console.log(this.formdetails.currentlocation);
-    //console.log(this.formdetails.zipcode);
-
-
-
-    //callebay() service pass formdetails
-
-    //this.ebaysearch.callEbay(this.formdetails);
-
     //call child method
-
   this.child.callEbayservice(this.formdetails);
+  this.child.showProgress=true;
 
 
   }
+
+
 
   clearForm(form: NgForm){
 
@@ -155,13 +132,21 @@ export class FormComponentComponent implements OnInit {
     this.wish_child.showWishList=true;
     this.child.showresults=false;
     this.child.prod.showResults=false;
+    this.wish_child.prodChild.showResults=false;
   }
 
 
-
-
-
-
-
-
+  togZip() {
+    this.zipDisable=!this.zipDisable;
+  }
+  //
+  // enableZip() {
+  //   let a=document.getElementById('zipcodebox');
+  //   a.removeAttribute('disabled')
+  // }
+  //
+  // disableZip() {
+  //   let a=document.getElementById('zipcodebox');
+  //   a.setAttribute('disabled','disabled');
+  // }
 }

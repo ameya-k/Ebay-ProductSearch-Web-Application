@@ -13,6 +13,8 @@ import { WishlistComponent } from './wishlist/wishlist.component';
 import { ProdDetailsComponent } from './prod-details/prod-details.component';
 import {RoundProgressModule} from 'angular-svg-round-progressbar'
 import { StorageServiceModule } from 'ngx-webstorage-service';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +33,9 @@ import { StorageServiceModule } from 'ngx-webstorage-service';
     HttpClientModule,
     NgbModule,
     RoundProgressModule,
-    StorageServiceModule
+    StorageServiceModule,
+
+
 
   ],
   providers: [],

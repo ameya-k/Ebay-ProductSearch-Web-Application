@@ -20,6 +20,9 @@ export class ZipAutoCompleteService {
  getZip(term):any{
 
    return this.call_zip.get<any>(this.url + term).pipe(map(res => {
+     if(term==""){
+       return [];
+     }
      return res.postalCodes.map(item => {
        console.log(item.postalCode);
        return item.postalCode

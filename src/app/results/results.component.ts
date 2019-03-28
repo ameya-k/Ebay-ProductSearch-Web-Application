@@ -20,6 +20,7 @@ export class ResultsComponent implements OnInit {
   stArray:any;
   @Input() itSet:Set<String>=new Set<String>();
   inWishList:boolean=true;
+  showProgress:boolean=false;
   @ViewChild(ProdDetailsComponent) prod:ProdDetailsComponent;
 
   ngOnInit() {
@@ -67,9 +68,14 @@ export class ResultsComponent implements OnInit {
 
 
 
-  callChild(itemId,title,row){
+  callChild(itemId,title,row,parent){
+
        this.showresults=false;
-       this.prod.callDetailServices(itemId,title,row);
+
+       console.log('progress shown');
+
+       this.prod.callDetailServices(itemId,title,row,parent);
+       this.prod.showpbar=true;
 
   }
 
@@ -115,10 +121,12 @@ export class ResultsComponent implements OnInit {
     //   console.log(this.searchJson);
     // })
    this.showresults=true;
+
    this.prod.showResults=false;
    this.ebaysearch.callEbay(formdata).subscribe(data=>{
      this.searchJson=data;
      console.log(this.searchJson);
+     this.showProgress=false;
      //console.log(this.searchJson);
      this.buildSearchTable(this.searchJson);
    });

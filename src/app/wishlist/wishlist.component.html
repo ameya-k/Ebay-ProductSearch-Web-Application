@@ -1,4 +1,13 @@
 <div *ngIf="showWishList">
+
+  <ng-container *ngIf="ws.getStorage().length==0">
+    <div>
+      No items in wish List
+    </div>
+
+  </ng-container>
+
+  <ng-container *ngIf="ws.getStorage().length!=0 ">
 <table class="table table-dark table-striped">
   <tr>
     <th scope="col">#</th>
@@ -9,16 +18,20 @@
     <th scope="col">Seller</th>
     <th scope="col">Wishlist</th>
   </tr>
+
   <tr *ngFor="let row of ws.getStorage();index as i">
   <td>{{i+1}}</td>
     <td *ngIf="row.galleryURL[0]!=undefined"><img src="{{row.galleryURL[0]}}"></td>
     <td *ngIf="row.galleryURL[0]==undefined">N/A</td>
-    <td>{{row.title}}</td>
+    <td><a  (click)="callWishProduct(row.itemId[0],row.title,row)">{{  row.title == null ? 'N/A' : (row.title.toString().length > 50 ? (row.title.toString().substring(0, 50).slice(-1) == ' ' ? (row.title.toString().substring(0, 50) + '...') : (row.title.toString().substring(0, (row.title.toString().substring(0, 50).lastIndexOf(' '))) + '...')) : row.title.toString())}}</a></td>
     <td>{{row.sellingStatus[0].currentPrice[0].__value__}}</td>
     <td>{{row.shippingInfo[0].shippingServiceCost[0].__value__}}</td>
     <td>{{row.sellerInfo[0].sellerUserName[0]}}</td>
     <td>
+
       <i class="material-icons" (click)="removeFromTable(row)">
+
+
         remove_shopping_cart
      </i>
     </td>
@@ -26,4 +39,6 @@
 
   <tr>
 </table>
+  </ng-container>
 </div>
+<app-prod-details (sendValueToWishlist)="showWishChild($event)"></app-prod-details>

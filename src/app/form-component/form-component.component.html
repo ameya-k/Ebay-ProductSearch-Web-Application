@@ -1,13 +1,17 @@
-<div id="formDiv" name="formDiv" class="container" style="color: white;background-color: black">
+<div class="row">
+<div class="col-2"></div>
+<div id="formDiv" name="formDiv" class="container col-8" style="color: white;background-color: black; font-size: 12px;margin-top: 10px">
 
-  <p style="text-align: center; font-size: 30px;margin-bottom: 10px;margin-top: 2px;">Product Search</p>
+  <p style="text-align: center; font-size: 20px;margin-bottom: 10px;margin-top: 2px;">Product Search</p>
 
-  <form id="mainForm" #prodForm="ngForm" (ngSubmit)="onFormSubmit(prodForm)" autocomplete="off">
-    <div class="form-group row">
-      <label for="kword" class="col-sm-2 col-form-label">Keyword</label>
+  <form id="mainForm" #prodForm="ngForm" (ngSubmit)="onFormSubmit(prodForm)"  autocomplete="off">
+    <div class="form-group row" >
+
+      <label for="kword" class="col-sm-2 col-form-label reqField">Keyword</label>
       <div class="col-sm-7">
         <input type="text" name="kword" id="kword" placeholder="Enter product Name(eg.Iphone 8)"
-                class="form-control" [(ngModel)]="formdetails.kword">
+                class="form-control"  [class.is-invalid]="searchword.invalid && searchword.touched"  [(ngModel)]="formdetails.kword" required #searchword="ngModel">
+        <span *ngIf="searchword.invalid && searchword.touched" class="help-block" style="color: red">Please enter a keyword</span>
       </div>
     </div>
     <div class="form-group row">
@@ -88,7 +92,7 @@
 
 
 
-    <label for="current">
+    <label for="current" class="reqField">
       From
     </label>
     <div class="form-check">
@@ -106,7 +110,7 @@
     <br>
 
     <input type="text" name="zipcodebox" placeholder="zip code" id="zipcodebox" class="form-control col-sm-7"
-           [(ngModel)]="formdetails.zipcode" [formControl]="zipcode" [matAutocomplete]="auto" autocomplete="off">
+           [(ngModel)]="formdetails.zipcode" [formControl]="zipcode" [matAutocomplete]="auto" autocomplete="off" >
     <mat-autocomplete #auto="matAutocomplete">
       <mat-option *ngFor="let option of ziparray " [value]="option">
         {{ option }}
@@ -121,14 +125,27 @@
     <p style="text-align: left;margin-left: 20px">
 
 
-      <button type="submit" name="search" value="search" id="search">Search</button>
+      <button class="btn text-center" style="background-color: white" type="submit" name="search" value="search" id="search" [disabled]="!prodForm.valid">
+          <i class="material-icons">
+            search
+          </i>
+          Search
+      </button>
       &nbsp;
-      <button name="clear" value="clear" id="clear" type="reset" ng-click="reset()">Clear</button>
+      <button name="clear" class="btn" style="background-color: white" value="clear" id="clear" type="reset" ng-click="reset()">
+        <i class="material-icons">
+          clear_all
+        </i>
+        Clear
+      </button>
     </p>
 
 
   </form>
 </div>
+  <div class="col-2"></div>
+</div>
+
 <div>
   <ul class="nav nav-pills mb-3 justify-content-center" id="pills-tab" role="tablist" >
     <li class="nav-item">

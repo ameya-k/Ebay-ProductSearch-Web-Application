@@ -1,3 +1,11 @@
+<div *ngIf="showProgress">
+  <div class="progress">
+    <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 10%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+  </div>
+
+</div>
+
+
 <div *ngIf="showresults&&searchJson">
   <!--error div-->
   <div *ngIf="error">
@@ -7,7 +15,7 @@
   </div>
 
   <!--result table div-->
-  <div *ngIf="!error">
+  <div *ngIf="!error" class="container">
 
     <table class="table table-dark table-striped">
       <tr>
@@ -27,7 +35,7 @@
         <td *ngIf="row.galleryURL[0]!=undefined"><img src="{{row.galleryURL[0]}}"></td>
         <td *ngIf="row.galleryURL[0]==undefined">N/A</td>
         <td><a data-toggle="tooltip" placement="bottom" ngbTooltip="{{row.title}}"
-               (click)="callChild(row['itemId']['0'],row.title,row)">{{  row.title == null ? 'N/A' : (row.title.toString().length > 50 ? (row.title.toString().substring(0, 50).slice(-1) == ' ' ? (row.title.toString().substring(0, 50) + '...') : (row.title.toString().substring(0, (row.title.toString().substring(0, 50).lastIndexOf(' '))) + '...')) : row.title.toString())
+               (click)="callChild(row['itemId']['0'],row.title,row,1)">{{  row.title == null ? 'N/A' : (row.title.toString().length > 50 ? (row.title.toString().substring(0, 50).slice(-1) == ' ' ? (row.title.toString().substring(0, 50) + '...') : (row.title.toString().substring(0, (row.title.toString().substring(0, 50).lastIndexOf(' '))) + '...')) : row.title.toString())
           }}</a></td>
         <td>
           ${{row.sellingStatus[0].currentPrice[0].__value__ == null ? 'N/A' : row.sellingStatus[0].currentPrice[0].__value__}}</td>
@@ -59,5 +67,6 @@
 
 
 </div>
-<app-prod-details (sendValueToResult)="setParentValue($event)" (sendHashSetToResult)="refreshHash($event)"></app-prod-details>
+<app-prod-details  (sendValueToResult)="setParentValue($event)" (sendHashSetToResult)="refreshHash($event)"></app-prod-details>
+
 

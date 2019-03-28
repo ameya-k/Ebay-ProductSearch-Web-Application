@@ -6,6 +6,9 @@ import {forEach} from '@angular/router/src/utils/collection';
 import {RoundProgressModule} from 'angular-svg-round-progressbar'
 import {ResultsComponent} from '../results/results.component';
 import {WishlistService} from '../wishlist.service';
+import {FacebookService} from '../facebook.service';
+
+
 
 @Component({
   selector: 'app-prod-details',
@@ -30,12 +33,18 @@ export class ProdDetailsComponent implements OnInit {
   order:string='ascending';
   storageArray:any;
   prodSet:Set<string>=new Set<string>();
+  identifyParent:number=1;
+  showpbar:boolean=false;
 
   currentRow:any;
- showResults=true;
+  showResults=true;
   deepCopy:any[];
+  link:string;
   @Output() sendValueToResult= new EventEmitter<boolean>();
+  @Output() sendValueToWishlist=new EventEmitter<boolean>();
   @Output() sendHashSetToResult=new EventEmitter();
+
+
   constructor(private detailService:ItemDetailsService,private simService: SimilarItemsService,private picService:GooglePhotosService,
               private wish:WishlistService) {}
   togbtn(){
@@ -55,8 +64,16 @@ export class ProdDetailsComponent implements OnInit {
     this.shipclicked=false;
     this.sellclicked=false;
     this.simclicked=false;
-    this.sendValueToResult.emit(true);
-    this.sendHashSetToResult.emit(this.prodSet);
+
+    if(this.identifyParent==1){
+      this.sendValueToResult.emit(true);
+      this.sendHashSetToResult.emit(this.prodSet);
+    }
+    else if(this.identifyParent==2){
+      this.sendValueToWishlist.emit(true);
+
+    }
+
   }
   ngOnInit() {
 
@@ -67,7 +84,11 @@ export class ProdDetailsComponent implements OnInit {
 
 
 
-  callDetailServices(item_id,title,searchJson){
+  callDetailServices(item_id,title,searchJson,parentId){
+
+    console.log('inside call services from wishlist');
+    console.log(this.showResults);
+    this.identifyParent=parentId;
     this.storageArray=this.wish.getStorage();
     //this.itArray=this.stArray.map(x=>x.itemId);
 
@@ -76,10 +97,17 @@ export class ProdDetailsComponent implements OnInit {
     }
     this.detailService.getItemDetails(item_id).subscribe(data=>{
       this.itemDetailsJson=data;
+      this.showpbar=false;
       this.currentRow=searchJson;
+      console.log('current row');
       console.log(this.currentRow);
       // this.buildItemDetailsTable(this.itemDetailsJson);
       console.log(this.itemDetailsJson);
+      this.link="https://www.facebook.com/dialog/share?app_id= 1028804487317941&display=popup";
+      let q="Buy"+encodeURIComponent(this.currentRow.title)+" at $"+this.itemDetailsJson['Item']['CurrentPrice']['Value']+" from link below";
+      this.link+="&quote="+q;
+      let href=this.itemDetailsJson['Item']['ViewItemURLForNaturalSearch'];
+      this.link+="&href="+href;
 
     });
 
@@ -100,9 +128,14 @@ export class ProdDetailsComponent implements OnInit {
       this.photosJson=data;
       console.log(this.photosJson);
 
+
     });
    this.sjson=searchJson;
+
    this.showResults=true;
+
+
+   console.log(this.showResults);
 
 
 
@@ -258,6 +291,7 @@ export class ProdDetailsComponent implements OnInit {
       this.simclicked=true;
       this.sellclicked=false;
     }
+
 
 
 }
