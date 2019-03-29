@@ -8,6 +8,7 @@
   </ng-container>
 
   <ng-container *ngIf="ws.getStorage().length!=0 ">
+ <button  [disabled]="!isDetailSearchPerformed" (click)="callWishProduct(currentRow['itemId']['0'],currentRow.title,currentRow)" >Detail</button>
 <table class="table table-dark table-striped container">
   <tr>
     <th scope="col">#</th>
@@ -19,7 +20,7 @@
     <th scope="col">Wishlist</th>
   </tr>
 
-  <tr *ngFor="let row of ws.getStorage();index as i">
+  <tr *ngFor="let row of myWL;index as i" [class.highlight]="row==currRow">
   <td>{{i+1}}</td>
     <td *ngIf="row.galleryURL[0]!=undefined"><img src="{{row.galleryURL[0]}}"></td>
     <td *ngIf="row.galleryURL[0]==undefined">N/A</td>
@@ -29,7 +30,7 @@
     <td>{{row.sellerInfo[0].sellerUserName[0]}}</td>
     <td>
 
-      <i class="material-icons" (click)="removeFromTable(row)">
+      <i class="material-icons" style="color: gold" (click)="removeFromTable(row)">
 
 
         remove_shopping_cart

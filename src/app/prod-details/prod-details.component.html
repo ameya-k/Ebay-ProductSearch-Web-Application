@@ -18,7 +18,7 @@
   <i class="material-icons float-right" *ngIf="!prodSet.has(currentRow.itemId[0])" (click)="callWish()">
     add_shopping_cart
   </i>
-  <i class="material-icons float-right" *ngIf="prodSet.has(currentRow.itemId[0])" (click)="removeWish()">
+  <i class="material-icons float-right" style="color: gold" *ngIf="prodSet.has(currentRow.itemId[0])" (click)="removeWish()">
     remove_shopping_cart
   </i>
 

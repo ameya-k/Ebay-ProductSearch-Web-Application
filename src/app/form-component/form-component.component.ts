@@ -72,10 +72,10 @@ export class FormComponentComponent implements OnInit {
   onFormSubmit(form: NgForm) {
 
     //call child method
-    console.log(this.formdetails);
+      console.log(this.formdetails);
 
-  this.child.callEbayservice(this.formdetails);
-  this.child.showProgress=true;
+      this.child.callEbayservice(this.formdetails);
+      this.child.showProgress=true;
 
 
   }
@@ -104,50 +104,15 @@ export class FormComponentComponent implements OnInit {
     });
 
     document.getElementById('resultTab').classList.add('active');
-
+    //
     document.getElementById('wishTab').classList.remove('active');
 
     console.log("after clear");
     console.log(this.formdetails);
 
-   this.clr.broadcastClear(true);
+    this.clr.broadcastClear(true);
 
-   //  if(form.controls['kword']!=undefined){
-   //    form.controls['kword'].setValue("");
-   //  }
-   // if(form.controls['category']!=undefined){
-   //   form.controls['category'].setValue('-1');
-   // }
-   //
-   // if(form.controls['conditionNew']!=undefined){
-   //   form.controls['conditionNew'].setValue(false);
-   // }
-   //
-   // if( form.controls['conditionUsed']!=undefined){
-   //   form.controls['conditionUsed'].setValue(false);
-   // }
-   //
-   // if(form.controls['conditionUnspecified']!=undefined){
-   //   form.controls['conditionUnspecified'].setValue(false);
-   // }
-   //
-   // if(form.controls['shippingLocal']!=undefined){
-   //   form.controls['shippingLocal'].setValue(false);
-   // }
-   //
-   //  if(form.controls['shippingFree']!=undefined){
-   //    form.controls['shippingFree'].setValue(false);
-   //  }
-   //
-   //  if( form.controls['distance']!=undefined){
-   //    form.controls['distance'].setValue("");
-   //  }
-   //  if(form.controls['location']!=undefined){
-   //    form.controls['location'].setValue("current");
-   //  }
-   //  if(form.controls['zipcode']!=undefined){
-   //    form.controls['zipcode'].setValue("");
-   //  }
+
 
   }
 

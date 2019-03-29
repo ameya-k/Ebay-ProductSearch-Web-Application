@@ -19,6 +19,9 @@ export class ResultsComponent implements OnInit {
   pageSize=10;
   page=1;
   showProgress:boolean=false;
+  isDetailSearchPerformed:boolean=false;
+
+  
 
   clearResult() {
 
@@ -61,11 +64,20 @@ export class ResultsComponent implements OnInit {
   }
 
 
+  currentRow;
+  highlightCurrentRow(row) {
+
+      this.currentRow=row;
+      console.log('row is'+row);
+  }
 
   showresults:boolean=true;
   error:boolean=false;
   errorMessage:string;
   constructor(private ebaysearch: CallEbayService,private wish:WishlistService,private clr:ClearService) {
+      
+
+    
       this.clr.receiveClear().subscribe(data=>{
         this.clearResult();
       });
@@ -92,7 +104,9 @@ export class ResultsComponent implements OnInit {
 
   callChild(itemId,title,row,parent){
 
+        this.highlightCurrentRow(row);
        this.showresults=false;
+       this.isDetailSearchPerformed=true;
 
        console.log('progress shown');
 
@@ -162,6 +176,7 @@ export class ResultsComponent implements OnInit {
     console.log('adding to hash');
     console.log(this.itSet);
     this.wish.storeItem(row);
+
 
   }
 
