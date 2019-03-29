@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import { Formdetails } from '../formdetails';
-import {FormBuilder, FormControl, FormGroup, NgForm} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import {ZipAutoCompleteService} from '../zip-auto-complete.service';
 
@@ -10,7 +10,7 @@ import {Observable} from 'rxjs';
 import {ResultsComponent} from '../results/results.component';
 import {WishlistComponent} from '../wishlist/wishlist.component';
 import {group} from '@angular/animations';
-
+import{ FormsModule,ReactiveFormsModule } from '@angular/forms';
 
 
 @Component({
@@ -21,14 +21,19 @@ import {group} from '@angular/animations';
 export class FormComponentComponent implements OnInit {
 
 
+
+
+
   isValidForm:boolean=true;
   zipDisable:boolean=true;
 
   form:FormGroup;
 
-  constructor( private ip: HttpClient,private zip_service: ZipAutoCompleteService,private ebaysearch: CallEbayService) {
+  constructor( private ip: HttpClient,private zip_service: ZipAutoCompleteService,private ebaysearch: CallEbayService,
+               private formBuilder:FormBuilder) {
 
     //this.zipcode.valueChanges.pi
+
 
     this.zipcode.valueChanges
       .pipe(debounceTime(400))
@@ -42,6 +47,8 @@ export class FormComponentComponent implements OnInit {
 
 
   }
+
+
 
 
 
@@ -60,6 +67,7 @@ export class FormComponentComponent implements OnInit {
 
   }
 
+
   @ViewChild(ResultsComponent) child;
   @ViewChild(WishlistComponent) wish_child;
   submitted=false;
@@ -70,6 +78,8 @@ export class FormComponentComponent implements OnInit {
   onFormSubmit(form: NgForm) {
 
     //call child method
+    console.log(this.formdetails);
+
   this.child.callEbayservice(this.formdetails);
   this.child.showProgress=true;
 
@@ -139,14 +149,14 @@ export class FormComponentComponent implements OnInit {
   togZip() {
     this.zipDisable=!this.zipDisable;
   }
-  //
-  // enableZip() {
-  //   let a=document.getElementById('zipcodebox');
-  //   a.removeAttribute('disabled')
-  // }
-  //
-  // disableZip() {
-  //   let a=document.getElementById('zipcodebox');
-  //   a.setAttribute('disabled','disabled');
-  // }
+
+  enableZip() {
+    let a=document.getElementById('zipcodebox');
+    a.removeAttribute('disabled')
+  }
+
+  disableZip() {
+    let a=document.getElementById('zipcodebox');
+    a.setAttribute('disabled','disabled');
+  }
 }

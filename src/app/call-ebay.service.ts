@@ -30,7 +30,7 @@ export class CallEbayService {
       }
 
       if(formdata.distance==''){
-        url+="&itemFilter("+cnt+").name=MaxDistance&itemFilter("+cnt+").value=10";
+        url+="&itemFilter("+cnt+").name=MaxDistance&itemFilter("+cnt+").value="+10;
         cnt++;
       }
       else{

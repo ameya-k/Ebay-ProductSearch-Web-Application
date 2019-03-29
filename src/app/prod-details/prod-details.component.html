@@ -109,6 +109,8 @@
     </table>
   </div>
 
+
+  <div *ngIf="photosJson['items']==undefined">No photos found</div>
   <div *ngIf="photclicked" id="photostab" class="tab-pane fade show active" aria-labelledby="pills-photos-tab">
 
 
