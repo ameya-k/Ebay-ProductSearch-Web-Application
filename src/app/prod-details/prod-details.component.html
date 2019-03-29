@@ -9,8 +9,10 @@
 
 <div *ngIf="itemDetailsJson&&similarItemsJson&&photosJson&&showResults" class="container">
 
-
   <button (click)="emitToParent()">Back</button>
+  {{itemDetailsJson['Item']['Title']}}
+
+
 
 
   <i class="material-icons float-right" *ngIf="!prodSet.has(currentRow.itemId[0])" (click)="callWish()">
