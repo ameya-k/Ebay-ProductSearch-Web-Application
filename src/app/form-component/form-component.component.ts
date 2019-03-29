@@ -10,6 +10,7 @@ import {Observable} from 'rxjs';
 import {ResultsComponent} from '../results/results.component';
 import {WishlistComponent} from '../wishlist/wishlist.component';
 import {group} from '@angular/animations';
+import {ClearService} from '../clear.service';
 
 
 
@@ -26,7 +27,8 @@ export class FormComponentComponent implements OnInit {
 
   form:FormGroup;
 
-  constructor( private ip: HttpClient,private zip_service: ZipAutoCompleteService,private ebaysearch: CallEbayService) {
+  constructor( private ip: HttpClient,private zip_service: ZipAutoCompleteService,private ebaysearch: CallEbayService,
+               private clr:ClearService) {
 
     //this.zipcode.valueChanges.pi
 
@@ -80,7 +82,7 @@ export class FormComponentComponent implements OnInit {
 
 
   clearForm(form: NgForm){
-
+    this.clr.broadcastClear(true);
     if(form.controls['kword']!=undefined){
       form.controls['kword'].setValue("");
     }

@@ -54,11 +54,12 @@ export class ResultsComponent implements OnInit {
   errorMessage:string;
   constructor(private ebaysearch: CallEbayService,private wish:WishlistService,private clr:ClearService) {
       this.clr.receiveClear().subscribe(data=>{
-        console.log('clear pressed!');
-      })
+        console.log('received clear!');
+      });
     // this.frm.clrobserver.subscribe(data=>{
     //     //   console.log('clear pressed');
     //     // });
+
 
     this.wish.observer.subscribe(data=>{
 
