@@ -11,10 +11,8 @@ import { FormComponentComponent } from './form-component/form-component.componen
 import { ResultsComponent } from './results/results.component';
 import { WishlistComponent } from './wishlist/wishlist.component';
 import { ProdDetailsComponent } from './prod-details/prod-details.component';
-import {RoundProgressModule} from 'angular-svg-round-progressbar';
+import {RoundProgressModule} from 'angular-svg-round-progressbar'
 import { StorageServiceModule } from 'ngx-webstorage-service';
-import { CustomKeywordDirective } from './custom-keyword.directive';
-import { CustomZipDirective } from './custom-zip.directive';
 
 
 @NgModule({
@@ -23,9 +21,7 @@ import { CustomZipDirective } from './custom-zip.directive';
     FormComponentComponent,
     ResultsComponent,
     WishlistComponent,
-    ProdDetailsComponent,
-    CustomKeywordDirective,
-    CustomZipDirective
+    ProdDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +34,6 @@ import { CustomZipDirective } from './custom-zip.directive';
     NgbModule,
     RoundProgressModule,
     StorageServiceModule,
-
 
 
 

@@ -4,12 +4,12 @@
 
   <p style="text-align: center; font-size: 20px;margin-bottom: 10px;margin-top: 2px;">Product Search</p>
 
-  <form id="mainForm" #prodForm="ngForm"  (ngSubmit)="onFormSubmit(prodForm)"  autocomplete="off">
+  <form id="mainForm" #prodForm="ngForm" (ngSubmit)="onFormSubmit(prodForm)"  autocomplete="off">
     <div class="form-group row" >
 
       <label for="kword" class="col-sm-2 col-form-label reqField">Keyword</label>
       <div class="col-sm-7">
-        <input type="text" name="kword" id="kword" placeholder="Enter product Name(eg.Iphone 8)" myNoSpaces
+        <input type="text" name="kword" id="kword" placeholder="Enter product Name(eg.Iphone 8)"
                 class="form-control"  [class.is-invalid]="searchword.invalid && searchword.touched"  [(ngModel)]="formdetails.kword" required #searchword="ngModel">
         <span *ngIf="searchword.invalid && searchword.touched" class="help-block" style="color: red">Please enter a keyword</span>
       </div>
@@ -92,69 +92,25 @@
 
 
 
-    <!--<label for="current" class="reqField">-->
-      <!--From-->
-    <!--</label>-->
-    <!--<div class="form-check">-->
-      <!--<input type="radio" name="location" value="current" id="current"-->
-             <!--checked="checked" class="form-control form-check-input" [(ngModel)]="formdetails.location">-->
-      <!--<label for="current" class="form-check-label">Current location</label>-->
-    <!--</div>-->
+    <label for="current" class="reqField">
+      From
+    </label>
+    <div class="form-check">
+      <input type="radio" name="location" value="current" id="current"
+             checked="checked" class="form-control form-check-input" [(ngModel)]="formdetails.location">
+      <label for="current" class="form-check-label">Current location</label>
+    </div>
 
-    <!--<div class="form-check">-->
-    <!--<input type="radio" name="location"  id="zip" value="zip" class="form-control form-check-input"-->
-           <!--[(ngModel)]="formdetails.location">-->
-    <!--<label for="zip" class="form-check-label">Other.Please specify zip code</label>-->
-    <!--</div>-->
+    <div class="form-check">
+    <input type="radio" name="location" id="zip" value="zip" class="form-control form-check-input"
+           [(ngModel)]="formdetails.location">
+    <label for="zip" class="form-check-label">Other.Please specify zip code</label>
+    </div>
 
-    <!--<br>-->
-    <!--<fieldset class="form-group">-->
-      <!--<div class="row">-->
-        <!--<legend class="col-form-label col-sm-2 pt-0 ">From</legend>-->
-          <!--<div class="col-sm-10">-->
-            <!--<div class="form-check">-->
-              <!--<input class="form-check-input form-control" type="radio" name="location" id="current" value="current"-->
-                     <!--[(ngModel)]="formdetails.location" checked>-->
-                <!--<label class="form-check-label" for="current">-->
-                  <!--Current location-->
-                <!--</label>-->
-            <!--</div>-->
-            <!--<div class="form-check">-->
-              <!--<input class="form-check-input form-control" type="radio" name="location" id="zip" value="zip"-->
-                     <!--[(ngModel)]="formdetails.location">-->
-              <!--<label class="form-check-label" for="current">-->
-                <!--Other.Please specify zip code.-->
-              <!--</label>-->
-            <!--</div>-->
-          <!--</div>-->
-      <!--</div>-->
-    <!--</fieldset>-->
-    <fieldset class="form-group">
-      <div class="row">
-        <legend class="col-form-label col-sm-2 pt-0 reqField">From</legend>
-        <div class="col-sm-10">
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="location" id="current" value="current"
-                   [(ngModel)]="formdetails.location" checked="checked" (click)="disableZip()">
-            <label class="form-check-label" for="current">
-              Current Location
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="location" id="zip"
-                   [(ngModel)]="formdetails.location" value="zip" (click)="enableZip()">
-            <label class="form-check-label" for="zip">
-              Other.Please specify location
-            </label>
-          </div>
-
-        </div>
-      </div>
-    </fieldset>
-
+    <br>
 
     <input type="text" name="zipcodebox" placeholder="zip code" id="zipcodebox" class="form-control col-sm-7"
-           [(ngModel)]="formdetails.zipcode" myZip required  [matAutocomplete]="auto" autocomplete="off" disabled>
+           [(ngModel)]="formdetails.zipcode" [formControl]="zipcode" [matAutocomplete]="auto" autocomplete="off" >
     <mat-autocomplete #auto="matAutocomplete">
       <mat-option *ngFor="let option of ziparray " [value]="option">
         {{ option }}
