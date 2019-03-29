@@ -84,12 +84,14 @@ export class FormComponentComponent implements OnInit {
 
   clearForm(form: NgForm){
 
-    // this.formdetails.kword = '';
-    // this.formdetails.category = -1;
-    // this.formdetails.location = 'current';
-    // this.formdetails.distance = '199';
 
     console.log(form);
+
+    //    //   this.wish_child.showWishList=false;
+    //    //   this.child.showResults=true;
+    //    // }
+
+
     form.resetForm({category: -1,
       kword: '',
       location: 'current',
@@ -101,6 +103,9 @@ export class FormComponentComponent implements OnInit {
       zipcode:'',
     });
 
+    document.getElementById('resultTab').classList.add('active');
+
+    document.getElementById('wishTab').classList.remove('active');
 
     console.log("after clear");
     console.log(this.formdetails);

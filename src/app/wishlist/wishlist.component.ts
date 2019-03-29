@@ -3,6 +3,7 @@ import {WishlistService} from '../wishlist.service';
 import {ItemDetailsService} from '../item-details.service';
 import {WishProdService} from '../wish-prod.service';
 import {ProdDetailsComponent} from '../prod-details/prod-details.component';
+import {ClearService} from '../clear.service';
 
 @Component({
   selector: 'app-wishlist',
@@ -20,8 +21,16 @@ export class WishlistComponent implements OnInit {
 
 
  sum:number=0;
-  constructor(private ws: WishlistService,private item:ItemDetailsService,private wp:WishProdService) {
+  constructor(private ws: WishlistService,private item:ItemDetailsService,private wp:WishProdService,private clr:ClearService) {
+        this.clr.receiveClear().subscribe(data=>{
+          this.wishInactive();
+        })
 
+  }
+
+  private wishInactive() {
+      console.log('inside wish clear!');
+      this.showWishList=false;
 
   }
 
@@ -77,4 +86,6 @@ export class WishlistComponent implements OnInit {
   showWishChild($event: boolean) {
     this.showWishList=true;
   }
+
+
 }

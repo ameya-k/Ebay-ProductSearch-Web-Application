@@ -55,8 +55,15 @@ export class ProdDetailsComponent implements OnInit {
   }
 
   private clearResult() {
-      console.log('inside product clear')
+     console.log('inside product clear');
+      this.similarItemsJson=null;
+      this.itemDetailsJson=null;
+      this.photosJson=null;
+      this.showResults=true;
+      this.showpbar=false;
+
   }
+
   togbtn(){
     if(this.butLabel=="Show More"){
       this.butLabel="Show Less";
@@ -114,7 +121,7 @@ export class ProdDetailsComponent implements OnInit {
       // this.buildItemDetailsTable(this.itemDetailsJson);
       console.log(this.itemDetailsJson);
       this.link="https://www.facebook.com/dialog/share?app_id= 1028804487317941&display=popup";
-      let q="Buy"+encodeURIComponent(this.currentRow.title)+" at $"+this.itemDetailsJson['Item']['CurrentPrice']['Value']+" from link below";
+      let q="Buy "+encodeURIComponent(this.currentRow.title)+" at $"+this.itemDetailsJson['Item']['CurrentPrice']['Value']+" from link below";
       this.link+="&quote="+q;
       let href=this.itemDetailsJson['Item']['ViewItemURLForNaturalSearch'];
       this.link+="&href="+href;

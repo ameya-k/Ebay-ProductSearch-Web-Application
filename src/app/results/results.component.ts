@@ -23,6 +23,11 @@ export class ResultsComponent implements OnInit {
   clearResult() {
 
     console.log('inside clear');
+    this.error=false;
+    this.pageSize=10;
+    this.page=1;
+    this.showresults=true;
+    this.showProgress=false;
     this.searchJson=null;
   }
 

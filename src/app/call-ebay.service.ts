@@ -16,7 +16,7 @@ export class CallEbayService {
       let url="http://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findItemsAdvanced&SERVICE-VERSION=1.0.0&SECURITY-APPNAME=AmeyaKul-CSCI571H-PRD-9a6d2f14d-216c0559&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&paginationInput.entriesPerPage=50";
       let cnt=0;
       if(formdata.kword!=null){
-        url+="&keywords="+formdata.kword;
+        url+="&keywords="+encodeURIComponent(formdata.kword);
       }
 
 
