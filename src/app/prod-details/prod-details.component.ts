@@ -7,6 +7,7 @@ import {RoundProgressModule} from 'angular-svg-round-progressbar'
 import {ResultsComponent} from '../results/results.component';
 import {WishlistService} from '../wishlist.service';
 import {FacebookService} from '../facebook.service';
+import {ClearService} from '../clear.service';
 
 
 
@@ -46,7 +47,16 @@ export class ProdDetailsComponent implements OnInit {
 
 
   constructor(private detailService:ItemDetailsService,private simService: SimilarItemsService,private picService:GooglePhotosService,
-              private wish:WishlistService) {}
+              private wish:WishlistService,private clr:ClearService) {
+
+    this.clr.receiveClear().subscribe(data=>{
+      this.clearResult();
+    })
+  }
+
+  private clearResult() {
+      console.log('inside product clear')
+  }
   togbtn(){
     if(this.butLabel=="Show More"){
       this.butLabel="Show Less";
