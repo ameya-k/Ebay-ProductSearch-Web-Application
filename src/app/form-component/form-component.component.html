@@ -10,7 +10,8 @@
       <label for="kword" class="col-sm-2 col-form-label reqField">Keyword</label>
       <div class="col-sm-7">
         <input type="text" name="kword" id="kword" placeholder="Enter product Name(eg.Iphone 8)"
-                class="form-control"  [class.is-invalid]="searchword.invalid && searchword.touched" appKeywordValid [(ngModel)]="formdetails.kword" required #searchword="ngModel">
+                class="form-control"  [class.is-invalid]="searchword.invalid && searchword.touched" appKeywordValid
+               [(ngModel)]="formdetails.kword" required #searchword="ngModel">
         <span *ngIf="searchword.invalid && searchword.touched" class="help-block" style="color: red">Please enter a keyword</span>
       </div>
     </div>
@@ -154,7 +155,7 @@
           Search
       </button>
       &nbsp;
-      <button name="clear" class="btn" style="background-color: white" value="clear" id="clear" type="reset" (click)="clearForm(prodForm)">
+      <button name="clear" class="btn" type="button" style="background-color: white" value="clear" id="clear" (click)="clearForm(prodForm)">
         <i class="material-icons">
           clear_all
         </i>

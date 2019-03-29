@@ -14,6 +14,7 @@ import {ClearService} from '../clear.service';
 
 
 
+
 @Component({
   selector: 'app-form-component',
   templateUrl: './form-component.component.html',
@@ -29,7 +30,6 @@ export class FormComponentComponent implements OnInit {
 
   constructor( private ip: HttpClient,private zip_service: ZipAutoCompleteService,private ebaysearch: CallEbayService,
                private clr:ClearService) {
-
     //this.zipcode.valueChanges.pi
 
     this.zipcode.valueChanges
@@ -72,7 +72,8 @@ export class FormComponentComponent implements OnInit {
   onFormSubmit(form: NgForm) {
 
     //call child method
-    console.log(this.formdetails)
+    console.log(this.formdetails);
+
   this.child.callEbayservice(this.formdetails);
   this.child.showProgress=true;
 
@@ -82,47 +83,66 @@ export class FormComponentComponent implements OnInit {
 
 
   clearForm(form: NgForm){
-    this.clr.broadcastClear(true);
-    if(form.controls['kword']!=undefined){
-      form.controls['kword'].setValue("");
-    }
-   if(form.controls['category']!=undefined){
-     form.controls['category'].setValue(-1);
-   }
 
-   if(form.controls['conditionNew']!=undefined){
-     form.controls['conditionNew'].setValue(false);
-   }
+    // this.formdetails.kword = '';
+    // this.formdetails.category = -1;
+    // this.formdetails.location = 'current';
+    // this.formdetails.distance = '199';
 
-   if( form.controls['conditionUsed']!=undefined){
-     form.controls['conditionUsed'].setValue(false);
-   }
-
-   if(form.controls['conditionUnspecified']!=undefined){
-     form.controls['conditionUnspecified'].setValue(false);
-   }
-
-   if(form.controls['shippingLocal']!=undefined){
-     form.controls['shippingLocal'].setValue(false);
-   }
-
-    if(form.controls['shippingFree']!=undefined){
-      form.controls['shippingFree'].setValue(false);
-    }
-
-    if( form.controls['distance']!=undefined){
-      form.controls['distance'].setValue("");
-    }
-    if(form.controls['location']!=undefined){
-      form.controls['location'].setValue("current");
-    }
-    if(form.controls['zipcode']!=undefined){
-      form.controls['zipcode'].setValue("");
-    }
+    console.log(form);
+    form.resetForm({category: -1,
+      kword: '',
+      location: 'current',
+      conditionNew:false,
+      conditionUsed:false,
+      conditionUnspecified:false,
+      shippingLocal:false,
+      shippingFree:false,
+      zipcode:'',
+    });
 
 
+    console.log("after clear");
+    console.log(this.formdetails);
 
+   this.clr.broadcastClear(true);
 
+   //  if(form.controls['kword']!=undefined){
+   //    form.controls['kword'].setValue("");
+   //  }
+   // if(form.controls['category']!=undefined){
+   //   form.controls['category'].setValue('-1');
+   // }
+   //
+   // if(form.controls['conditionNew']!=undefined){
+   //   form.controls['conditionNew'].setValue(false);
+   // }
+   //
+   // if( form.controls['conditionUsed']!=undefined){
+   //   form.controls['conditionUsed'].setValue(false);
+   // }
+   //
+   // if(form.controls['conditionUnspecified']!=undefined){
+   //   form.controls['conditionUnspecified'].setValue(false);
+   // }
+   //
+   // if(form.controls['shippingLocal']!=undefined){
+   //   form.controls['shippingLocal'].setValue(false);
+   // }
+   //
+   //  if(form.controls['shippingFree']!=undefined){
+   //    form.controls['shippingFree'].setValue(false);
+   //  }
+   //
+   //  if( form.controls['distance']!=undefined){
+   //    form.controls['distance'].setValue("");
+   //  }
+   //  if(form.controls['location']!=undefined){
+   //    form.controls['location'].setValue("current");
+   //  }
+   //  if(form.controls['zipcode']!=undefined){
+   //    form.controls['zipcode'].setValue("");
+   //  }
 
   }
 

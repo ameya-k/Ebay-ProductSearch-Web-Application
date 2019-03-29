@@ -3,7 +3,7 @@ import {NgForm} from '@angular/forms';
 
 export class Formdetails {
   public kword: string;
-  public category:any;
+  public category=-1;
   public conditionNew: boolean;
   public conditionUsed:boolean;
   public conditionUnspecified:boolean;

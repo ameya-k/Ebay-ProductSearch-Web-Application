@@ -7,6 +7,7 @@ import {ClearService} from '../clear.service';
 
 
 
+
 @Component({
   selector: 'app-results',
   templateUrl: './results.component.html',
@@ -17,12 +18,19 @@ export class ResultsComponent implements OnInit {
   searchJson;
   pageSize=10;
   page=1;
-  addWishClicked:boolean=false;
-  cart;
+  showProgress:boolean=false;
+
+  clearResult() {
+
+    console.log('inside clear');
+    this.searchJson=null;
+  }
+
+
   stArray:any;
   @Input() itSet:Set<String>=new Set<String>();
-  inWishList:boolean=true;
-  showProgress:boolean=false;
+
+
   @ViewChild(ProdDetailsComponent) prod:ProdDetailsComponent;
 
   ngOnInit() {
@@ -54,7 +62,7 @@ export class ResultsComponent implements OnInit {
   errorMessage:string;
   constructor(private ebaysearch: CallEbayService,private wish:WishlistService,private clr:ClearService) {
       this.clr.receiveClear().subscribe(data=>{
-        console.log('received clear!');
+        this.clearResult();
       });
     // this.frm.clrobserver.subscribe(data=>{
     //     //   console.log('clear pressed');
@@ -137,7 +145,7 @@ export class ResultsComponent implements OnInit {
      console.log(this.searchJson);
      this.showProgress=false;
      //console.log(this.searchJson);
-     this.buildSearchTable(this.searchJson);
+     this.buildSearchTable(data);
    });
  }
 
