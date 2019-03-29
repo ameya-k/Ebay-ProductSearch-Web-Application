@@ -13,6 +13,7 @@ import { WishlistComponent } from './wishlist/wishlist.component';
 import { ProdDetailsComponent } from './prod-details/prod-details.component';
 import {RoundProgressModule} from 'angular-svg-round-progressbar'
 import { StorageServiceModule } from 'ngx-webstorage-service';
+import { KeywordValidDirective } from './keyword-valid.directive';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { StorageServiceModule } from 'ngx-webstorage-service';
     FormComponentComponent,
     ResultsComponent,
     WishlistComponent,
-    ProdDetailsComponent
+    ProdDetailsComponent,
+    KeywordValidDirective
   ],
   imports: [
     BrowserModule,

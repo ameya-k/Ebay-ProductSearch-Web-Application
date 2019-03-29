@@ -70,6 +70,7 @@ export class FormComponentComponent implements OnInit {
   onFormSubmit(form: NgForm) {
 
     //call child method
+    console.log(this.formdetails)
   this.child.callEbayservice(this.formdetails);
   this.child.showProgress=true;
 
@@ -119,6 +120,8 @@ export class FormComponentComponent implements OnInit {
 
 
 
+
+
   }
 
   showChildResult(){
@@ -129,6 +132,7 @@ export class FormComponentComponent implements OnInit {
   }
 
   showChildWishList(){
+    this.wish_child.calcSum();
     this.wish_child.showWishList=true;
     this.child.showresults=false;
     this.child.prod.showResults=false;
@@ -140,13 +144,13 @@ export class FormComponentComponent implements OnInit {
     this.zipDisable=!this.zipDisable;
   }
   //
-  // enableZip() {
-  //   let a=document.getElementById('zipcodebox');
-  //   a.removeAttribute('disabled')
-  // }
-  //
-  // disableZip() {
-  //   let a=document.getElementById('zipcodebox');
-  //   a.setAttribute('disabled','disabled');
-  // }
+  enableZip() {
+    let a=document.getElementById('zipcodebox');
+    a.removeAttribute('disabled')
+  }
+
+  disableZip() {
+    let a=document.getElementById('zipcodebox');
+    a.setAttribute('disabled','disabled');
+  }
 }

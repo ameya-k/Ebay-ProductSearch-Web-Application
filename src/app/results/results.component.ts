@@ -2,6 +2,8 @@ import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {CallEbayService} from '../call-ebay.service';
 import {ProdDetailsComponent} from '../prod-details/prod-details.component';
 import {WishlistService} from '../wishlist.service';
+import {FormComponentComponent} from '../form-component/form-component.component';
+import {ClearService} from '../clear.service';
 
 
 
@@ -50,7 +52,13 @@ export class ResultsComponent implements OnInit {
   showresults:boolean=true;
   error:boolean=false;
   errorMessage:string;
-  constructor(private ebaysearch: CallEbayService,private wish:WishlistService) {
+  constructor(private ebaysearch: CallEbayService,private wish:WishlistService,private clr:ClearService) {
+      this.clr.receiveClear().subscribe(data=>{
+        console.log('clear pressed!');
+      })
+    // this.frm.clrobserver.subscribe(data=>{
+    //     //   console.log('clear pressed');
+    //     // });
 
     this.wish.observer.subscribe(data=>{
 

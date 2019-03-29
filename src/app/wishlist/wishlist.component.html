@@ -8,7 +8,7 @@
   </ng-container>
 
   <ng-container *ngIf="ws.getStorage().length!=0 ">
-<table class="table table-dark table-striped">
+<table class="table table-dark table-striped container">
   <tr>
     <th scope="col">#</th>
     <th scope="col">Image</th>
@@ -24,8 +24,8 @@
     <td *ngIf="row.galleryURL[0]!=undefined"><img src="{{row.galleryURL[0]}}"></td>
     <td *ngIf="row.galleryURL[0]==undefined">N/A</td>
     <td><a  (click)="callWishProduct(row.itemId[0],row.title,row)">{{  row.title == null ? 'N/A' : (row.title.toString().length > 50 ? (row.title.toString().substring(0, 50).slice(-1) == ' ' ? (row.title.toString().substring(0, 50) + '...') : (row.title.toString().substring(0, (row.title.toString().substring(0, 50).lastIndexOf(' '))) + '...')) : row.title.toString())}}</a></td>
-    <td>{{row.sellingStatus[0].currentPrice[0].__value__}}</td>
-    <td>{{row.shippingInfo[0].shippingServiceCost[0].__value__}}</td>
+    <td>${{row.sellingStatus[0].currentPrice[0].__value__}}</td>
+    <td>${{row.shippingInfo[0].shippingServiceCost[0].__value__}}</td>
     <td>{{row.sellerInfo[0].sellerUserName[0]}}</td>
     <td>
 
@@ -37,7 +37,17 @@
     </td>
 
 
-  <tr>
+<tr>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td>Total Shopping</td>
+  <td>${{sum}}</td>
+</tr>
+
+
 </table>
   </ng-container>
 </div>

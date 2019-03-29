@@ -19,13 +19,28 @@ export class WishlistComponent implements OnInit {
   ijson;
 
 
-
+ sum:number=0;
   constructor(private ws: WishlistService,private item:ItemDetailsService,private wp:WishProdService) {
 
 
   }
 
+  calcSum(){
+    let wsArray=this.ws.getStorage();
+    this.sum=0;
+    for(var i=0;i<wsArray.length;i++){
+      console.log(wsArray[i]['sellingStatus'][0]['currentPrice'][0]['__value__']);
+      this.sum+=parseFloat(wsArray[i]['sellingStatus'][0]['currentPrice'][0]['__value__'])
+    }
+  }
   ngOnInit() {
+    let wsArray=this.ws.getStorage();
+    this.sum=0;
+    for(var i=0;i<wsArray.length;i++){
+      console.log(wsArray[i]['sellingStatus'][0]['currentPrice'][0]['__value__']);
+      this.sum+=parseFloat(wsArray[i]['sellingStatus'][0]['currentPrice'][0]['__value__'])
+    }
+    console.log(this.sum);
 
   }
 
@@ -34,6 +49,14 @@ export class WishlistComponent implements OnInit {
     //service that removes from local storage
 
     this.ws.removeItem(row);
+    let wsArray=this.ws.getStorage();
+    this.sum=0;
+    for(var i=0;i<wsArray.length;i++){
+      console.log(wsArray[i]['sellingStatus'][0]['currentPrice'][0]['__value__']);
+      this.sum+=parseFloat(wsArray[i]['sellingStatus'][0]['currentPrice'][0]['__value__'])
+    }
+    console.log(this.sum);
+
 
     //getting the local storage array upon element removal
 
