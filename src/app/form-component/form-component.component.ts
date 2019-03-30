@@ -73,7 +73,9 @@ export class FormComponentComponent implements OnInit {
 
     //call child method
       console.log(this.formdetails);
-
+      console.log('submitting to result');
+      this.child.showResults=true;
+      console.log(this.child.showResults);
       this.child.callEbayservice(this.formdetails);
       this.child.showProgress=true;
 

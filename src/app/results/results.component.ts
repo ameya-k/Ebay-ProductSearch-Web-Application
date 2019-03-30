@@ -156,7 +156,9 @@ export class ResultsComponent implements OnInit {
     //   this.searchJson=data;
     //   console.log(this.searchJson);
     // })
+   console.log('inside result'+this.showresults);
    this.showresults=true;
+   console.log(this.showresults);
 
    this.prod.showResults=false;
    this.ebaysearch.callEbay(formdata).subscribe(data=>{

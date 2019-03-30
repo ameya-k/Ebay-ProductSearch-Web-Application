@@ -52,67 +52,77 @@
 
   <!--(currentRow.title,itemDetailsJson['Item']['CurrentPrice']['Value'],itemDetailsJson['Item']['ViewItemURLForNaturalSearch']-->
   <div *ngIf="prodclicked" id="prodtab" class="tab-pane fade show active" aria-labelledby="pills-prod-tab">
-    <table class="table table-dark table-striped ">
-      <tr *ngIf="itemDetailsJson['Item']!=undefined && itemDetailsJson['Item']['PictureURL']!=undefined &&
-      itemDetailsJson['Item']['PictureURL'].length!=0">
-        <td>
-          Product Images
-        </td>
-        <td>
-          <a data-toggle="modal" href="#imageModal" data-target="#imageModal">Click for product images</a>
-        </td>
-      </tr>
-
-      <tr *ngIf="itemDetailsJson['Item']['Subtitle']!=undefined">
-
-        <td>SubTitle</td>
-        <td>{{itemDetailsJson['Item']['Subtitle']}}</td>
-
-      </tr>
-      <tr *ngIf="itemDetailsJson['Item']['CurrentPrice']!=undefined &&
-      itemDetailsJson['Item']['CurrentPrice']['Value']!=undefined">
-        <td>Price</td>
-        <td>{{itemDetailsJson['Item']['CurrentPrice']['Value']}}</td>
-      </tr>
-
-      <tr *ngIf="itemDetailsJson['Item']['Location']!=undefined">
-        <td>Location</td>
-        <td>{{itemDetailsJson['Item']['Location']}}</td>
-      </tr>
-
-      <tr *ngIf="itemDetailsJson['Item']['ReturnPolicy']!=undefined">
-        <td>Return Policy(US)</td>
-        <td *ngIf="itemDetailsJson['Item']['ReturnPolicy']['ReturnsAccepted']!=undefined
-        &&itemDetailsJson['Item']['ReturnPolicy']['ReturnsWithin']!=undefined">
-          {{itemDetailsJson['Item']['ReturnPolicy']['ReturnsAccepted']}} within {{itemDetailsJson['Item']['ReturnPolicy']['ReturnsWithin']}}
-        </td>
-        <td *ngIf="itemDetailsJson['Item']['ReturnPolicy']['ReturnsAccepted']!=undefined
-        &&itemDetailsJson['Item']['ReturnPolicy']['ReturnsWithin']==undefined">
-          {{itemDetailsJson['Item']['ReturnPolicy']['ReturnsAccepted']}}
-        </td>
-        <td *ngIf="itemDetailsJson['Item']['ReturnPolicy']['ReturnsAccepted']==undefined
-        &&itemDetailsJson['Item']['ReturnPolicy']['ReturnsWithin']!=undefined">
-            {{itemDetailsJson['Item']['ReturnPolicy']['ReturnsWithin']}}
-        </td>
-
-
-      </tr>
-      <ng-container *ngIf="itemDetailsJson['Item']['ItemSpecifics']!=undefined">
-        <tr  *ngFor="let row of itemDetailsJson['Item']['ItemSpecifics']['NameValueList'] ">
+    <div *ngIf="itemDetailsJson==null || itemDetailsJson.Item==undefined || itemDetailsJson.Item.length==0">
+      No product details
+    </div>
+    <div *ngIf="itemDetailsJson!=undefined && itemDetailsJson.Item!=undefined && itemDetailsJson.Item.length!=0">
+      <table class="table table-dark table-striped ">
+        <tr *ngIf="itemDetailsJson['Item']!=undefined && itemDetailsJson['Item']['PictureURL']!=undefined &&
+        itemDetailsJson['Item']['PictureURL'].length!=0">
           <td>
-            {{row.Name}}
+            Product Images
           </td>
-          <td>{{row.Value[0]}}</td>
+          <td>
+            <a data-toggle="modal" href="#imageModal" data-target="#imageModal">Click for product images</a>
+          </td>
+        </tr>
+
+        <tr *ngIf="itemDetailsJson['Item']['Subtitle']!=undefined">
+
+          <td>SubTitle</td>
+          <td>{{itemDetailsJson['Item']['Subtitle']}}</td>
 
         </tr>
-      </ng-container>
+        <tr *ngIf="itemDetailsJson['Item']['CurrentPrice']!=undefined &&
+        itemDetailsJson['Item']['CurrentPrice']['Value']!=undefined">
+          <td>Price</td>
+          <td>${{itemDetailsJson['Item']['CurrentPrice']['Value']}}</td>
+        </tr>
+
+        <tr *ngIf="itemDetailsJson['Item']['Location']!=undefined">
+          <td>Location</td>
+          <td>{{itemDetailsJson['Item']['Location']}}</td>
+        </tr>
+
+        <tr *ngIf="itemDetailsJson['Item']['ReturnPolicy']!=undefined">
+          <td>Return Policy(US)</td>
+          <td *ngIf="itemDetailsJson['Item']['ReturnPolicy']['ReturnsAccepted']!=undefined
+          &&itemDetailsJson['Item']['ReturnPolicy']['ReturnsWithin']!=undefined">
+            {{itemDetailsJson['Item']['ReturnPolicy']['ReturnsAccepted']}} within {{itemDetailsJson['Item']['ReturnPolicy']['ReturnsWithin']}}
+          </td>
+          <td *ngIf="itemDetailsJson['Item']['ReturnPolicy']['ReturnsAccepted']!=undefined
+          &&itemDetailsJson['Item']['ReturnPolicy']['ReturnsWithin']==undefined">
+            {{itemDetailsJson['Item']['ReturnPolicy']['ReturnsAccepted']}}
+          </td>
+          <td *ngIf="itemDetailsJson['Item']['ReturnPolicy']['ReturnsAccepted']==undefined
+          &&itemDetailsJson['Item']['ReturnPolicy']['ReturnsWithin']!=undefined">
+              {{itemDetailsJson['Item']['ReturnPolicy']['ReturnsWithin']}}
+          </td>
 
 
-    </table>
+        </tr>
+        <ng-container *ngIf="itemDetailsJson['Item']['ItemSpecifics']!=undefined">
+          <tr  *ngFor="let row of itemDetailsJson['Item']['ItemSpecifics']['NameValueList'] ">
+            <td>
+              {{row.Name}}
+            </td>
+            <td>{{row.Value[0]}}</td>
+
+          </tr>
+        </ng-container>
+
+
+      </table>
+  </div>
   </div>
 
   <div *ngIf="photclicked" id="photostab" class="tab-pane fade show active" aria-labelledby="pills-photos-tab">
 
+    <div *ngIf="photosJson!=undefined&&photosJson.items==undefined || photosJson.items.length==0">
+      No photos found
+    </div>
+
+    <div *ngIf="photosJson.items!=undefined && photosJson.items.length!=0">
 
     <div class="container-fluid center">
 
@@ -141,6 +151,7 @@
 
 
       </div>
+    </div>
 
     </div>
 
@@ -303,6 +314,19 @@
   </div>
 
   <div *ngIf="simclicked" id="simTab" class="tab-pane fade show active" aria-labelledby="pills-similar-tab">
+
+    <div *ngIf="similarItemsJson!=undefined||similarItemsJson.getSimilarItemsResponse!=undefined
+ ||similarItemsJson.getSimilarItemsResponse.itemRecommendations!=undefined||
+ similarItemsJson.getSimilarItemsResponse.itemRecommendations.item!=undefined||
+ similarItemsJson.getSimilarItemsResponse.itemRecommendations.item.lenght!=0">
+      No similar items
+    </div>
+    <div *ngIf="similarItemsJson!=undefined&&similarItemsJson.getSimilarItemsResponse!=undefined
+ &&similarItemsJson.getSimilarItemsResponse.itemRecommendations!=undefined&&
+ similarItemsJson.getSimilarItemsResponse.itemRecommendations.item!=undefined&&
+ similarItemsJson.getSimilarItemsResponse.itemRecommendations.item.lenght!=0">
+
+
     <select id="sortAttr" (change)="sort($event.target.value)">
       <option value="default">Default</option>
       <option value="ProductName" >Product Name</option>
@@ -347,6 +371,7 @@
     </button>
 
   </div>
+  </div>
 
   <!--modal goes here -->
   <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -364,11 +389,11 @@
           <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
               <div class="carousel-item active">
-                <a [attr.target]="_blank" a [attr.href]="itemDetailsJson['Item']['PictureURL'][0]"><img class="d-block w-100" [attr.src]="itemDetailsJson['Item']['PictureURL'][0]" alt="First slide"></a>
+                <a [attr.target]="_blank" a [attr.href]="itemDetailsJson['Item']['PictureURL'][0]"><img class="d-block w-100" [attr.src]="itemDetailsJson['Item']['PictureURL'][0]" ></a>
               </div>
               <ng-container *ngFor="let row of itemDetailsJson['Item']['PictureURL'];index as i">
                 <div class="carousel-item" *ngIf="i<itemDetailsJson['Item']['PictureURL'].length-1">
-                  <a [attr.target]="_blank" [attr.href]="itemDetailsJson['Item']['PictureURL'][i+1]"><img class="d-block w-100"  [attr.src]="itemDetailsJson['Item']['PictureURL'][i+1]"></a>
+                  <a target="_blank" [attr.href]="itemDetailsJson['Item']['PictureURL'][i+1]"><img class="d-block w-100"  [attr.src]="itemDetailsJson['Item']['PictureURL'][i+1]"></a>
                 </div>
               </ng-container>
 
