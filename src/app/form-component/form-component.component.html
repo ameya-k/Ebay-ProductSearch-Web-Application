@@ -4,7 +4,7 @@
 
   <p style="text-align: center; font-size: 20px;margin-bottom: 10px;margin-top: 2px;">Product Search</p>
 
-  <form id="mainForm" #prodForm="ngForm" (ngSubmit)="onFormSubmit(prodForm)"   autocomplete="off">
+  <form id="mainForm" #prodForm="ngForm"  (ngSubmit)="onFormSubmit(prodForm)"   autocomplete="off">
     <div class="form-group row" >
 
       <label for="kword" class="col-sm-2 col-form-label reqField">Keyword</label>
@@ -132,8 +132,12 @@
 
     <br>
 
+    <!--<input type="text" name="zipcodebox" placeholder="zip code" id="zipcodebox" class="form-control col-sm-7"-->
+           <!--[(ngModel)]="formdetails.zipcode"  [formControl]="zipcode" disabled [matAutocomplete]="auto" autocomplete="off" required> -->
     <input type="text" name="zipcodebox" placeholder="zip code" id="zipcodebox" class="form-control col-sm-7"
-           [(ngModel)]="formdetails.zipcode" [formControl]="zipcode" disabled [matAutocomplete]="auto" autocomplete="off" >
+           pattern="(^\d{5}$)|(^\d{5}-\d{4}$)" [(ngModel)]="formdetails.zipcode" [formControl]="zipcode" disabled [matAutocomplete]="auto"
+            autocomplete="off" required>
+    <span *ngIf="zipcode.errors&&isZipenabled&&zipcode.touched" style="color: red" class="help-block">Zip code is required</span>
     <mat-autocomplete #auto="matAutocomplete">
       <mat-option *ngFor="let option of ziparray " [value]="option">
         {{ option }}
@@ -148,7 +152,8 @@
     <p style="text-align: left;margin-left: 20px">
 
 
-      <button class="btn text-center" style="background-color: white" type="submit" name="search" value="search" id="search" [disabled]="!prodForm.valid">
+      <button class="btn text-center" style="background-color: white" type="submit" name="search" value="search" id="search" [disabled]="!prodForm.valid||
+      (zipcode.errors&&isZipenabled)">
           <i class="material-icons">
             search
           </i>

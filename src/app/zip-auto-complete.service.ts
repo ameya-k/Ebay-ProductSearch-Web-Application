@@ -24,7 +24,7 @@ export class ZipAutoCompleteService {
        return [];
      }
      return res.postalCodes.map(item => {
-       console.log(item.postalCode);
+
        return item.postalCode
      })
    }))

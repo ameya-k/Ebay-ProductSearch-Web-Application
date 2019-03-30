@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import { Formdetails } from '../formdetails';
-import {FormBuilder, FormControl, FormGroup, NgForm} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import {ZipAutoCompleteService} from '../zip-auto-complete.service';
 
@@ -25,11 +25,11 @@ export class FormComponentComponent implements OnInit {
 
   isValidForm:boolean=true;
   zipDisable:boolean=true;
-
+  isZipenabled:boolean=false;
   form:FormGroup;
 
   constructor( private ip: HttpClient,private zip_service: ZipAutoCompleteService,private ebaysearch: CallEbayService,
-               private clr:ClearService) {
+               private clr:ClearService,private formBuilder: FormBuilder) {
     //this.zipcode.valueChanges.pi
 
     this.zipcode.valueChanges
@@ -81,6 +81,7 @@ export class FormComponentComponent implements OnInit {
 
 
   }
+
 
 
 
@@ -141,10 +142,12 @@ export class FormComponentComponent implements OnInit {
   enableZip() {
     let a=document.getElementById('zipcodebox');
     a.removeAttribute('disabled')
+    this.isZipenabled=true;
   }
 
   disableZip() {
     let a=document.getElementById('zipcodebox');
     a.setAttribute('disabled','disabled');
+    this.isZipenabled=false;
   }
 }
