@@ -90,11 +90,6 @@ export class FormComponentComponent implements OnInit {
 
     console.log(form);
 
-    //    //   this.wish_child.showWishList=false;
-    //    //   this.child.showResults=true;
-    //    // }
-
-
     form.resetForm({category: -1,
       kword: '',
       location: 'current',
@@ -106,9 +101,26 @@ export class FormComponentComponent implements OnInit {
       zipcode:'',
     });
 
-    document.getElementById('resultTab').classList.add('active');
+    //document.getElementById('resultTab').classList.add('active');
     //
-    document.getElementById('wishTab').classList.remove('active');
+    //document.getElementById('wishTab').classList.remove('active');
+    if(document.getElementById('wishTab').classList.contains('active')){
+      console.log('wish is active');
+      document.getElementById('wishTab').classList.remove('active');
+      document.getElementById('wishlist').classList.remove('active');
+      document.getElementById('wishlist').classList.remove('show');
+      document.getElementById('resultTab').classList.add('active');
+      document.getElementById('results').classList.add('show');
+      document.getElementById('results').classList.add('active');
+      this.child.showResults=true;
+      this.wish_child.showWishList=false;
+    }
+    else{
+      document.getElementById('resultTab').classList.add('active');
+      document.getElementById('results').classList.add('active');
+      document.getElementById('wishlist').classList.add('show');
+      this.wish_child.showWishList=false;
+    }
 
     console.log("after clear");
     console.log(this.formdetails);

@@ -8,9 +8,11 @@ export class ClearService {
 
   private clrsubject=new Subject<any>();
 
+
   constructor() { }
 
   broadcastClear(clear:boolean){
+    console.log('broadcasting clear');
     this.clrsubject.next(clear);
   }
 

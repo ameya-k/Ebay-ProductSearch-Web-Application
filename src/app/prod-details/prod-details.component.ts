@@ -50,6 +50,7 @@ export class ProdDetailsComponent implements OnInit {
               private wish:WishlistService,private clr:ClearService) {
 
     this.clr.receiveClear().subscribe(data=>{
+      console.log(data);
       this.clearResult();
     })
   }
