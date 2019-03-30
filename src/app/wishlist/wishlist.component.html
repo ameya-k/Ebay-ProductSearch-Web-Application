@@ -9,7 +9,7 @@
 
   <ng-container *ngIf="ws.getStorage().length!=0 ">
  <button  [disabled]="!isDetailSearchPerformed" (click)="callWishProduct(currRow['itemId']['0'],currRow.title,currRow)" >Detail</button>
-<table class="table table-dark table-striped container">
+<table class="table table-dark table-striped container table-hover">
   <tr>
     <th scope="col">#</th>
     <th scope="col">Image</th>

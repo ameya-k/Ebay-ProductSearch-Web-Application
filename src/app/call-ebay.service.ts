@@ -74,12 +74,13 @@ export class CallEbayService {
       url+="&outputSelector(0)=SellerInfo+&outputSelector(1)=StoreInfo";
 
       console.log(url);
+      //http://ameyabk117-angularweb8.appspot.com
+
+      // let url_call="http://localhost:3000/ebaySearchTable/";
+     //      //       // url_call+=Object.keys(formdata).map(key => key + '=' + formdata[key]).join('&');
+     //      //       // console.log(url_call);
       return this.ebaySearch.get(url);
-      // this.ebaySearch.get(url).subscribe(data=>{
-      //    console.log("data :");
-      //    console.log(data);
-      // });
-      // return this.ebayResponse;
+
 
 
 

@@ -18,7 +18,7 @@
   <div *ngIf="!error" class="container">
 
 <button class="btn" [disabled]="!isDetailSearchPerformed" (click)="callChild(currentRow['itemId']['0'],currentRow.title,currentRow,1)">Detail</button>
-    <table class="table table-dark table-striped">
+    <table class="table table-dark table-striped table-hover">
       <tr>
         <th scope="col">#</th>
         <th scope="col">Image</th>
@@ -33,10 +33,10 @@
       <tr *ngFor="let row of searchJson.findItemsAdvancedResponse[0].searchResult[0].item|
       slice: (page-1) * pageSize : (page-1) * pageSize + pageSize;index as i" [class.highlight]="row==currentRow">
         <td>{{(page - 1) * 10 + i + 1}}</td>
-        <td *ngIf="row.galleryURL[0]!=undefined"><img src="{{row.galleryURL[0]}}"></td>
+        <td *ngIf="row.galleryURL[0]!=undefined"><img class="resImage" src="{{row.galleryURL[0]}}"></td>
         <td *ngIf="row.galleryURL[0]==undefined">N/A</td>
         <td *ngIf="row.title!=undefined">
-          <a data-toggle="tooltip" placement="bottom" ngbTooltip="{{row.title}}"
+          <a href="#" data-toggle="tooltip" placement="bottom" ngbTooltip="{{row.title}}"
 
                (click)="callChild(row['itemId']['0'],row.title,row,1)">
             {{  row.title == null ? 'N/A' : (row.title.toString().length > 50 ? (row.title.toString().substring(0, 50).slice(-1) == ' ' ? (row.title.toString().substring(0, 50) + '...') : (row.title.toString().substring(0, (row.title.toString().substring(0, 50).lastIndexOf(' '))) + '...')) : row.title.toString())

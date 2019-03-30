@@ -56,7 +56,7 @@
       No product details
     </div>
     <div *ngIf="itemDetailsJson!=undefined && itemDetailsJson.Item!=undefined && itemDetailsJson.Item.length!=0">
-      <table class="table table-dark table-striped ">
+      <table class="table table-dark table-striped table-hover ">
         <tr *ngIf="itemDetailsJson['Item']!=undefined && itemDetailsJson['Item']['PictureURL']!=undefined &&
         itemDetailsJson['Item']['PictureURL'].length!=0">
           <td>
@@ -162,7 +162,7 @@
 
 
   <div *ngIf="shipclicked" id="shippingTab" class="tab-pane fade show active" aria-labelledby="pills-shipping-tab">
-    <table class="table table-dark table-striped ">
+    <table class="table table-dark table-striped table-hover ">
 
       <tr *ngIf="sjson.shippingInfo!=undefined && sjson.shippingInfo[0].shippingServiceCost[0].__value__!=undefined">
           <td>
@@ -240,7 +240,7 @@
   </div>
 
   <div *ngIf="sellclicked" id="sellerTab" class="tab-pane fade show active" aria-labelledby="pills-seller-tab">
-    <table class="table table-dark table-striped ">
+    <table class="table table-dark table-striped table-hover ">
       <caption *ngIf="sjson.sellerInfo!=undefined && sjson.sellerInfo[0].sellerUserName!=undefined">
         {{sjson.sellerInfo[0].sellerUserName[0]}}
       </caption>
