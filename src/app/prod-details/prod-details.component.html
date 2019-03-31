@@ -315,16 +315,16 @@
 
   <div *ngIf="simclicked" id="simTab" class="tab-pane fade show active" aria-labelledby="pills-similar-tab">
 
-    <div *ngIf="similarItemsJson!=undefined||similarItemsJson.getSimilarItemsResponse!=undefined
- ||similarItemsJson.getSimilarItemsResponse.itemRecommendations!=undefined||
- similarItemsJson.getSimilarItemsResponse.itemRecommendations.item!=undefined||
- similarItemsJson.getSimilarItemsResponse.itemRecommendations.item.lenght!=0">
+    <div *ngIf="similarItemsJson==undefined||similarItemsJson.getSimilarItemsResponse==undefined
+ ||similarItemsJson.getSimilarItemsResponse.itemRecommendations==undefined||
+ similarItemsJson.getSimilarItemsResponse.itemRecommendations.item==undefined||
+ similarItemsJson.getSimilarItemsResponse.itemRecommendations.item.length==0">
       No similar items
     </div>
     <div *ngIf="similarItemsJson!=undefined&&similarItemsJson.getSimilarItemsResponse!=undefined
  &&similarItemsJson.getSimilarItemsResponse.itemRecommendations!=undefined&&
  similarItemsJson.getSimilarItemsResponse.itemRecommendations.item!=undefined&&
- similarItemsJson.getSimilarItemsResponse.itemRecommendations.item.lenght!=0">
+ similarItemsJson.getSimilarItemsResponse.itemRecommendations.item.length!=0">
 
 
     <select id="sortAttr" (change)="sort($event.target.value)">

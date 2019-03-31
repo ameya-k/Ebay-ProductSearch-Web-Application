@@ -11,18 +11,23 @@ import {map} from 'rxjs/operators';
 export class ZipAutoCompleteService {
 
 
-  url:string;
+
   constructor(private call_zip:HttpClient){
-      this.url="http://api.geonames.org/postalCodeSearchJSON?username=ameya_k&country=US&maxRows=5&postalcode_startsWith=";
+      //this.url="http://api.geonames.org/postalCodeSearchJSON?username=ameya_k&country=US&maxRows=5&postalcode_startsWith=";
+      //var url="http://localhost:3000/zipCall/"
+
   }
 
 
  getZip(term):any{
+    //let url="http://api.geonames.org/postalCodeSearchJSON?username=ameya_k&country=US&maxRows=5&postalcode_startsWith=";
+    console.log('zip term'+term);
+  // if(term=='' || term==null){
+  //   return
+  // }
+    let url="http://localhost:3000/zipCall/"+term;
+   return this.call_zip.get<any>(url + term).pipe(map(res => {
 
-   return this.call_zip.get<any>(this.url + term).pipe(map(res => {
-     if(term==""){
-       return [];
-     }
      return res.postalCodes.map(item => {
 
        return item.postalCode

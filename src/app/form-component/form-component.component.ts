@@ -32,15 +32,15 @@ export class FormComponentComponent implements OnInit {
                private clr:ClearService,private formBuilder: FormBuilder) {
     //this.zipcode.valueChanges.pi
 
-    this.zipcode.valueChanges
-      .pipe(debounceTime(400))
-      .subscribe(data => {
-        this.zip_service.getZip(data).subscribe(response => {
-          if (response[0] != null && response[0] != "undefined" && response[0] != "Undefined")
-            this.ziparray = response;
-
-        })
-      })
+    // this.zipcode.valueChanges
+    //   .pipe(debounceTime(400),distinctUntilChanged())
+    //   .subscribe(data => {
+    //     this.zip_service.getZip(data).subscribe(response => {
+    //       if (response[0] != null && response[0] != "undefined" && response[0] != "Undefined")
+    //         this.ziparray = response;
+    //
+    //     })
+    //   })
 
 
   }
@@ -59,6 +59,25 @@ export class FormComponentComponent implements OnInit {
 
     let obs=this.ip.get("http://ip-api.com/json");
     obs.subscribe((response)=>this.setLocation(response));
+    this.callMyZip();
+    // this.zipcode.valueChanges
+    //   .pipe(debounceTime(400),distinctUntilChanged())
+    //   .subscribe(data => {
+    //     this.zip_service.getZip(data).subscribe(response => {
+    //       if (response[0] != null && response[0] != "undefined" && response[0] != "Undefined")
+    //         this.ziparray = response;
+    //
+    //     })
+    //   })
+    // this.zipcode.valueChanges
+    //   .pipe(debounceTime(400))
+    //   .subscribe(data => {
+    //     this.zip_service.getZip(data).subscribe(response => {
+    //       if (response[0] != null && response[0] != "undefined" && response[0] != "Undefined")
+    //         this.ziparray = response;
+    //
+    //     })
+    //   });
 
   }
 
@@ -67,8 +86,29 @@ export class FormComponentComponent implements OnInit {
   submitted=false;
   formdetails=new Formdetails();
 
+ callMyZip(){
+
+   this.zipcode.valueChanges
+     .pipe(debounceTime(400),distinctUntilChanged())
+     .subscribe(data => {
+          this.callmyZipService(data);
+     })
+ }
 
 
+ callmyZipService(data){
+   if(data==null || data==''){
+     this.ziparray=[];
+   }
+   else{
+     this.zip_service.getZip(data).subscribe(response => {
+       if (response[0] != null && response[0] != "undefined" && response[0] != "Undefined")
+         this.ziparray = response;
+
+     });
+   }
+
+ }
   onFormSubmit(form: NgForm) {
 
     //call child method
