@@ -25,7 +25,7 @@ export class ZipAutoCompleteService {
   // if(term=='' || term==null){
   //   return
   // }
-    let url="http://localhost:3000/zipCall/"+term;
+    let url="https://ameyabk117-angularweb8.appspot.com/zipCall/"+term;
    return this.call_zip.get<any>(url + term).pipe(map(res => {
 
      return res.postalCodes.map(item => {
