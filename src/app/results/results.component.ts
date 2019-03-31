@@ -26,6 +26,8 @@ export class ResultsComponent implements OnInit {
   clearResult() {
 
     console.log('inside clear');
+    this.currentRow=null;
+    this.isDetailSearchPerformed=false;
     this.error=false;
     this.pageSize=10;
     this.page=1;
