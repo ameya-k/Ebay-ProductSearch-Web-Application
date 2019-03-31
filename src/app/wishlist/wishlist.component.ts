@@ -68,6 +68,8 @@ export class WishlistComponent implements OnInit {
   private wishInactive() {
       console.log('inside wish clear!');
       this.showWishList=false;
+      this.currRow=null;
+      this.isDetailSearchPerformed=false;
 
   }
 
