@@ -222,14 +222,14 @@
         </td>
       </tr>
 
-      <tr  *ngIf="sjson.shippingInfo!=undefined && sjson.shippingInfo[0].returnsAccepted!=undefined">
+      <tr  *ngIf="sjson.returnsAccepted!=undefined && sjson.returnsAccepted[0]!=undefined">
         <td>Return Accepted</td>
-        <td *ngIf=" sjson.shippingInfo[0].returnsAccepted[0]=='true'">
+        <td *ngIf=" sjson.returnsAccepted[0]=='true'">
           <i class="material-icons" style="color: green">
             check
           </i>
         </td>
-        <td *ngIf=" sjson.shippingInfo[0].returnsAccepted[0]=='false'">
+        <td *ngIf=" sjson.returnsAccepted[0]=='false'">
           <i class="material-icons" style="color: red">
             close
           </i>
@@ -307,7 +307,7 @@
 
       <tr *ngIf="sjson.storeInfo!=undefined&&sjson.storeInfo[0].storeURL!=undefined">
         <td>Buy Product At</td>
-        <td><a [attr.href]="sjson.storeInfo[0].storeURL[0]" target="_blank">{{sjson.storeInfo[0].storeURL[0]}}</a></td>
+        <td><a [attr.href]="sjson.storeInfo[0].storeURL[0]" target="_blank">Store</a></td>
       </tr>
 
     </table>
@@ -346,8 +346,8 @@
 
       <div class="card-block px-2" style="color: white">
         <p *ngIf="row.title!=undefined" style="margin-top: 10px;"><a [attr.href]="row.viewItemURL" target="_blank">{{row.title}}</a></p>
-        <p *ngIf="row.buyItNowPrice!=undefined">Price:{{row.buyItNowPrice.__value__}}</p>
-        <p *ngIf="row.shippingCost!=undefined">Shipping Cost:{{row.shippingCost.__value__}}</p>
+        <p *ngIf="row.buyItNowPrice!=undefined">Price:${{row.buyItNowPrice.__value__}}</p>
+        <p *ngIf="row.shippingCost!=undefined">Shipping Cost:${{row.shippingCost.__value__}}</p>
         <p *ngIf="row.timeLeft!=undefined">Days Left:{{row.timeLeft.substring(row.timeLeft.lastIndexOf('P')+1,row.timeLeft.lastIndexOf('D'))}}</p>
       </div>
     </div>
@@ -360,8 +360,8 @@
 
         <div class="card-block px-2" style="color: white">
           <p *ngIf="row.title!=undefined" style="margin-top: 10px;"><a [attr.href]="row.viewItemURL" target="_blank">{{row.title}}</a></p>
-          <p *ngIf="row.buyItNowPrice!=undefined">Price:{{row.buyItNowPrice.__value__}}</p>
-          <p *ngIf="row.shippingCost!=undefined">Shipping Cost:{{row.shippingCost.__value__}}</p>
+          <p *ngIf="row.buyItNowPrice!=undefined">Price:${{row.buyItNowPrice.__value__}}</p>
+          <p *ngIf="row.shippingCost!=undefined">Shipping Cost:${{row.shippingCost.__value__}}</p>
           <p *ngIf="row.timeLeft!=undefined">Days Left:{{row.timeLeft.substring(row.timeLeft.lastIndexOf('P')+1,row.timeLeft.lastIndexOf('D'))}}</p>
         </div>
       </div>
