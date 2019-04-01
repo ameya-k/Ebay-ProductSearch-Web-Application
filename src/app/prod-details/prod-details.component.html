@@ -347,10 +347,10 @@
       </div>
 
       <div class="card-block px-2" style="color: white">
-        <p *ngIf="row.title!=undefined" style="margin-top: 10px;"><a [attr.href]="row.viewItemURL" target="_blank">{{row.title}}</a></p>
-        <p *ngIf="row.buyItNowPrice!=undefined">Price:${{row.buyItNowPrice.__value__}}</p>
-        <p *ngIf="row.shippingCost!=undefined">Shipping Cost:${{row.shippingCost.__value__}}</p>
-        <p *ngIf="row.timeLeft!=undefined">Days Left:{{row.timeLeft.substring(row.timeLeft.lastIndexOf('P')+1,row.timeLeft.lastIndexOf('D'))}}</p>
+        <p *ngIf="row.title!=undefined" style="margin-top: 10px"><a [attr.href]="row.viewItemURL" target="_blank" style="color:#659093">{{row.title}}</a></p>
+        <p *ngIf="row.buyItNowPrice!=undefined" style="color:#a5cd92">Price:${{row.buyItNowPrice.__value__}}</p>
+        <p *ngIf="row.shippingCost!=undefined" style="color: #c6a55b">Shipping Cost:${{row.shippingCost.__value__}}</p>
+        <p *ngIf="row.timeLeft!=undefined" style="color: #e4e4e5">Days Left:{{row.timeLeft.substring(row.timeLeft.lastIndexOf('P')+1,row.timeLeft.lastIndexOf('D'))}}</p>
       </div>
     </div>
     <div id="demo" class="collapse">
@@ -361,10 +361,10 @@
         </div>
 
         <div class="card-block px-2" style="color: white">
-          <p *ngIf="row.title!=undefined" style="margin-top: 10px;"><a [attr.href]="row.viewItemURL" target="_blank">{{row.title}}</a></p>
-          <p *ngIf="row.buyItNowPrice!=undefined">Price:${{row.buyItNowPrice.__value__}}</p>
-          <p *ngIf="row.shippingCost!=undefined">Shipping Cost:${{row.shippingCost.__value__}}</p>
-          <p *ngIf="row.timeLeft!=undefined">Days Left:{{row.timeLeft.substring(row.timeLeft.lastIndexOf('P')+1,row.timeLeft.lastIndexOf('D'))}}</p>
+          <p *ngIf="row.title!=undefined" style="margin-top: 10px;color:#567572"><a [attr.href]="row.viewItemURL" target="_blank" style="color:#659093">{{row.title}}</a></p>
+          <p *ngIf="row.buyItNowPrice!=undefined" style="color:#a5cd92">Price:${{row.buyItNowPrice.__value__}}</p>
+          <p *ngIf="row.shippingCost!=undefined" style="color: #c6a55b">Shipping Cost:${{row.shippingCost.__value__}}</p>
+          <p *ngIf="row.timeLeft!=undefined" style="color: #e4e4e5">Days Left:{{row.timeLeft.substring(row.timeLeft.lastIndexOf('P')+1,row.timeLeft.lastIndexOf('D'))}}</p>
         </div>
       </div>
     </div>
@@ -391,22 +391,24 @@
           <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
               <div class="carousel-item active">
-                <a [attr.target]="_blank" a [attr.href]="itemDetailsJson['Item']['PictureURL'][0]"><img class="d-block w-100" [attr.src]="itemDetailsJson['Item']['PictureURL'][0]" ></a>
+                <a [attr.target]="_blank"  [attr.href]="itemDetailsJson['Item']['PictureURL'][0]"><img class="d-block w-100" [attr.src]="itemDetailsJson['Item']['PictureURL'][0]"
+                                                                                                       style="border: 5px solid black"></a>
               </div>
               <ng-container *ngFor="let row of itemDetailsJson['Item']['PictureURL'];index as i">
                 <div class="carousel-item" *ngIf="i<itemDetailsJson['Item']['PictureURL'].length-1">
-                  <a target="_blank" [attr.href]="itemDetailsJson['Item']['PictureURL'][i+1]"><img class="d-block w-100"  [attr.src]="itemDetailsJson['Item']['PictureURL'][i+1]"></a>
+                  <a target="_blank" [attr.href]="itemDetailsJson['Item']['PictureURL'][i+1]"><img class="d-block w-100"  [attr.src]="itemDetailsJson['Item']['PictureURL'][i+1]"
+                                                                                                   style="border: 8px solid black"></a>
                 </div>
               </ng-container>
 
 
             </div>
             <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="carousel-control-prev-icon" style="background-color: black" aria-hidden="true"></span>
               <span class="sr-only">Previous</span>
             </a>
             <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="carousel-control-next-icon" style="background-color: black" aria-hidden="true"></span>
               <span class="sr-only">Next</span>
             </a>
           </div>
