@@ -54,7 +54,7 @@ export class ResultsComponent implements OnInit {
     console.log(this.itSet);
   }
 
-  setParentValue(){
+  setParentValue($event){
 
     this.stArray=this.wish.getStorage();
     //this.itArray=this.stArray.map(x=>x.itemId);
@@ -114,6 +114,8 @@ export class ResultsComponent implements OnInit {
 
        this.prod.callDetailServices(itemId,title,row,parent);
        this.prod.showpbar=true;
+       this.prod.showpbar1=true;
+       this.prod.showpbar2=true;
 
   }
 

@@ -77,7 +77,7 @@ export class CallEbayService {
       //http://ameyabk117-angularweb8.appspot.com
 
      // let url_call="http://localhost:3000/ebaySearchTable/";
-      let url_call="http://ameyabk117-angularweb8.appspot.com/ebaySearchTable/";
+      let url_call="http://ameyanodemodule-dot-ameyabk117-angularweb8.appspot.com/ebaySearchTable/";
       url_call+=Object.keys(formdata).map(key => key + '=' + formdata[key]).join('&');
       console.log(url_call);
       return this.ebaySearch.get(url_call);

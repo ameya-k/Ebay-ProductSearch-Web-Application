@@ -11,7 +11,7 @@ export class ItemDetailsService {
   getItemDetails(item_id):any{
     //let url="http://open.api.ebay.com/shopping?callname=GetSingleItem&responseencoding=JSON&appid=AmeyaKul-CSCI571H-PRD-9a6d2f14d-216c0559&siteid=0&version=967&IncludeSelector=Description,Details,ItemSpecifics&ItemID="+item_id;
     //let url="http://localhost:3000/itemDetailsCall/"+item_id;
-    let url="http://ameyabk117-angularweb8.appspot.com/itemDetailsCall/"+item_id;
+    let url="http://ameyanodemodule-dot-ameyabk117-angularweb8.appspot.com/itemDetailsCall/"+item_id;
     console.log(url);
 
     return this.idetails.get(url);

@@ -65,8 +65,8 @@ export class ProdDetailsComponent implements OnInit {
       this.showResults=true;
       this.showpbar=false;
       //set other show pbar variables here
-    this.showpbar2=false;
-    this.showpbar1=false;
+      this.showpbar2=false;
+      this.showpbar1=false;
 
   }
 
@@ -108,7 +108,9 @@ export class ProdDetailsComponent implements OnInit {
 
 
   callDetailServices(item_id,title,searchJson,parentId){
-
+    this.itemDetailsJson=null;
+    this.similarItemsJson=null;
+    this.photosJson=null;
     console.log('inside call services from wishlist');
     console.log(this.showResults);
     this.identifyParent=parentId;
