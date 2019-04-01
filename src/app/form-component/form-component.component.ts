@@ -129,7 +129,8 @@ export class FormComponentComponent implements OnInit {
 
 
     console.log(form);
-
+    document.getElementById('zipcodebox').setAttribute('disabled','disabled');
+    (<HTMLInputElement>document.getElementById('zipcodebox')).value='';
     form.resetForm({category: -1,
       kword: '',
       location: 'current',
