@@ -190,13 +190,14 @@ export class ProdDetailsComponent implements OnInit {
       }
       if(value=='ProductName'){
             this.itemArray.sort(function(x,y) {
-              if(x.title<y.title){
-                return -1;
-              }
-              if(x.title>y.title){
-                return 1;
-              }
-              return 0;
+              // if(x.title<y.title){
+              //   return -1;
+              // }
+              // if(x.title>y.title){
+              //   return 1;
+              // }
+              // return 0;
+              return x.title.localeCompare(y.title);
             })
       }
 
