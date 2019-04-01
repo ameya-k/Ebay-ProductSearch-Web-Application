@@ -36,6 +36,8 @@ export class ProdDetailsComponent implements OnInit {
   prodSet:Set<string>=new Set<string>();
   identifyParent:number=1;
   showpbar:boolean=false;
+  showpbar1:boolean=false;
+  showpbar2:boolean=false;
 
   currentRow:any;
   showResults=true;
@@ -62,6 +64,9 @@ export class ProdDetailsComponent implements OnInit {
       this.photosJson=null;
       this.showResults=true;
       this.showpbar=false;
+      //set other show pbar variables here
+    this.showpbar2=false;
+    this.showpbar1=false;
 
   }
 
@@ -134,7 +139,7 @@ export class ProdDetailsComponent implements OnInit {
       //Object.assign(this.deepCopy,this.similarItemsJson.getSimilarItemsResponse.itemRecommendations.item);
       this.deepCopy=Object.assign([],this.similarItemsJson.getSimilarItemsResponse.itemRecommendations.item);
       this.itemArray=this.similarItemsJson.getSimilarItemsResponse.itemRecommendations.item;
-
+      this.showpbar1=false;
       //Object.assign(this.deepCopy,this.similarItemsJson.getSimilarItemsResponse.itemRecommendations.item);
       console.log(this.similarItemsJson);
       // console.log(this.itemArray);
@@ -145,7 +150,7 @@ export class ProdDetailsComponent implements OnInit {
     this.picService.getGooglePhotos(title).subscribe(data=>{
       this.photosJson=data;
       console.log(this.photosJson);
-
+      this.showpbar2=false;
 
     });
    this.sjson=searchJson;
