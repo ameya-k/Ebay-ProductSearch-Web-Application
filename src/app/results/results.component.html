@@ -55,7 +55,8 @@
 
 
         <td *ngIf="row.shippingInfo!=undefined&&row.shippingInfo[0]!=undefined&&row.shippingInfo[0].shippingServiceCost!=undefined&&row.shippingInfo[0].shippingServiceCost[0]!=undefined&&row.shippingInfo[0].shippingServiceCost[0].__value__!=undefined">
-          {{row.shippingInfo[0].shippingServiceCost[0].__value__ == null ? 'N/A' : row.shippingInfo[0].shippingServiceCost[0].__value__}}
+
+          {{row.shippingInfo[0].shippingServiceCost[0].__value__ == null ? 'N/A' : (row.shippingInfo[0].shippingServiceCost[0].__value__==0? "Free shipping":'$'+row.shippingInfo[0].shippingServiceCost[0].__value__)}}
         </td>
         <td *ngIf="row.shippingInfo==undefined||row.shippingInfo[0]==undefined||row.shippingInfo[0].shippingServiceCost==undefined||row.shippingInfo[0].shippingServiceCost[0]==undefined||row.shippingInfo[0].shippingServiceCost[0].__value__==undefined">
           N/A
