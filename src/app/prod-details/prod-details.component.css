@@ -2,63 +2,119 @@
 .center{
   text-align: center;
 }
-.img1{
-  border: 7px solid black;
-  max-height: 300px;
-  max-width: 300px;
-  margin: 2%;
+
+
+.row{
+  display: flex;
+  flex-wrap: wrap;
 
 
 }
+
+.column{
+  flex:33%;
+  max-width: 33%;
+}
+
+.img1{
+  border: 6px solid black;
+  margin-top:5px;
+  margin-right:5px;
+  margin-bottom:5px;
+  vertical-align: center;
+
+}
+
 .img2{
-  border: 7px solid black;
-  max-height: 300px;
-  max-width: 300px;
-  margin: 2%;
+  border: 6px solid black;
+  margin-top:5px;
+  margin-bottom:5px;
+  margin-left:5px;
+  margin-right:5px;
+  vertical-align: center;
+
 }
 .img3{
-  border: 7px solid black;
-  max-height: 300px;
-  max-width: 300px;
-  margin: 2%;
+  border: 6px solid black;
+  margin-top:5px;
+  margin-left:10px;
+  margin-bottom:5px;
+  vertical-align: center;
+
 }
 .img4{
-  border: 7px solid black;
-  max-height: 300px;
-  max-width: 300px;
-  margin: 2%;
+  border: 6px solid black;
+  margin-top:5px;
+  margin-right:5px;
+  margin-bottom: 5px;
+  vertical-align: center;
+
 }
 .img5{
-  border: 7px solid black;
-  max-height: 300px;
-  max-width: 300px;
-  margin: 2%;
+  border: 6px solid black;
+  margin-top:5px;
+  margin-bottom:5px;
+  margin-left:5px;
+  margin-right:5px;
+  vertical-align: center;
+
 }
 .img6{
-  border: 7px solid black;
-  max-height: 300px;
-  max-width: 300px;
-  margin: 2%;
+  border: 6px solid black;
+  margin-top:5px;
+  margin-left:10px;
+  margin-bottom:5px;
+  vertical-align: center;
+
 }
 
+.img7{
+  border: 6px solid black;
+  margin-top:5px;
+  margin-right:5px;
+  margin-bottom:5px;
+  margin-left: 5px;
 
+  vertical-align: center;
+}
 
 .img8{
-  border: 7px solid black;
-  max-height: 300px;
-  max-width: 300px;
-  grid-column: 2;
-  grid-row: 3/5;
-  margin: 2%;
+  border: 6px solid black;
+  margin-left:5px;
+  margin-top:5px;
+  vertical-align: center;
+
+}
+
+#bck1{
+    background-color: rgba(1,1,1,0.04) !important;
+  }
+
+#bck2{
+  background-color: rgba(1,1,1,0.04) !important;
 }
 
 
-.img9{
-  border: 7px solid black;
-  max-height: 300px;
-  max-width: 300px;
-  margin: 2%;
+.nav-pills .nav-link.active, .nav-pills .show  .nav-link {
+
+  color: white;
+  background-color: black;
+
 }
+
+.nav-item a{
+  color: black;
+}
+
+@media screen and (max-width: 600px) {
+  .column{
+    flex: 100%;
+    max-width: 100%;
+  }
+}
+
+
+
 
 
 

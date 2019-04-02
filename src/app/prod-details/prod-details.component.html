@@ -9,21 +9,47 @@
 
 <div *ngIf="itemDetailsJson&&similarItemsJson&&photosJson&&showResults" class="container">
 
- <div>{{itemDetailsJson['Item']['Title']}}</div>
-  <button (click)="emitToParent()">Back</button>
+  <div style="text-align: center;margin-top: 25px;margin-bottom: 25px;"><h5><b>{{itemDetailsJson['Item']['Title']}}</b></h5></div>
+
+  <div class="container;" style="display: inline">
+  <button (click)="emitToParent()" class="btn" id="bck">
+    <i class="material-icons alignWithDetail" style="vertical-align: bottom">
+      chevron_left
+    </i>List
+
+  </button>
+    <div *ngIf="!prodSet.has(currentRow.itemId[0])" class="float-right" style="margin-left: 5px">
+      <button class="btn btn-light" id="bck1" >
+        <i class="material-icons float-right" *ngIf="!prodSet.has(currentRow.itemId[0])" (click)="callWish()">
+          add_shopping_cart
+        </i>
+      </button>
+    </div>
+    <!--</button>-->
+    <!--<button class="btn btn-light">-->
+    <div *ngIf="prodSet.has(currentRow.itemId[0])" style="float: right;margin-left: 5px">
+      <button class="btn btn-light" style="float: right" id="bck2">
+        <i class="material-icons float-right" style="color: gold" *ngIf="prodSet.has(currentRow.itemId[0])" (click)="removeWish()">
+          remove_shopping_cart
+        </i>
+      </button>
+    </div>
+
+    <a target="_blank" class="float-right" [href]="link" >
+      <img src="http://csci571.com/hw/hw8/Images/facebook.png" width="35px" height="35px">
+    </a>
 
 
 
 
 
-  <i class="material-icons float-right" *ngIf="!prodSet.has(currentRow.itemId[0])" (click)="callWish()">
-    add_shopping_cart
-  </i>
-  <i class="material-icons float-right" style="color: gold" *ngIf="prodSet.has(currentRow.itemId[0])" (click)="removeWish()">
-    remove_shopping_cart
-  </i>
+  <!--<button class="btn btn-light">-->
 
-  <a target="_blank" class="float-right" [href]="link"><img src="http://csci571.com/hw/hw8/Images/facebook.png" width="30px" height="30px"></a>
+
+  <!--</button>-->
+
+
+  </div>
   <div>
     <ul class="nav nav-pills mb-3 justify-content-end"  id="pills-tab" role="tablist" >
       <li class="nav-item">
@@ -53,43 +79,44 @@
 
   <!--(currentRow.title,itemDetailsJson['Item']['CurrentPrice']['Value'],itemDetailsJson['Item']['ViewItemURLForNaturalSearch']-->
   <div *ngIf="prodclicked" id="prodtab" class="tab-pane fade show active" aria-labelledby="pills-prod-tab">
-    <div *ngIf="itemDetailsJson==null || itemDetailsJson.Item==undefined || itemDetailsJson.Item.length==0">
+    <div *ngIf="itemDetailsJson==null || itemDetailsJson.Item==undefined || itemDetailsJson.Item.length==0" class="table-responsive">
 
-      <div class="alert alert-warning container" role="alert">
+      <div class="alert alert-warning container" style="margin-top: 20px" role="alert">
         No product details
       </div>
     </div>
-    <div *ngIf="itemDetailsJson!=undefined && itemDetailsJson.Item!=undefined && itemDetailsJson.Item.length!=0">
+    <div *ngIf="itemDetailsJson!=undefined && itemDetailsJson.Item!=undefined && itemDetailsJson.Item.length!=0" class="table-responsive">
+
       <table class="table table-dark table-striped table-hover ">
         <tr *ngIf="itemDetailsJson['Item']!=undefined && itemDetailsJson['Item']['PictureURL']!=undefined &&
         itemDetailsJson['Item']['PictureURL'].length!=0">
           <td>
-            Product Images
+            <strong>Product Images</strong>
           </td>
           <td>
-            <a data-toggle="modal" href="#imageModal" data-target="#imageModal">Click for product images</a>
+            <a data-toggle="modal" href="#imageModal" data-target="#imageModal" style="color:#659093">View product Images here</a>
           </td>
         </tr>
 
         <tr *ngIf="itemDetailsJson['Item']['Subtitle']!=undefined">
 
-          <td>SubTitle</td>
+          <td><strong>SubTitle</strong></td>
           <td>{{itemDetailsJson['Item']['Subtitle']}}</td>
 
         </tr>
         <tr *ngIf="itemDetailsJson['Item']['CurrentPrice']!=undefined &&
         itemDetailsJson['Item']['CurrentPrice']['Value']!=undefined">
-          <td>Price</td>
+          <td><strong>Price</strong></td>
           <td>${{itemDetailsJson['Item']['CurrentPrice']['Value']}}</td>
         </tr>
 
         <tr *ngIf="itemDetailsJson['Item']['Location']!=undefined">
-          <td>Location</td>
+          <td><strong>Location</strong></td>
           <td>{{itemDetailsJson['Item']['Location']}}</td>
         </tr>
 
         <tr *ngIf="itemDetailsJson['Item']['ReturnPolicy']!=undefined">
-          <td>Return Policy(US)</td>
+          <td><strong>Return Policy(US)</strong></td>
           <td *ngIf="itemDetailsJson['Item']['ReturnPolicy']['ReturnsAccepted']!=undefined
           &&itemDetailsJson['Item']['ReturnPolicy']['ReturnsWithin']!=undefined">
             {{itemDetailsJson['Item']['ReturnPolicy']['ReturnsAccepted']}} within {{itemDetailsJson['Item']['ReturnPolicy']['ReturnsWithin']}}
@@ -108,7 +135,7 @@
         <ng-container *ngIf="itemDetailsJson['Item']['ItemSpecifics']!=undefined">
           <tr  *ngFor="let row of itemDetailsJson['Item']['ItemSpecifics']['NameValueList'] ">
             <td>
-              {{row.Name}}
+              <strong>{{row.Name}}</strong>
             </td>
             <td>{{row.Value[0]}}</td>
 
@@ -123,67 +150,78 @@
   <div *ngIf="photclicked" id="photostab" class="tab-pane fade show active" aria-labelledby="pills-photos-tab">
 
     <div *ngIf="photosJson==undefined&&photosJson.items==undefined || photosJson.items.length==0">
-      <div class="alert alert-warning container" role="alert">
+      <div class="alert alert-warning container table-responsive" style="margin-top: 20px" role="alert">
         No photos found.
       </div>
     </div>
 
     <div *ngIf="photosJson.items!=undefined && photosJson.items.length!=0">
 
-    <div class="container-fluid center">
+      <!--<div class="container-fluid center">-->
 
-      <div class="d-flex flex-row flex-wrap justify-content-center">
-
-
+        <!--<div class="d-flex flex-row flex-wrap justify-content-center">-->
 
 
-        <div class="d-flex flex-column">
-          <img class="img1" [src]="photosJson['items'][0]['link']">
-          <img class="img2" [src]="photosJson['items'][3]['link']">
-        </div>
-        <div class="d-flex flex-column">
-          <img class="img3" [src]="photosJson['items'][1]['link']">
-          <img class="img4" [src]="photosJson['items'][4]['link']">
-          <img class="img5" [src]="photosJson['items'][6]['link']">
-        </div>
-        <div class="d-flex flex-column">
-          <img class="img6" [src]="photosJson['items'][2]['link']">
-          <img class="img8" [src]="photosJson['items'][5]['link']">
-          <img class="img9" [src]="photosJson['items'][7]['link']">
-        </div>
+          <!--<div class="d-flex flex-column">-->
+            <!--<img class="img1" [src]="photosJson['items'][0]['link']">-->
+            <!--<img class="img2" [src]="photosJson['items'][3]['link']">-->
+          <!--</div>-->
+          <!--<div class="d-flex flex-column">-->
+            <!--<img class="img3" [src]="photosJson['items'][1]['link']">-->
+            <!--<img class="img4" [src]="photosJson['items'][4]['link']">-->
+            <!--<img class="img5" [src]="photosJson['items'][6]['link']">-->
+          <!--</div>-->
+          <!--<div class="d-flex flex-column">-->
+            <!--<img class="img6" [src]="photosJson['items'][2]['link']">-->
+            <!--<img class="img8" [src]="photosJson['items'][5]['link']">-->
+            <!--<img class="img9" [src]="photosJson['items'][7]['link']">-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
 
+      <div class="row">
+      <div class="column">
+      <img class="img1" style="width: 100%" [src]="photosJson['items'][0]['link']">
+      <img class="img4" style="width: 100%" [src]="photosJson['items'][3]['link']">
+      </div>
+      <div class="column">
+      <img class="img2" style="width: 100%" [src]="photosJson['items'][1]['link']">
+      <img class="img5" style="width: 100%" [src]="photosJson['items'][4]['link']">
+      <img class="img7" style="width: 100%" [src]="photosJson['items'][6]['link']">
+      </div>
+      <div class="column">
+      <img class="img3" style="width: 100%" [src]="photosJson['items'][2]['link']">
+      <img class="img6" style="width: 100%" [src]="photosJson['items'][5]['link']">
+      <img class="img8" style="width: 100%" [src]="photosJson['items'][7]['link']">
+      </div>
       </div>
 
-
-
-      </div>
     </div>
-
-    </div>
-
+  </div>
 
 
 
 
 
 
-  <div *ngIf="shipclicked" id="shippingTab" class="tab-pane fade show active" aria-labelledby="pills-shipping-tab">
+
+  <div *ngIf="shipclicked" id="shippingTab" class="tab-pane fade show active table-responsive" aria-labelledby="pills-shipping-tab" >
     <table class="table table-dark table-striped table-hover ">
 
       <tr *ngIf="sjson.shippingInfo!=undefined && sjson.shippingInfo[0].shippingServiceCost[0].__value__!=undefined">
           <td>
-              Shipping Cost
+             <strong>Shipping Cost</strong>
           </td>
           <td *ngIf="sjson.shippingInfo[0].shippingServiceCost[0].__value__==0">
             Free Shipping
           </td>
           <td *ngIf="sjson.shippingInfo[0].shippingServiceCost[0].__value__!=0">
-            {{sjson.shippingInfo[0].shippingServiceCost[0].__value__}}
+            ${{sjson.shippingInfo[0].shippingServiceCost[0].__value__}}
           </td>
       </tr>
 
       <tr *ngIf="sjson.shippingInfo!=undefined && sjson.shippingInfo[0].shipToLocations!=undefined">
-      <td>Shipping Locations</td>
+        <td><strong>Shipping Locations</strong></td>
         <td>
           {{sjson.shippingInfo[0].shipToLocations[0]}}
         </td>
@@ -191,7 +229,7 @@
       </tr>
       <tr *ngIf="sjson.shippingInfo!=undefined && sjson.shippingInfo[0].handlingTime!=undefined">
         <td>
-          Handling time
+         <strong>Handling time</strong>
         </td>
         <td *ngIf="sjson.shippingInfo[0].handlingTime[0]==0 || sjson.shippingInfo[0].handlingTime[0]==1">
           {{sjson.shippingInfo[0].handlingTime[0]}} day
@@ -202,7 +240,7 @@
       </tr>
 
       <tr *ngIf="sjson.shippingInfo!=undefined && sjson.shippingInfo[0].expeditedShipping!=undefined">
-        <td>Expedited Shipping</td>
+        <td><strong>Expedited Shipping</strong></td>
         <td *ngIf="sjson.shippingInfo[0].expeditedShipping[0]=='true'">
           <i class="material-icons" style="color: green">
             check
@@ -215,7 +253,7 @@
         </td>
       </tr>
       <tr  *ngIf="sjson.shippingInfo!=undefined && sjson.shippingInfo[0].oneDayShippingAvailable!=undefined">
-        <td>One Day Shipping</td>
+        <td><strong>One Day Shipping</strong></td>
         <td *ngIf=" sjson.shippingInfo[0].oneDayShippingAvailable[0]=='true'">
           <i class="material-icons" style="color: green">
             check
@@ -229,7 +267,7 @@
       </tr>
 
       <tr  *ngIf="sjson.returnsAccepted!=undefined && sjson.returnsAccepted[0]!=undefined">
-        <td>Return Accepted</td>
+        <td><strong>Return Accepted</strong></td>
         <td *ngIf=" sjson.returnsAccepted[0]=='true'">
           <i class="material-icons" style="color: green">
             check
@@ -245,22 +283,24 @@
     </table>
   </div>
 
-  <div *ngIf="sellclicked" id="sellerTab" class="tab-pane fade show active" aria-labelledby="pills-seller-tab">
+  <div *ngIf="sellclicked" id="sellerTab" class="tab-pane fade show active table-responsive" aria-labelledby="pills-seller-tab">
     <table class="table table-dark table-striped table-hover ">
-      <tr *ngIf="sjson.sellerInfo!=undefined && sjson.sellerInfo[0].sellerUserName!=undefined" style="text-align: center" >
+      <tr  *ngIf="sjson.sellerInfo!=undefined && sjson.sellerInfo[0].sellerUserName!=undefined" style="text-align: center" >
 
-        <td>{{sjson.sellerInfo[0].sellerUserName[0]}}</td>
+        <td colspan="2"><strong>{{sjson.sellerInfo[0].sellerUserName[0]}}</strong></td>
 
       </tr>
 
       <tr *ngIf="sjson.sellerInfo!=undefined && sjson.sellerInfo[0].feedbackScore!=undefined">
-          <td>Feedback Score</td>
+        <td><strong>Feedback Score</strong></td>
           <td>{{sjson.sellerInfo[0].feedbackScore}}</td>
       </tr>
 
       <tr *ngIf="sjson.sellerInfo!=undefined&&sjson.sellerInfo[0].positiveFeedbackPercent!=undefined">
         <td>
+          <strong>
           Popularity
+          </strong>
         </td>
         <td>
           <round-progress [current]="sjson.sellerInfo[0].positiveFeedbackPercent[0]" [stroke]="5" [max]="100" [radius]="15">
@@ -270,7 +310,7 @@
       </tr>
 
       <tr *ngIf="sjson.sellerInfo!=undefined &&sjson.sellerInfo[0].feedbackRatingStar!=undefined ">
-      <td>Feedback Rating Star</td>
+        <td><strong>Feedback Rating Star</strong></td>
         <td  *ngIf="sjson.sellerInfo[0].feedbackScore>10000">
           <i class="material-icons" [style.color]="sjson.sellerInfo[0].feedbackRatingStar[0]">
             stars
@@ -293,7 +333,9 @@
       </tr>
       <tr *ngIf="sjson.sellerInfo!=undefined && sjson.sellerInfo[0].topRatedSeller!=undefined">
         <td>
+          <strong>
           Top Rated
+          </strong>
         </td>
         <td *ngIf="sjson.sellerInfo[0].topRatedSeller[0]=='true'">
           <i class="material-icons" style="color: green">
@@ -309,25 +351,25 @@
       </tr>
 
       <tr *ngIf="sjson.storeInfo!=undefined&&sjson.storeInfo[0].storeName!=undefined">
-        <td>Store Name</td>
+        <td><strong>Store Name</strong></td>
         <td>{{sjson.storeInfo[0].storeName[0]}}</td>
       </tr>
 
       <tr *ngIf="sjson.storeInfo!=undefined&&sjson.storeInfo[0].storeURL!=undefined">
-        <td>Buy Product At</td>
+        <td><strong>Buy Product At</strong></td>
         <td><a [attr.href]="sjson.storeInfo[0].storeURL[0]" target="_blank">Store</a></td>
       </tr>
 
     </table>
   </div>
 
-  <div *ngIf="simclicked" id="simTab" class="tab-pane fade show active" aria-labelledby="pills-similar-tab">
+  <div *ngIf="simclicked" id="simTab" class="tab-pane fade show active table-responsive" aria-labelledby="pills-similar-tab">
 
     <div *ngIf="similarItemsJson==undefined||similarItemsJson.getSimilarItemsResponse==undefined
  ||similarItemsJson.getSimilarItemsResponse.itemRecommendations==undefined||
  similarItemsJson.getSimilarItemsResponse.itemRecommendations.item==undefined||
  similarItemsJson.getSimilarItemsResponse.itemRecommendations.item.length==0">
-      <div class="alert alert-warning container" role="alert">
+      <div class="alert alert-warning container table-responsive" style="margin-top: 20px" role="alert">
         No similar items.
       </div>
     </div>
@@ -337,7 +379,7 @@
  similarItemsJson.getSimilarItemsResponse.itemRecommendations.item.length!=0">
 
 
-    <select id="sortAttr" (change)="sort($event.target.value)">
+    <select   id="sortAttr" (change)="sort($event.target.value)">
       <option value="default">Default</option>
       <option value="ProductName" >Product Name</option>
       <option value="DaysLeft">Days Left</option>
@@ -345,7 +387,7 @@
       <option value="ShippingCost">Shipping Cost</option>
     </select>
 
-    <select id='sorder'(change)="setOrder($event.target.value)" disabled>
+    <select  id='sorder'(change)="setOrder($event.target.value)" disabled>
       <option value="ascending">Ascending</option>
       <option value="descending">Descending</option>
     </select>
@@ -376,10 +418,11 @@
         </div>
       </div>
     </div>
-    <button (click)="togbtn()" data-toggle="collapse" data-target="#demo" *ngIf="similarItemsJson['getSimilarItemsResponse']['itemRecommendations']['item'].length>5">
+      <div class="container" style="text-align: center">
+    <button class="btn" style="background-color: black !important;color: white !important;" (click)="togbtn()" data-toggle="collapse" data-target="#demo" *ngIf="similarItemsJson['getSimilarItemsResponse']['itemRecommendations']['item'].length>5">
       {{butLabel}}
     </button>
-
+      </div>
   </div>
   </div>
 

@@ -7,7 +7,7 @@
 }
 
 
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+.nav-pills .nav-link.active, .nav-pills .show  .nav-link {
 
   color: white;
   background-color: black;
