@@ -53,26 +53,31 @@
   <div>
     <ul class="nav nav-pills mb-3 justify-content-end"  id="pills-tab" role="tablist" >
       <li class="nav-item">
-        <a class="nav-link active" id="pills-prod-tab" data-toggle="pill" href="#prodtab" role="tab" aria-controls="pills-home"
+        <a class="nav-link active" id="pills-prod-tab" data-toggle="pill" href="#prodtab" role="tab" aria-controls="prodtab"
             aria-selected="true" (click)="prod_clicked()">Product</a>
       </li>
       <li class="nav-item">
       <a class="nav-link" id="pills-photos-tab" data-toggle="pill" href="#photostab" role="tab"
-         aria-controls="pills-profile" aria-selected="false" (click)="phot_clicked()">Photos</a>
+         aria-controls="photostab" aria-selected="false" (click)="phot_clicked()">Photos</a>
     </li>
       <li class="nav-item">
         <a class="nav-link" id="pills-shipping-tab" data-toggle="pill" href="#shippingTab" role="tab"
-           aria-controls="pills-profile" aria-selected="false" (click)="ship_clicked()">Shipping</a>
+           aria-controls="shippingTab" aria-selected="false" (click)="ship_clicked()">Shipping</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" id="pills-seller-tab" data-toggle="pill" href="#sellerTab" role="tab"
-           aria-controls="pills-profile" aria-selected="false" (click)="sell_clicked()">Seller</a>
+           aria-controls="sellerTab" aria-selected="false" (click)="sell_clicked()">Seller</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item offOnMobile">
         <a class="nav-link" id="pills-similar-tab" data-toggle="pill" href="#simTab" role="tab"
-           aria-controls="pills-profile" aria-selected="false" (click)="sim_clicked()">Similar Products</a>
+           aria-controls="simTab" aria-selected="false" (click)="sim_clicked()">Similar Products</a>
       </li>
 
+      <li class="nav-item hiddenPanel">
+        <a class="nav-link" id="pills-related-tab" data-toggle="pill" href="#simTab" role="tab"
+           aria-controls="simTab" aria-selected="false" (click)="sim_clicked()">Related</a>
+      </li>
+    <!--changes started here i changed area controls -->
 
     </ul>
   </div>
@@ -147,7 +152,7 @@
   </div>
   </div>
 
-  <div *ngIf="photclicked" id="photostab" class="tab-pane fade show active" aria-labelledby="pills-photos-tab">
+  <div *ngIf="photclicked" id="photostab" class="tab-pane fade " aria-labelledby="pills-photos-tab">
 
     <div *ngIf="photosJson==undefined&&photosJson.items==undefined || photosJson.items.length==0">
       <div class="alert alert-warning container table-responsive" style="margin-top: 20px" role="alert">
@@ -205,7 +210,7 @@
 
 
 
-  <div *ngIf="shipclicked" id="shippingTab" class="tab-pane fade show active table-responsive" aria-labelledby="pills-shipping-tab" >
+  <div *ngIf="shipclicked" id="shippingTab" class="tab-pane fade  table-responsive" aria-labelledby="pills-shipping-tab" >
     <table class="table table-dark table-striped table-hover ">
 
       <tr *ngIf="sjson.shippingInfo!=undefined && sjson.shippingInfo[0].shippingServiceCost[0].__value__!=undefined">
@@ -283,7 +288,7 @@
     </table>
   </div>
 
-  <div *ngIf="sellclicked" id="sellerTab" class="tab-pane fade show active table-responsive" aria-labelledby="pills-seller-tab">
+  <div *ngIf="sellclicked" id="sellerTab" class="tab-pane fade table-responsive" aria-labelledby="pills-seller-tab">
     <table class="table table-dark table-striped table-hover ">
       <tr  *ngIf="sjson.sellerInfo!=undefined && sjson.sellerInfo[0].sellerUserName!=undefined" style="text-align: center" >
 
@@ -363,7 +368,7 @@
     </table>
   </div>
 
-  <div *ngIf="simclicked" id="simTab" class="tab-pane fade show active table-responsive" aria-labelledby="pills-similar-tab">
+  <div *ngIf="simclicked" id="simTab" class="tab-pane fade table-responsive" aria-labelledby="pills-similar-tab">
 
     <div *ngIf="similarItemsJson==undefined||similarItemsJson.getSimilarItemsResponse==undefined
  ||similarItemsJson.getSimilarItemsResponse.itemRecommendations==undefined||
@@ -442,7 +447,7 @@
           <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
               <div class="carousel-item active">
-                <a [attr.target]="_blank"  [attr.href]="itemDetailsJson['Item']['PictureURL'][0]"><img class="d-block w-100" [attr.src]="itemDetailsJson['Item']['PictureURL'][0]"
+                <a target="_blank" [attr.href]="itemDetailsJson['Item']['PictureURL'][0]"><img class="d-block w-100" [attr.src]="itemDetailsJson['Item']['PictureURL'][0]"
                                                                                                        style="border: 5px solid black"></a>
               </div>
               <ng-container *ngFor="let row of itemDetailsJson['Item']['PictureURL'];index as i">
@@ -454,11 +459,11 @@
 
 
             </div>
-            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+            <a *ngIf="itemDetailsJson['Item']['PictureURL'].length>1" class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
               <span class="carousel-control-prev-icon" style="background-color: black" aria-hidden="true"></span>
               <span class="sr-only">Previous</span>
             </a>
-            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+            <a *ngIf="itemDetailsJson['Item']['PictureURL'].length>1" class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
               <span class="carousel-control-next-icon" style="background-color: black" aria-hidden="true"></span>
               <span class="sr-only">Next</span>
             </a>
