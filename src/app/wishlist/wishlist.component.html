@@ -1,15 +1,24 @@
-<div *ngIf="showWishList">
-
+<div *ngIf="showWishList" class="container">
+  <button  [disabled]="!isDetailSearchPerformed" class="btn"
+           (click)="callWishProduct(currRow['itemId']['0'],currRow.title,currRow)" id="wishDet"
+  style="float: right">
+    Detail
+    <i class="material-icons alignWithDetail">
+      chevron_right
+    </i>
+  </button>
+  <br>
   <ng-container *ngIf="ws.getStorage().length==0">
-    <div>
-      No items in wish List
+    <div class="alert alert-warning container" role="alert">
+      No items in wishlist
     </div>
 
   </ng-container>
 
   <ng-container *ngIf="ws.getStorage().length!=0 ">
- <button  [disabled]="!isDetailSearchPerformed" (click)="callWishProduct(currRow['itemId']['0'],currRow.title,currRow)" >Detail</button>
-<table class="table table-dark table-striped container table-hover">
+ <!--<button  [disabled]="!isDetailSearchPerformed" (click)="callWishProduct(currRow['itemId']['0'],currRow.title,currRow)" >Detail</button>-->
+    <div class="table-responsive">
+<table class="table table-dark table-striped container table-hover" style="margin-top: 20px">
   <tr>
     <th scope="col">#</th>
     <th scope="col">Image</th>
@@ -22,19 +31,37 @@
 
   <tr *ngFor="let row of myWL;index as i" [class.highlight]="row==currRow">
   <td>{{i+1}}</td>
-    <td *ngIf="row.galleryURL[0]!=undefined"><img src="{{row.galleryURL[0]}}"></td>
+    <td *ngIf="row.galleryURL[0]!=undefined"><img src="{{row.galleryURL[0]}}" class="wishImage"></td>
     <td *ngIf="row.galleryURL[0]==undefined">N/A</td>
-    <td><a  (click)="callWishProduct(row.itemId[0],row.title,row)">{{  row.title == null ? 'N/A' : (row.title.toString().length > 50 ? (row.title.toString().substring(0, 50).slice(-1) == ' ' ? (row.title.toString().substring(0, 50) + '...') : (row.title.toString().substring(0, (row.title.toString().substring(0, 50).lastIndexOf(' '))) + '...')) : row.title.toString())}}</a></td>
-    <td>${{row.sellingStatus[0].currentPrice[0].__value__}}</td>
-    <td>${{row.shippingInfo[0].shippingServiceCost[0].__value__}}</td>
+    <td><a href="#" data-toggle="tooltip" placement="bottom" ngbTooltip="{{row.title}}" (click)="callWishProduct(row.itemId[0],row.title,row)">{{  row.title == null ? 'N/A' : (row.title.toString().length > 50 ? (row.title.toString().substring(0, 50).slice(-1) == ' ' ? (row.title.toString().substring(0, 50) + '...') : (row.title.toString().substring(0, (row.title.toString().substring(0, 50).lastIndexOf(' '))) + '...')) : row.title.toString())}}</a></td>
+
+    <td *ngIf="row.sellingStatus==undefined||row.sellingStatus[0]==undefined||row.sellingStatus[0].currentPrice[0]==undefined">
+      N/A
+    </td>
+    <td *ngIf="row.sellingStatus!=undefined&&row.sellingStatus[0]!=undefined&&row.sellingStatus[0].currentPrice[0]!=undefined
+&&row.sellingStatus[0].currentPrice[0].__value__!=undefined">
+      ${{row.sellingStatus[0].currentPrice[0].__value__}}
+    </td>
+
+    <td *ngIf="row.shippingInfo!=undefined&&row.shippingInfo[0]!=undefined&&row.shippingInfo[0].shippingServiceCost!=undefined&&row.shippingInfo[0].shippingServiceCost[0]!=undefined&&row.shippingInfo[0].shippingServiceCost[0].__value__!=undefined">
+      {{row.shippingInfo[0].shippingServiceCost[0].__value__==0?'Free Shipping':'$'+row.shippingInfo[0].shippingServiceCost[0].__value__}}
+    </td>
+    <td *ngIf="row.shippingInfo==undefined||row.shippingInfo[0]==undefined
+    ||row.shippingInfo[0].shippingServiceCost==undefined
+    ||row.shippingInfo[0].shippingServiceCost[0]==undefined
+    ||row.shippingInfo[0].shippingServiceCost[0].__value__==undefined">
+      N/A
+    </td>
+
     <td>{{row.sellerInfo[0].sellerUserName[0]}}</td>
     <td>
-
+      <button class="btn btn-light">
       <i class="material-icons" style="color: gold" (click)="removeFromTable(row)">
 
 
         remove_shopping_cart
      </i>
+      </button>
     </td>
 
 
@@ -50,6 +77,7 @@
 
 
 </table>
+    </div>
   </ng-container>
 </div>
 <app-prod-details (sendValueToWishlist)="showWishChild($event)"></app-prod-details>

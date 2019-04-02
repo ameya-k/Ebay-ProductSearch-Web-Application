@@ -125,7 +125,7 @@ export class ResultsComponent implements OnInit {
       searchJson['findItemsAdvancedResponse'][0]['searchResult'][0]['item'].length==0 )
     {
           this.error=true;
-          this.errorMessage="No records found";
+          this.errorMessage="No records.";
           return false;
     }
 //handle case error 36

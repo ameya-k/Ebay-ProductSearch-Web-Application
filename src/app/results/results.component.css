@@ -6,4 +6,22 @@
   height: 150px;
 }
 
+.alignWithDetail{
+  vertical-align: bottom !important;
 
+}
+
+.det{
+  background-color: rgba(1,1,1,0.04) !important;
+}
+/deep/ .page-item.active .page-link{
+  background-color: black !important;
+  text-decoration: underline;
+
+
+}
+/deep/ .page-link {
+
+  color: black;
+
+}

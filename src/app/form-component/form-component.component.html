@@ -3,16 +3,20 @@
   <div id="formDiv" name="formDiv" class="container col-8"
        style="color: white;background-color: black; font-size: 12px;margin-top: 10px">
 
-    <p style="text-align: center; font-size: 20px;margin-bottom: 30px;margin-top: 15px;"><strong>Product Search</strong>
+    <p style="text-align: center; font-size: 25px;margin-bottom: 35px;margin-top: 25px;"><strong>Product Search</strong>
     </p>
 
-
+    <div class="row">
+    <div class="col-2"></div>
+      <div class="col-8">
     <form id="mainForm" #prodForm="ngForm" (ngSubmit)="onFormSubmit(prodForm)" autocomplete="off">
+
+
 
 
       <div class="form-group row">
 
-        <label for="kword" class="col-sm-2 col-form-label reqField">Keyword</label>
+        <label for="kword" class="col-sm-2 col-form-label reqField incFont" >Keyword</label>
         <div class="col-sm-7">
           <input type="text" name="kword" id="kword" placeholder="Enter product Name(eg.Iphone 8)"
                  class="form-control" [class.is-invalid]="searchword.invalid && searchword.touched" appKeywordValid
@@ -21,10 +25,10 @@
         </div>
       </div>
       <div class="form-group row">
-        <label for="category" class="col-sm-2 col-form-label">
+        <label for="category" class="col-sm-2 col-form-label incFont">
           Category&nbsp;
         </label>
-        <div class="col-sm-3">
+        <div class="col-sm-4">
           <select name="category" id="category" class="form-control"
                   [(ngModel)]="formdetails.category">
             <option value="-1" name="allcat">All categories</option>
@@ -42,24 +46,24 @@
       </div>
       <!--starts here-->
       <div class="form-group row">
-        <label for="conditionChkBx" class="col-sm-2 col-form-label">
+        <label for="conditionChkBx" class="col-sm-2 col-form-label incFont">
           Condition
         </label>
         <div class="col-sm-7">
           <div class="form-check form-check-inline" id="conditionChkBx">
             <input type="checkbox" name="conditionNew" id="conditionNew" class="form-check-input form-control"
                    [(ngModel)]="formdetails.conditionNew">
-            <label for="conditionNew" class="form-check-label">New</label>
+            <label for="conditionNew" class="form-check-label incFont ">New</label>
           </div>
           <div class="form-check form-check-inline">
             <input type="checkbox" name="conditionUsed" id="conditionUsed" class="form-check-input form-control"
                    [(ngModel)]="formdetails.conditionUsed">
-            <label for="conditionUsed" class="form-check-label">Used</label>
+            <label for="conditionUsed" class="form-check-label incFont">Used</label>
           </div>
           <div class="form-check form-check-inline">
             <input type="checkbox" name="conditionUnspecified" id="conditionUnspecified"
                    class="form-check-input form-control" [(ngModel)]="formdetails.conditionUnspecified">
-            <label for="conditionUnspecified" class="form-check-label">Unspecified</label>
+            <label for="conditionUnspecified" class="form-check-label incFont">Unspecified</label>
           </div>
         </div>
       </div>
@@ -67,26 +71,26 @@
 
 
       <div class="form-group row">
-        <label for="shipbox" class="col-sm-2 col-form-label">
+        <label for="shipbox" class="col-sm-2 col-form-label incFont">
           Shipping Options
         </label>
         <div class="col-sm-7">
           <div class="form-check form-check-inline" id="shipbox">
             <input type="checkbox" name="shippingLocal" id="ship1" class="form-check-input form-control"
                    [(ngModel)]="formdetails.shippingLocal">
-            <label for="ship1">Local Pickup</label>
+            <label for="ship1" class="incFont" >Local Pickup</label>
           </div>
           <div class="form-check form-check-inline">
             <input type="checkbox" name="shippingFree" id="ship2" class="form-check-input form-control"
                    [(ngModel)]="formdetails.shippingFree">
-            <label for="ship2">Free Shipping</label>
+            <label for="ship2" class="incFont">Free Shipping</label>
           </div>
         </div>
       </div>
 
 
       <div class="form-group row">
-        <label for="distance" class="col-sm-2 col-form-label">
+        <label for="distance" class="col-sm-2 col-form-label incFont">
           Distance(Miles)
         </label>
         <div class="col-sm-3">
@@ -102,14 +106,14 @@
             <div class="form-check ">
               <input class="form-check-input" type="radio" name="location" id="current" value="current"
                      [(ngModel)]="formdetails.location" checked (click)="disableZip()">
-              <label class="form-check-label" for="current">
+              <label class="form-check-label incFont" for="current">
                 Current Location
               </label>
             </div>
             <div class="form-check">
               <input class="form-check-input" type="radio" name="location" id="zip" value="zip"
                      [(ngModel)]="formdetails.location" (click)="enableZip()">
-              <label class="form-check-label" for="zip">
+              <label class="form-check-label incFont" for="zip">
                 Other.Please specify zip code
               </label>
             </div>
@@ -118,20 +122,26 @@
         </div>
       </fieldset>
 
-      <br>
+
 
       <!--<input type="text" name="zipcodebox" placeholder="zip code" id="zipcodebox" class="form-control col-sm-7"-->
       <!--[(ngModel)]="formdetails.zipcode"  [formControl]="zipcode" disabled [matAutocomplete]="auto" autocomplete="off" required> -->
-      <input type="text" name="zipcodebox"  id="zipcodebox" class="form-control col-sm-7"
-             pattern="(^\d{5}$)|(^\d{5}-\d{4}$)" [(ngModel)]="formdetails.zipcode" [formControl]="zipcode" disabled
-             [matAutocomplete]="auto"
-             autocomplete="off" required>
-      <span *ngIf="zipcode.errors&&isZipenabled&&zipcode.touched" style="color: red" class="help-block">Zip code is required</span>
-      <mat-autocomplete #auto="matAutocomplete">
-        <mat-option *ngFor="let option of ziparray " [value]="option">
-          {{ option }}
-        </mat-option>
-      </mat-autocomplete>
+      <div class="form-group row">
+        <label for="zipcodebox" class="col-sm-2 col-form-label "></label>
+        <div class="col-sm-7">
+
+          <input type="text" name="zipcodebox" id="zipcodebox" class="form-control"
+                 pattern="(^\d{5}$)|(^\d{5}-\d{4}$)" [(ngModel)]="formdetails.zipcode" [formControl]="zipcode" disabled
+                 [matAutocomplete]="auto"
+                 autocomplete="off" required>
+          <span *ngIf="zipcode.errors&&isZipenabled&&zipcode.touched" style="color: red" class="help-block">Zip code is required</span>
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let option of ziparray " [value]="option">
+              {{ option }}
+            </mat-option>
+          </mat-autocomplete>
+        </div>
+      </div>
 
 
       <input type="text" hidden="hidden" name="currentlocation" id="iploc" class="form-control"
@@ -141,7 +151,7 @@
       <p style="text-align: left;margin-left: 20px">
 
 
-        <button class="btn text-center" style="background-color: white" type="submit" name="search" value="search"
+        <button class="btn text-center" style="background-color: white;margin-top: 10px;margin-right: 10px" type="submit" name="search" value="search"
                 id="search" [disabled]="!prodForm.valid||
       (zipcode.errors&&isZipenabled)">
           <i class="material-icons" style="vertical-align: bottom !important;">
@@ -150,7 +160,7 @@
           Search
         </button>
         &nbsp;
-        <button name="clear" class="btn" type="button" style="background-color: white" value="clear" id="clear"
+        <button name="clear" class="btn" type="button" style="background-color: white;margin-top: 10px;margin-left: 10px" value="clear" id="clear"
                 (click)="clearForm(prodForm)">
           <i class="material-icons" style="vertical-align: bottom !important; ">
             clear_all
@@ -161,17 +171,22 @@
 
 
     </form>
+      </div>
+      <div class="col-2"></div>
+    </div>
   </div>
+  <div class="col-2"></div>
 
 </div>
 
+
 <div>
   <ul class="nav nav-pills mb-3 justify-content-center" id="pills-tab" role="tablist">
-    <li class="nav-item">
+    <li class="nav-item" style="margin-top: 10px">
       <a class="nav-link active" id="resultTab" data-toggle="pill" href="#results" role="tab" aria-controls="results"
          (click)="showChildResult()" aria-selected="true">Results</a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item" style="margin-top: 10px">
       <a class="nav-link" id="wishTab" data-toggle="pill" href="#wishlist" role="tab"
          (click)="showChildWishList()" aria-controls="wishlist" aria-selected="false">Wishlist</a>
     </li>

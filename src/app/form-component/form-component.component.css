@@ -17,3 +17,18 @@
 .alignSbuttons{
   vertical-align: bottom !important;
 }
+
+.incFont{
+  font-size: 13px !important;
+}
+
+.nav-item a{
+  color: black;
+}
+@media only screen and (max-width: 768px) {
+  .col-8{
+    flex:unset;
+    max-width: unset;
+  }
+}
+

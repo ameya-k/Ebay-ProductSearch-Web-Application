@@ -52,6 +52,7 @@ export class FormComponentComponent implements OnInit {
   ziparray:string[];
 
   setLocation(response){
+
     this.formdetails.currentlocation=response['zip'];
   }
 
@@ -115,9 +116,29 @@ export class FormComponentComponent implements OnInit {
       console.log(this.formdetails);
       console.log('submitting to result');
       this.child.showResults=true;
+      this.wish_child.showWishList=false;
       console.log(this.child.showResults);
       this.child.callEbayservice(this.formdetails);
       this.child.showProgress=true;
+
+    if(document.getElementById('wishTab').classList.contains('active')){
+      console.log('wish is active');
+      document.getElementById('wishTab').classList.remove('active');
+      document.getElementById('wishlist').classList.remove('active');
+      document.getElementById('wishlist').classList.remove('show');
+      document.getElementById('resultTab').classList.add('active');
+      document.getElementById('results').classList.add('show');
+      document.getElementById('results').classList.add('active');
+      this.child.showResults=true;
+      this.child.searchJson=null;
+      this.wish_child.showWishList=false;
+    }
+    else{
+      document.getElementById('resultTab').classList.add('active');
+      document.getElementById('results').classList.add('active');
+      document.getElementById('wishlist').classList.add('show');
+      this.wish_child.showWishList=false;
+    }
 
 
   }
