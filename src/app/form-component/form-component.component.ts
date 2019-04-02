@@ -111,13 +111,14 @@ export class FormComponentComponent implements OnInit {
 
  }
   onFormSubmit(form: NgForm) {
-
+    this.child.searchJson=null;
     //call child method
       console.log(this.formdetails);
       console.log('submitting to result');
       this.child.showResults=true;
       this.wish_child.showWishList=false;
       console.log(this.child.showResults);
+
       this.child.callEbayservice(this.formdetails);
       this.child.showProgress=true;
 
