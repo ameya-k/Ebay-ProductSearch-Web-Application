@@ -15,6 +15,10 @@ export class WishlistComponent implements OnInit {
 
   myWL: any;
 
+  showpbar:boolean=false;
+  showpbar1:boolean=false;
+  showpbar2:boolean=false;
+
   wishset:Set<any>=new Set();
   wishArray;
   @ViewChild(ProdDetailsComponent) prodChild:ProdDetailsComponent;
@@ -70,6 +74,9 @@ export class WishlistComponent implements OnInit {
       this.showWishList=false;
       this.currRow=null;
       this.isDetailSearchPerformed=false;
+      this.showpbar=false;
+      this.showpbar1=false;
+      this.showpbar2=false;
 
   }
 
@@ -115,7 +122,11 @@ export class WishlistComponent implements OnInit {
     console.log("itemId:"+itemId);
     console.log("title"+title);
     console.log(row);
+    this.prodChild.showpbar=true;
+    this.prodChild.showpbar1=true;
+    this.prodChild.showpbar2=true;
     this.prodChild.callDetailServices(itemId,title,row,2);
+
 
   }
 
