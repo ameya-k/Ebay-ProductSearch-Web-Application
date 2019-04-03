@@ -44,7 +44,11 @@
       <tr *ngFor="let row of searchJson.findItemsAdvancedResponse[0].searchResult[0].item|
       slice: (page-1) * pageSize : (page-1) * pageSize + pageSize;index as i" [class.highlight]="row==currentRow">
         <td>{{(page - 1) * 10 + i + 1}}</td>
-        <td *ngIf="row.galleryURL[0]!=undefined"><img class="resImage" src="{{row.galleryURL[0]}}"></td>
+        <td *ngIf="row.galleryURL!=undefined&&row.galleryURL[0]!=undefined">
+          <a target="_blank" href="{{row.galleryURL[0]}}">
+            <img class="resImage" src="{{row.galleryURL[0]}}">
+            </a>
+        </td>
         <td *ngIf="row.galleryURL[0]==undefined">N/A</td>
         <td *ngIf="row.title!=undefined">
           <a href="#" data-toggle="tooltip" placement="bottom" ngbTooltip="{{row.title}}"
