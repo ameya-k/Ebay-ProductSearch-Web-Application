@@ -4,6 +4,7 @@ import {ProdDetailsComponent} from '../prod-details/prod-details.component';
 import {WishlistService} from '../wishlist.service';
 import {FormComponentComponent} from '../form-component/form-component.component';
 import {ClearService} from '../clear.service';
+import {ResetProductService} from '../reset-product.service';
 
 
 
@@ -107,11 +108,14 @@ export class ResultsComponent implements OnInit {
   callChild(itemId,title,row,parent){
 
         this.highlightCurrentRow(row);
-       this.showresults=false;
-       this.isDetailSearchPerformed=true;
+        this.showresults=false;
+        this.isDetailSearchPerformed=true;
+
+        this.prod.resetProd();
 
        console.log('progress shown');
 
+        //this.rst.sendResetMessage();
        this.prod.callDetailServices(itemId,title,row,parent);
        this.prod.showpbar=true;
        this.prod.showpbar1=true;
