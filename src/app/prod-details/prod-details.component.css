@@ -65,6 +65,23 @@
 
 }
 
+.wrap{
+  position: relative;
+}
+
+.wrap .text{
+  position: absolute;
+  top: 28%;
+  right: 45%;
+  /*transform: translateY(-50%);*/
+  /*transform: translateX(-30%);*/
+  /*-webkit-transform: translateY(-50%);*/
+  /*-webkit-transform: translateX(-30%);*/
+  text-align: center;
+  width: 100%;
+  z-index: 1;
+}
+
 .column{
   flex:33%;
   max-width: 33%;
@@ -155,6 +172,8 @@
     flex: 100%;
     max-width: 100%;
   }
+
+
 }
 
 
