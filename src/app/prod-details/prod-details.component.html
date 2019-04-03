@@ -383,8 +383,8 @@
  similarItemsJson.getSimilarItemsResponse.itemRecommendations.item!=undefined&&
  similarItemsJson.getSimilarItemsResponse.itemRecommendations.item.length!=0">
 
-
-    <select   id="sortAttr" (change)="sort($event.target.value)">
+  <div class="myDiv">
+    <select class="form-control col-2"  id="sortAttr" (change)="sort($event.target.value)">
       <option value="default">Default</option>
       <option value="ProductName" >Product Name</option>
       <option value="DaysLeft">Days Left</option>
@@ -392,10 +392,11 @@
       <option value="ShippingCost">Shipping Cost</option>
     </select>
 
-    <select  id='sorder'(change)="setOrder($event.target.value)" disabled>
+    <select  class="form-control col-2 init"  id='sorder' (change)="setOrder($event.target.value)" disabled>
       <option value="ascending">Ascending</option>
       <option value="descending">Descending</option>
     </select>
+  </div>
     <div class="card flex-row flex-wrap bg-dark" style="margin-top: 10px;margin-bottom: 5px;" *ngFor="let row of itemArray| slice:0:5">
       <div>
         <img class="card-header border-0" [attr.src]="row.imageURL" style="padding-bottom: 10px;padding-top: 10px;height: 160px;width: 160px;" alt="Card image cap">
