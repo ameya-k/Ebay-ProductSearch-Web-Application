@@ -4,6 +4,59 @@
 }
 
 
+.hiddenPanel{
+  display: none;
+}
+
+.offOnMobile{
+
+}
+
+.init{
+  margin-left: 20px !important;
+}
+
+.myDiv{
+  display: flex;
+}
+
+@media screen and (max-width: 600px) {
+  .offOnMobile{
+    display: none;
+  }
+  .hiddenPanel{
+    display: inline-block;
+  }
+
+  .nav-link{
+    padding: 0.2rem 0.6rem;
+  }
+  /*.input-group {*/
+    /*display: block;*/
+  /*}*/
+  .myDiv{
+    display:inline-block;
+  }
+
+  .col-2{
+    max-width: unset;
+  }
+
+
+  .init{
+    margin-left: 0 !important;
+
+  }
+
+
+}
+
+
+
+.resizedPanel{
+
+}
+
 .row{
   display: flex;
   flex-wrap: wrap;
