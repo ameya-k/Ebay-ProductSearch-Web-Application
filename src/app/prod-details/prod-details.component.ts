@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output} from '@angular/core';
 import {ItemDetailsService} from '../item-details.service';
 import {SimilarItemsService} from '../similar-items.service';
 import {GooglePhotosService} from '../google-photos.service';
@@ -8,6 +8,7 @@ import {ResultsComponent} from '../results/results.component';
 import {WishlistService} from '../wishlist.service';
 import {FacebookService} from '../facebook.service';
 import {ClearService} from '../clear.service';
+import {ResetProductService} from '../reset-product.service';
 
 
 
@@ -54,7 +55,11 @@ export class ProdDetailsComponent implements OnInit {
     this.clr.receiveClear().subscribe(data=>{
       console.log(data);
       this.clearResult();
-    })
+    });
+
+
+
+
   }
 
   private clearResult() {
@@ -67,7 +72,12 @@ export class ProdDetailsComponent implements OnInit {
       //set other show pbar variables here
       this.showpbar2=false;
       this.showpbar1=false;
-
+      this.prodclicked=true;
+      this.photclicked=false;
+      this.shipclicked=false;
+      this.sellclicked=false;
+      this.simclicked=false;
+      // this.resetProd();
   }
 
   togbtn(){
@@ -78,6 +88,7 @@ export class ProdDetailsComponent implements OnInit {
       this.butLabel="Show More";
     }
   }
+
 
   emitToParent(){
     this.prodclicked=true;
@@ -100,17 +111,42 @@ export class ProdDetailsComponent implements OnInit {
   }
   ngOnInit() {
 
+
   }
 
 
 
 
+resetProd(){
+  //   console.error('inside reset product');
+  // document.getElementById('pills-prod-tab').classList.add('active');
+  // document.getElementById('pills-prod-tab').classList.add('show');
+  // document.getElementById('prodtab').classList.add('active');
+  // document.getElementById('prodtab').classList.add('show');
+  // // document.getElementById('pills-prod-tab').setAttribute('aria-selected','true');
+  // // document.getElementById('pills-photos-tab').setAttribute('area-selected','false');
+  //
+  // if(document.getElementById('pills-photos-tab').classList.contains('active')){
+  //   document.getElementById('pills-photos-tab').classList.remove('active');
+  //   document.getElementById('photostab').classList.remove('active');
+  //   document.getElementById('photostab').classList.remove('show');
+  // }
+  this.prodclicked=true;
+  this.photclicked=false;
+  this.sellclicked=false;
+  this.shipclicked=false;
+  this.simclicked=false;
+}
+
 
 
   callDetailServices(item_id,title,searchJson,parentId){
+
     this.itemDetailsJson=null;
     this.similarItemsJson=null;
     this.photosJson=null;
+
+
     console.log('inside call services from wishlist');
     console.log(this.showResults);
     this.identifyParent=parentId;
@@ -158,6 +194,8 @@ export class ProdDetailsComponent implements OnInit {
    this.sjson=searchJson;
 
    this.showResults=true;
+
+
 
 
    console.log(this.showResults);
@@ -317,6 +355,7 @@ export class ProdDetailsComponent implements OnInit {
       this.simclicked=true;
       this.sellclicked=false;
     }
+
 
 
 
