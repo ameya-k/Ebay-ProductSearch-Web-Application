@@ -25,3 +25,8 @@
   color: black;
 
 }
+
+
+::ng-deep .tooltip-inner{
+  background-color:#3d3c3e ;
+}
