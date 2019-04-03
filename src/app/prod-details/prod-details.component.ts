@@ -9,13 +9,15 @@ import {WishlistService} from '../wishlist.service';
 import {FacebookService} from '../facebook.service';
 import {ClearService} from '../clear.service';
 import {ResetProductService} from '../reset-product.service';
+import { trigger, transition, animate, style } from '@angular/animations'
 
 
 
 @Component({
   selector: 'app-prod-details',
   templateUrl: './prod-details.component.html',
-  styleUrls: ['./prod-details.component.css']
+  styleUrls: ['./prod-details.component.css'],
+
 })
 export class ProdDetailsComponent implements OnInit {
 
