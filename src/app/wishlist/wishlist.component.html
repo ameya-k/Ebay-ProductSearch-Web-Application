@@ -31,7 +31,11 @@
 
   <tr *ngFor="let row of myWL;index as i" [class.highlight]="row==currRow">
   <td>{{i+1}}</td>
-    <td *ngIf="row.galleryURL[0]!=undefined"><img src="{{row.galleryURL[0]}}" class="wishImage"></td>
+    <td *ngIf="row.galleryURL[0]!=undefined">
+      <a target="_blank" href="{{row.galleryURL[0]}}">
+      <img src="{{row.galleryURL[0]}}" class="wishImage">
+      </a>
+    </td>
     <td *ngIf="row.galleryURL[0]==undefined">N/A</td>
     <td><a href="#" data-toggle="tooltip" placement="bottom" ngbTooltip="{{row.title}}" (click)="callWishProduct(row.itemId[0],row.title,row)">{{  row.title == null ? 'N/A' : (row.title.toString().length > 50 ? (row.title.toString().substring(0, 50).slice(-1) == ' ' ? (row.title.toString().substring(0, 50) + '...') : (row.title.toString().substring(0, (row.title.toString().substring(0, 50).lastIndexOf(' '))) + '...')) : row.title.toString())}}</a></td>
 
