@@ -15,3 +15,6 @@
   width: 150px;
   height: 150px;
 }
+::ng-deep .tooltip-inner{
+  background-color:#3d3c3e ;
+}
