@@ -1,14 +1,18 @@
 <div *ngIf="showProgress">
   <div class="progress " style="width: 80% !important;margin: auto">
-    <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+    <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 50%" aria-valuenow="50"
+         aria-valuemin="0" aria-valuemax="100"></div>
   </div>
 
 </div>
 
 
-<div *ngIf="showresults&&searchJson" class="container">
+<div *ngIf="showresults&&searchJson" [@resultOut]="!myVar"  class="container">
 
-  <button class="btn" [disabled]="!isDetailSearchPerformed" (click)="callChild(currentRow['itemId']['0'],currentRow.title,currentRow,1)" style="float: right" id="det">Detail
+
+  <button class="btn" [disabled]="!isDetailSearchPerformed"
+          (click)="callChild(currentRow['itemId']['0'],currentRow.title,currentRow,1)" style="float: right" id="det">
+    Detail
     <i class="material-icons alignWithDetail">
       chevron_right
     </i>
@@ -29,87 +33,92 @@
 
 
     <div class="table-responsive">
-    <table class="table table-dark table-striped table-hover" style="margin-top: 20px">
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Image</th>
-        <th scope="col">Title</th>
-        <th scope="col">Price</th>
-        <th scope="col">Shipping</th>
-        <th scope="col">Zip</th>
-        <th scope="col">Seller</th>
-        <th scope="col">Wishlist</th>
-      </tr>
+      <table class="table table-dark table-striped table-hover" style="margin-top: 20px">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Image</th>
+          <th scope="col">Title</th>
+          <th scope="col">Price</th>
+          <th scope="col">Shipping</th>
+          <th scope="col">Zip</th>
+          <th scope="col">Seller</th>
+          <th scope="col">Wishlist</th>
+        </tr>
 
-      <tr *ngFor="let row of searchJson.findItemsAdvancedResponse[0].searchResult[0].item|
+        <tr *ngFor="let row of searchJson.findItemsAdvancedResponse[0].searchResult[0].item|
       slice: (page-1) * pageSize : (page-1) * pageSize + pageSize;index as i" [class.highlight]="row==currentRow">
-        <td>{{(page - 1) * 10 + i + 1}}</td>
-        <td *ngIf="row.galleryURL!=undefined&&row.galleryURL[0]!=undefined">
-          <a target="_blank" href="{{row.galleryURL[0]}}">
-            <img class="resImage" src="{{row.galleryURL[0]}}">
+          <td>{{(page - 1) * 10 + i + 1}}</td>
+          <td *ngIf="row.galleryURL!=undefined&&row.galleryURL[0]!=undefined">
+            <a target="_blank" href="{{row.galleryURL[0]}}">
+              <img class="resImage" src="{{row.galleryURL[0]}}">
             </a>
-        </td>
-        <td *ngIf="row.galleryURL[0]==undefined">N/A</td>
-        <td *ngIf="row.title!=undefined">
-          <a href="#" data-toggle="tooltip" placement="bottom" ngbTooltip="{{row.title}}"
+          </td>
+          <td *ngIf="row.galleryURL[0]==undefined">N/A</td>
+          <td *ngIf="row.title!=undefined">
+            <a href="#" data-toggle="tooltip" placement="bottom" ngbTooltip="{{row.title}}"
 
                (click)="callChild(row['itemId']['0'],row.title,row,1)">
-            {{  row.title == null ? 'N/A' : (row.title.toString().length > 35 ? (row.title.toString().substring(0, 35).slice(-1) == ' ' ? (row.title.toString().substring(0, 35) + '...') : (row.title.toString().substring(0, (row.title.toString().substring(0, 35).lastIndexOf(' '))) + '...')) : row.title.toString())
-          }}</a>
-        </td>
-        <td *ngIf="row.title==undefined">
-         N/A
-        </td>
+              {{  row.title == null ? 'N/A' : (row.title.toString().length > 35 ? (row.title.toString().substring(0, 35).slice(-1) == ' ' ? (row.title.toString().substring(0, 35) + '...') : (row.title.toString().substring(0, (row.title.toString().substring(0, 35).lastIndexOf(' '))) + '...')) : row.title.toString())
+              }}</a>
+          </td>
+          <td *ngIf="row.title==undefined">
+            N/A
+          </td>
 
-        <td *ngIf="row.sellingStatus!=undefined &&row.sellingStatus[0]!=undefined&&row.sellingStatus[0].currentPrice[0]!=undefined&&row.sellingStatus[0].currentPrice[0].__value__!=undefined">
-          ${{row.sellingStatus[0].currentPrice[0].__value__ == null ? 'N/A' : row.sellingStatus[0].currentPrice[0].__value__}}
-        </td>
-        <td *ngIf="row.sellingStatus==undefined||row.sellingStatus[0]==undefined||row.sellingStatus[0].currentPrice[0]==undefined">
-          N/A
-        </td>
-
-
-        <td *ngIf="row.shippingInfo!=undefined&&row.shippingInfo[0]!=undefined&&row.shippingInfo[0].shippingServiceCost!=undefined&&row.shippingInfo[0].shippingServiceCost[0]!=undefined&&row.shippingInfo[0].shippingServiceCost[0].__value__!=undefined">
-
-          {{row.shippingInfo[0].shippingServiceCost[0].__value__ == null ? 'N/A' : (row.shippingInfo[0].shippingServiceCost[0].__value__==0? "Free shipping":'$'+row.shippingInfo[0].shippingServiceCost[0].__value__)}}
-        </td>
-        <td *ngIf="row.shippingInfo==undefined||row.shippingInfo[0]==undefined||row.shippingInfo[0].shippingServiceCost==undefined||row.shippingInfo[0].shippingServiceCost[0]==undefined||row.shippingInfo[0].shippingServiceCost[0].__value__==undefined">
-          N/A
-        </td>
-        <td *ngIf="row.postalCode!=undefined">
-        {{row.postalCode == null ? 'N/A' : row.postalCode}}
-      </td>
-        <td *ngIf="row.postalCode==undefined">
-          {{row.postalCode == null ? 'N/A' : row.postalCode}}
-        </td>
-        <td *ngIf="row.sellerInfo!=undefined&&row.sellerInfo[0]!=undefined&&row.sellerInfo[0].sellerUserName!=undefined&&row.sellerInfo[0].sellerUserName[0]!=undefined">
-          {{row.sellerInfo[0].sellerUserName[0] == null ? 'N/A' : row.sellerInfo[0].sellerUserName[0]}}
-        </td>
-        <td *ngIf="row.sellerInfo==undefined||row.sellerInfo[0]==undefined||row.sellerInfo[0].sellerUserName==undefined||row.sellerInfo[0].sellerUserName[0]==undefined">
-          N/A
-        </td>
+          <td
+            *ngIf="row.sellingStatus!=undefined &&row.sellingStatus[0]!=undefined&&row.sellingStatus[0].currentPrice[0]!=undefined&&row.sellingStatus[0].currentPrice[0].__value__!=undefined">
+            ${{row.sellingStatus[0].currentPrice[0].__value__ == null ? 'N/A' : row.sellingStatus[0].currentPrice[0].__value__}}
+          </td>
+          <td
+            *ngIf="row.sellingStatus==undefined||row.sellingStatus[0]==undefined||row.sellingStatus[0].currentPrice[0]==undefined">
+            N/A
+          </td>
 
 
+          <td
+            *ngIf="row.shippingInfo!=undefined&&row.shippingInfo[0]!=undefined&&row.shippingInfo[0].shippingServiceCost!=undefined&&row.shippingInfo[0].shippingServiceCost[0]!=undefined&&row.shippingInfo[0].shippingServiceCost[0].__value__!=undefined">
 
-        <td *ngIf="!this.itSet.has(row.itemId[0])">
-          <button class="btn btn-light">
-            <i class="material-icons" (click)="addToWish(row)">
-              add_shopping_cart
-            </i>
-          </button>
-        </td>
-        <td *ngIf="this.itSet.has(row.itemId[0])">
-          <button class="btn btn-light">
-            <i class="material-icons" style="color: gold" (click)="removeFromWish(row)">
-              remove_shopping_cart
-            </i>
-          </button>
-        </td>
+            {{row.shippingInfo[0].shippingServiceCost[0].__value__ == null ? 'N/A' : (row.shippingInfo[0].shippingServiceCost[0].__value__ == 0 ? "Free shipping" : '$' + row.shippingInfo[0].shippingServiceCost[0].__value__)}}
+          </td>
+          <td
+            *ngIf="row.shippingInfo==undefined||row.shippingInfo[0]==undefined||row.shippingInfo[0].shippingServiceCost==undefined||row.shippingInfo[0].shippingServiceCost[0]==undefined||row.shippingInfo[0].shippingServiceCost[0].__value__==undefined">
+            N/A
+          </td>
+          <td *ngIf="row.postalCode!=undefined">
+            {{row.postalCode == null ? 'N/A' : row.postalCode}}
+          </td>
+          <td *ngIf="row.postalCode==undefined">
+            {{row.postalCode == null ? 'N/A' : row.postalCode}}
+          </td>
+          <td
+            *ngIf="row.sellerInfo!=undefined&&row.sellerInfo[0]!=undefined&&row.sellerInfo[0].sellerUserName!=undefined&&row.sellerInfo[0].sellerUserName[0]!=undefined">
+            {{row.sellerInfo[0].sellerUserName[0] == null ? 'N/A' : row.sellerInfo[0].sellerUserName[0]}}
+          </td>
+          <td
+            *ngIf="row.sellerInfo==undefined||row.sellerInfo[0]==undefined||row.sellerInfo[0].sellerUserName==undefined||row.sellerInfo[0].sellerUserName[0]==undefined">
+            N/A
+          </td>
 
 
-      </tr>
+          <td *ngIf="!this.itSet.has(row.itemId[0])">
+            <button class="btn btn-light">
+              <i class="material-icons" (click)="addToWish(row)">
+                add_shopping_cart
+              </i>
+            </button>
+          </td>
+          <td *ngIf="this.itSet.has(row.itemId[0])">
+            <button class="btn btn-light">
+              <i class="material-icons" style="color: gold" (click)="removeFromWish(row)">
+                remove_shopping_cart
+              </i>
+            </button>
+          </td>
 
-    </table>
+
+        </tr>
+
+      </table>
     </div>
     <ngb-pagination
       [(page)]="page"
@@ -124,6 +133,7 @@
 
 
 </div>
-<app-prod-details  (sendValueToResult)="setParentValue($event)" (sendHashSetToResult)="refreshHash($event)"></app-prod-details>
+<app-prod-details (sendValueToResult)="setParentValue($event)"
+                  (sendHashSetToResult)="refreshHash($event)"></app-prod-details>
 
 
