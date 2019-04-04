@@ -7,7 +7,7 @@
 </div>
 
 
-<div *ngIf="showresults&&searchJson"   class="container">
+<div *ngIf="showresults&&searchJson"  [@resultOut] class="container">
 
 
   <button class="btn" [disabled]="!isDetailSearchPerformed"
@@ -53,7 +53,7 @@
               <img class="resImage" src="{{row.galleryURL[0]}}">
             </a>
           </td>
-          <td *ngIf="row.galleryURL[0]==undefined">N/A</td>
+          <td *ngIf="row.galleryURL==undefined||row.galleryURL[0]==undefined">N/A</td>
           <td *ngIf="row.title!=undefined">
             <a href="#" data-toggle="tooltip" placement="bottom" ngbTooltip="{{row.title}}"
 
