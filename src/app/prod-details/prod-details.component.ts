@@ -20,7 +20,7 @@ import {style, trigger, state, transition, animate} from '@angular/animations';
   templateUrl: './prod-details.component.html',
   styleUrls: ['./prod-details.component.css'],
   animations: [
-    trigger('slideInOut', [
+    trigger('progressIn', [
       transition(':enter', [
         style({transform: 'translateX(-100%)'}),
         animate('600ms ease-in', style({transform: 'translateX(0%)'}))
@@ -75,6 +75,7 @@ export class ProdDetailsComponent implements OnInit {
   @Output() sendValueToResult= new EventEmitter<boolean>();
   @Output() sendValueToWishlist=new EventEmitter<boolean>();
   @Output() sendHashSetToResult=new EventEmitter();
+
 
 
 
