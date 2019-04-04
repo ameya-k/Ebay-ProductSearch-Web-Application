@@ -177,7 +177,20 @@
 }
 
 
+.current{
+  position: absolute;
+  color: #bbb;
+  font-weight: 100;
 
+  line-height: 1;
+}
+
+.progress-wrapper{
+  text-align: center;
+  position: relative;
+  margin: 10px auto;
+  font-size: 20px;
+}
 
 
 
