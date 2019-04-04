@@ -101,15 +101,15 @@
 
 
           <td *ngIf="!this.itSet.has(row.itemId[0])">
-            <button class="btn btn-light">
-              <i class="material-icons" (click)="addToWish(row)">
+            <button class="btn btn-light" (click)="addToWish(row)">
+              <i class="material-icons" >
                 add_shopping_cart
               </i>
             </button>
           </td>
-          <td *ngIf="this.itSet.has(row.itemId[0])">
+          <td *ngIf="this.itSet.has(row.itemId[0])" (click)="removeFromWish(row)">
             <button class="btn btn-light">
-              <i class="material-icons" style="color: gold" (click)="removeFromWish(row)">
+              <i class="material-icons" style="color: gold" >
                 remove_shopping_cart
               </i>
             </button>
