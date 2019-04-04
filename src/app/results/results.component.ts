@@ -31,7 +31,7 @@ import {animate, style, transition, trigger} from '@angular/animations';
 })
 export class ResultsComponent implements OnInit {
 
- // myVar:boolean=true;
+ //myVar:boolean=true;
   //backClicked:boolean=true;
   searchJson;
   pageSize=10;
@@ -39,7 +39,8 @@ export class ResultsComponent implements OnInit {
   showProgress:boolean=false;
   isDetailSearchPerformed:boolean=false;
 
-  //activeTab:String="result";
+
+  //private backClicked: boolean=true;
   
 
   clearResult() {
@@ -129,7 +130,7 @@ export class ResultsComponent implements OnInit {
 
         this.highlightCurrentRow(row);
         this.showresults=false;
-        //this.activeTab="result";
+        //this.activeTab="product";
         //this.myVar=false;
         this.isDetailSearchPerformed=true;
 
