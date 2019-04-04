@@ -16,7 +16,7 @@ import {animate, style, transition, trigger} from '@angular/animations';
   styleUrls: ['./results.component.css'],
   animations:[
     trigger('resultOut',[
-      transition(':leave', [
+      transition('result=>*', [
         animate('300ms ease-in', style({transform: 'translateX(100%)'}))
       ])
     ]),
@@ -31,14 +31,15 @@ import {animate, style, transition, trigger} from '@angular/animations';
 })
 export class ResultsComponent implements OnInit {
 
-  myVar:boolean=true;
-  backClicked:boolean=true;
+ // myVar:boolean=true;
+  //backClicked:boolean=true;
   searchJson;
   pageSize=10;
   page=1;
   showProgress:boolean=false;
   isDetailSearchPerformed:boolean=false;
 
+  //activeTab:String="result";
   
 
   clearResult() {
@@ -74,6 +75,8 @@ export class ResultsComponent implements OnInit {
 
   setParentValue($event){
     //this.backClicked=false;
+    //this.myVar=true;
+    //console.error("myvar:"+this.myVar);
     this.stArray=this.wish.getStorage();
     //this.itArray=this.stArray.map(x=>x.itemId);
 
@@ -126,7 +129,8 @@ export class ResultsComponent implements OnInit {
 
         this.highlightCurrentRow(row);
         this.showresults=false;
-        this.myVar=false;
+        //this.activeTab="result";
+        //this.myVar=false;
         this.isDetailSearchPerformed=true;
 
         this.prod.resetProd();
