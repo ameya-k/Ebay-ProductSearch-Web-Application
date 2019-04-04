@@ -9,7 +9,9 @@ import {WishlistService} from '../wishlist.service';
 import {FacebookService} from '../facebook.service';
 import {ClearService} from '../clear.service';
 import {ResetProductService} from '../reset-product.service';
-import { trigger, transition, animate, style } from '@angular/animations'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {style, trigger, state, transition, animate} from '@angular/animations';
+
 
 
 
@@ -17,10 +19,34 @@ import { trigger, transition, animate, style } from '@angular/animations'
   selector: 'app-prod-details',
   templateUrl: './prod-details.component.html',
   styleUrls: ['./prod-details.component.css'],
+  animations: [
+    trigger('slideInOut', [
+      transition(':enter', [
+        style({transform: 'translateX(-100%)'}),
+        animate('600ms ease-in', style({transform: 'translateX(0%)'}))
+      ]),
+
+
+    ]),
+    trigger('tableSlide', [
+      transition(':enter', [
+        style({transform: 'translateX(-100%)'}),
+        animate('100ms ease-in', style({transform: 'translateX(0%)'}))
+      ]),
+
+
+    ])
+
+
+  ]
+
+
+
 
 })
 export class ProdDetailsComponent implements OnInit {
 
+  showDiv:boolean=true;
   sjson;
   itemDetailsJson;
   itemArray:any[];
