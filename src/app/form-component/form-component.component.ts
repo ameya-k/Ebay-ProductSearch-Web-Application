@@ -112,6 +112,7 @@ export class FormComponentComponent implements OnInit {
  }
   onFormSubmit(form: NgForm) {
     this.child.searchJson=null;
+    this.child.page=1;
     //this.child.backClicked=true;
     //call child method
       console.log(this.formdetails);
@@ -201,10 +202,12 @@ export class FormComponentComponent implements OnInit {
      this.wish_child.showWishList=false;
      this.child.page=1;
 
+
+
   }
 
   showChildWishList(){
-    //this.child.myVar=true;
+
     this.wish_child.calcSum();
     this.wish_child.showWishList=true;
     this.child.showresults=false;
@@ -219,7 +222,7 @@ export class FormComponentComponent implements OnInit {
   //
   enableZip() {
     let a=document.getElementById('zipcodebox');
-    a.removeAttribute('disabled')
+    a.removeAttribute('disabled');
     this.isZipenabled=true;
   }
 
