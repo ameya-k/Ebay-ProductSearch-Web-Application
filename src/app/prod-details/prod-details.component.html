@@ -1,6 +1,6 @@
 <!--<div *ngIf="showpbar&&!(itemDetailsJson&&similarItemsJson&&photosJson)">-->
 
-<div *ngIf="showpbar||showpbar1||showpbar2" [@slideInOut]>
+<div *ngIf="showpbar||showpbar1||showpbar2" [@progressIn]>
   <div class="progress " style="width: 70% !important;margin: auto">
     <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
   </div>
@@ -155,7 +155,7 @@
 
   <div *ngIf="photclicked" id="photostab" class="tab-pane fade " aria-labelledby="pills-photos-tab">
 
-    <div *ngIf="photosJson==undefined&&photosJson.items==undefined || photosJson.items.length==0">
+    <div *ngIf="photosJson==undefined||photosJson.items==undefined || photosJson.items.length==0">
       <div class="alert alert-warning container table-responsive" style="margin-top: 20px" role="alert">
         No photos found.
       </div>
