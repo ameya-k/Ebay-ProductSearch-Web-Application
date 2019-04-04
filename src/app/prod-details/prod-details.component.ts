@@ -77,6 +77,7 @@ export class ProdDetailsComponent implements OnInit {
   @Output() sendHashSetToResult=new EventEmitter();
 
 
+
   constructor(private detailService:ItemDetailsService,private simService: SimilarItemsService,private picService:GooglePhotosService,
               private wish:WishlistService,private clr:ClearService) {
 
@@ -180,7 +181,7 @@ resetProd(){
     this.identifyParent=parentId;
     this.storageArray=this.wish.getStorage();
     //this.itArray=this.stArray.map(x=>x.itemId);
-
+    this.prodSet.clear();
     for(var i=0;i<this.storageArray.length;i++){
       this.prodSet.add(this.storageArray[i].itemId[0]);
     }
