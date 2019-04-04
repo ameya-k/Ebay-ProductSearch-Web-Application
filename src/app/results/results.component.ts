@@ -16,7 +16,7 @@ import {animate, style, transition, trigger} from '@angular/animations';
   styleUrls: ['./results.component.css'],
   animations:[
     trigger('resultOut',[
-      transition('result=>*', [
+      transition(':leave', [
         animate('300ms ease-in', style({transform: 'translateX(100%)'}))
       ])
     ]),
