@@ -5,6 +5,7 @@ import {WishlistService} from '../wishlist.service';
 import {FormComponentComponent} from '../form-component/form-component.component';
 import {ClearService} from '../clear.service';
 import {ResetProductService} from '../reset-product.service';
+import {animate, style, transition, trigger} from '@angular/animations';
 
 
 
@@ -12,10 +13,26 @@ import {ResetProductService} from '../reset-product.service';
 @Component({
   selector: 'app-results',
   templateUrl: './results.component.html',
-  styleUrls: ['./results.component.css']
+  styleUrls: ['./results.component.css'],
+  animations:[
+    trigger('resultOut',[
+      transition(':leave', [
+        animate('300ms ease-in', style({transform: 'translateX(100%)'}))
+      ])
+    ]),
+    trigger('resultIn', [
+      transition(':enter', [
+        style({transform: 'translateX(-100%)'}),
+        animate('600ms ease-in', style({transform: 'translateX(0%)'}))
+      ]),
+
+    ])
+  ]
 })
 export class ResultsComponent implements OnInit {
 
+  myVar:boolean=true;
+  backClicked:boolean=true;
   searchJson;
   pageSize=10;
   page=1;
@@ -56,7 +73,7 @@ export class ResultsComponent implements OnInit {
   }
 
   setParentValue($event){
-
+    //this.backClicked=false;
     this.stArray=this.wish.getStorage();
     //this.itArray=this.stArray.map(x=>x.itemId);
 
@@ -109,6 +126,7 @@ export class ResultsComponent implements OnInit {
 
         this.highlightCurrentRow(row);
         this.showresults=false;
+        this.myVar=false;
         this.isDetailSearchPerformed=true;
 
         this.prod.resetProd();
